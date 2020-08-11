@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core'; 
-declare const L: any; // nécessaire pour que leaflet-search fonctionne correctement. [?]
-import 'leaflet-search';
+import * as L from 'leaflet';
+
 
 @Component({
   selector: 'app-map',
@@ -54,55 +54,27 @@ export class MapComponent implements AfterViewInit { // AfterViewInit permet d'a
 		{"loc":[41.807149,13.162994], "title":"Yoan", "category":"drone"},
 		];
 
-		/*const emilien = 'Emilien Alvarez-Vanhard'
+		const emilien = 'Emilien Alvarez-Vanhard'
 
 		const popupOption = { // objet pour params addMarker()
 			coords: univRennes2,
 			text: emilien,
 			open: true  // booléen pour indiquer si le pop up doit être ouvert de base.
-		};*/
+		};
 
-		/*this.addMarker(popupOption);*/ // appel du marker.
+		this.addMarker(popupOption); // appel du marker.
 
-		/* Search */
-
-		var markersLayer = new L.LayerGroup();	//layer contain searched elements
-
-		this.map.addLayer(markersLayer);
-
-		var controlSearch = new L.Control.Search({
-		position:'topright',		
-		layer: markersLayer,
-		initial: false,
-		zoom: 12,
-		marker: false,
-		propertyName: 'category'
-
-		});
-
-		this.map.addControl( controlSearch );
-
-		////////////populate map with markers from sample data
-		for(var i = 0; i < data.length; i++) {
-			var title = data[i].title,	//value searched
-				loc = data[i].loc,	//position found
-				category = data[i].category,	
-				marker = new L.Marker(new L.latLng(loc), {title: title, category: category });//se property searched
-			marker.bindPopup('title: '+ title );
-			markersLayer.addLayer(marker);
-			console.log(marker);
-		}
 
 	}//Eo createMap()
 
-	/*addMarker({coords, text, open}) {*/ // instance du marker.
-		/*const marker = L.marker([coords.lat, coords.lng], {icon: this.smallIcon});
+	addMarker({coords, text, open}) { // instance du marker.
+		const marker = L.marker([coords.lat, coords.lng], {icon: this.smallIcon});
 		if(open) {
-			marker.addTo(this.map).bindPopup(text).openPopup();*/ // ajout du marker et du pop up à la map.
-		/*} else {
-			marker.addTo(this.map).bindPopup(text);*/ // version où le pop up n'est pas ouvert au chargement.
-		/*} 
-	}*///Eo addMarker()
+			marker.addTo(this.map).bindPopup(text).openPopup(); // ajout du marker et du pop up à la map.
+		} else {
+			marker.addTo(this.map).bindPopup(text); // version où le pop up n'est pas ouvert au chargement.
+		} 
+	}//Eo addMarker()
 		
 
 }//EO class
