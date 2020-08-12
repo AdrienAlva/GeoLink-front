@@ -1,4 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core'; 
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'; 
+import { Member } from '../models/Member.model';
+import { MembersService } from '../services/members.service';
+import { Subscription } from 'rxjs/Subscription';
 import * as L from 'leaflet';
 
 
@@ -7,9 +10,12 @@ import * as L from 'leaflet';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
 
 	map; // variable pour stocker la map.
+	members: Member[] = [];
+
+	memberSubscription: Subscription;
 
 	smallIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -21,13 +27,29 @@ export class MapComponent implements AfterViewInit { // AfterViewInit permet d'a
 		shadowSize:  [41, 41]
 	});
 
-	constructor() { }
+	constructor(private membersService: MembersService) { }
+
+	ngOnInit(): void {
+		this.memberSubscription = this.membersService.membersSubject.subscribe( //pour remplir l'array local.
+			(members: any) => {
+				this.members.push(members);
+			}
+		);
+		
+		this.membersService.getMembers();
+		this.membersService.emitMembers();
+
+		console.log('OnInit :' + this.members);
+		
+	}//Eo ngOnInit()
 
 	ngAfterViewInit(): void {
-		this.createMap();
+		this.createMap();// initialisation de la map.
+		
 	}//Eo ngAfterViewInit()
 
 	createMap() {
+		console.log('createMap')
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,
 			lng: -1.702823
@@ -48,19 +70,17 @@ export class MapComponent implements AfterViewInit { // AfterViewInit permet d'a
 
 		mainLayer.addTo(this.map); // methode pour ajouter les options de configuration de la carte. tileLayer / min-max zoom / attribution.
 
-		var data = [
-		{"loc":[48.118048,-1.702823], "title":"Emilien", "category":"drone emilien"},
-		{"loc":[41.575730,13.002411], "title":"Adrien", "category":"Satellite"},
-		{"loc":[41.807149,13.162994], "title":"Yoan", "category":"drone"},
-		];
+		console.log('create map member : ' + this.members);
 
 		const emilien = 'Emilien Alvarez-Vanhard'
 
 		const popupOption = { // objet pour params addMarker()
 			coords: univRennes2,
-			text: emilien,
+			text: this.members.name,
 			open: true  // booléen pour indiquer si le pop up doit être ouvert de base.
 		};
+
+		console.log(popupOption);
 
 		this.addMarker(popupOption); // appel du marker.
 
@@ -74,7 +94,14 @@ export class MapComponent implements AfterViewInit { // AfterViewInit permet d'a
 		} else {
 			marker.addTo(this.map).bindPopup(text); // version où le pop up n'est pas ouvert au chargement.
 		} 
+
+		console.log('addmarker')
 	}//Eo addMarker()
 		
+
+	ngOnDestroy() {
+  		this.memberSubscription.unsubscribe();
+  	}//Eo ngOnDestroy()
+
 
 }//EO class
