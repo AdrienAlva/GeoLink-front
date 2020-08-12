@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { MembersService } from './services/members.service';
+import { MemberListComponent } from './member-list/member-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,

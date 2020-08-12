@@ -9,13 +9,13 @@ import * as L from 'leaflet';
 })
 export class MembersService {
 
-  members: Member[] =[]; //array local vide.
-  membersSubject = new Subject<Member[]>(); // Subject pour diffuser l'array local.
+  members: [] =[]; //array local vide.
+  membersSubject = new Subject<any[]>(); // Subject pour diffuser l'array local.
 
   constructor() { }
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.
-  	console.log('On rentre dans emitMembers.')
+  	
   	this.membersSubject.next(this.members);
   }//Eo emitMembers()
 
@@ -24,7 +24,7 @@ export class MembersService {
   }//Eo saveMembers()
 
   getMembers() {
-  	console.log('On rentre dans getMembers.')
+  	
   	firebase.database().ref('/members')
   		.on('value', (data) => {		//on() surveille en permanence et renvoie tout changement en BDD (?).
   			this.members = data.val() ? data.val() : [];
@@ -47,11 +47,6 @@ export class MembersService {
   		}
   	);
   }//Eo getSingleMembers()
-
-  makeMarker(map): void {
-  	const marker = L.marker(this.members.name)
-  }//Eo makeMarker()
-
 
 
 }//Eo class

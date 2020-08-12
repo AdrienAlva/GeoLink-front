@@ -13,7 +13,7 @@ import * as L from 'leaflet';
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
 
 	map; // variable pour stocker la map.
-	members: Member[] = [];
+	members: string;
 
 	memberSubscription: Subscription;
 
@@ -27,21 +27,26 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		shadowSize:  [41, 41]
 	});
 
-	constructor(private membersService: MembersService) { }
+	constructor(private membersService: MembersService) { 
+		
+	}
 
 	ngOnInit(): void {
-		this.memberSubscription = this.membersService.membersSubject.subscribe( //pour remplir l'array local.
-			(members: any) => {
-				this.members.push(members);
-			}
-		);
-		
+		/*this.memberSubscription = this.membersService.membersSubject.subscribe( 
+	  		(members: any[]) => {
+	  			this.members = members;
+	  		}
+  		);*/
+
 		this.membersService.getMembers();
 		this.membersService.emitMembers();
 
-		console.log('OnInit :' + this.members);
-		
+		let currentMember = this.membersService.membersSubject.asObservable();
+
+		this.membersService.membersSubject.subscribe(val => this.addMarker(val));
+	
 	}//Eo ngOnInit()
+
 
 	ngAfterViewInit(): void {
 		this.createMap();// initialisation de la map.
@@ -55,7 +60,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			lng: -1.702823
 		};
 
-		const zoomLevel = 9; // niveau de zoom initial.
+		const zoomLevel = 5; // niveau de zoom initial.
 
 		this.map = L.map('map', { //Instance de l'objet map.
 			center: [univRennes2.lat, univRennes2.lng],
@@ -70,34 +75,29 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 		mainLayer.addTo(this.map); // methode pour ajouter les options de configuration de la carte. tileLayer / min-max zoom / attribution.
 
-		console.log('create map member : ' + this.members);
-
-		const emilien = 'Emilien Alvarez-Vanhard'
-
-		const popupOption = { // objet pour params addMarker()
-			coords: univRennes2,
-			text: this.members.name,
-			open: true  // booléen pour indiquer si le pop up doit être ouvert de base.
-		};
-
-		console.log(popupOption);
-
-		this.addMarker(popupOption); // appel du marker.
-
-
 	}//Eo createMap()
 
-	addMarker({coords, text, open}) { // instance du marker.
-		const marker = L.marker([coords.lat, coords.lng], {icon: this.smallIcon});
-		if(open) {
-			marker.addTo(this.map).bindPopup(text).openPopup(); // ajout du marker et du pop up à la map.
-		} else {
-			marker.addTo(this.map).bindPopup(text); // version où le pop up n'est pas ouvert au chargement.
-		} 
+	addMarker(val) { // instance du marker.
 
-		console.log('addmarker')
+		const obj = Object.create(val);
+		
+		for ( let member of obj) {
+			const open = false;
+			const name: string = member.name; 
+			const lat: number = member.lat;
+			const lng: number = member.lng;
+			
+			const marker = L.marker([lat, lng], {icon: this.smallIcon});
+				if(open) {
+					marker.addTo(this.map).bindPopup(name).openPopup(); // ajout du marker et du pop up à la map.
+				} else {
+					marker.addTo(this.map).bindPopup(name); // version où le pop up n'est pas ouvert au chargement.
+				} 	
+		}//Eo for
+	
 	}//Eo addMarker()
 		
+
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();

@@ -7,19 +7,23 @@
 /* custom CSS map */
 
 .map-wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	position: relative;
+	height: 50%;
 	margin: 20px;
 }
 
-.map-border {
-	border: 5px solid orange;
-	height: 100%;
-}
+
 
 #map {
-	height: 100%;
+	position: relative;
+	height: 50vh;
+	width: 100%;
+}
+
+
+/* list */
+
+.li-item {
+	border: solid green 2px;
+	margin-bottom: 2px;
 }
