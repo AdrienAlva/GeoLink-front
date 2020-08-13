@@ -1,6 +1,10 @@
 <ul>
 	<li class="li-item" *ngFor="let member of members">
 		<h3> {{ member.name }} </h3>
-		<p> {{ member.status}} </p>
+		<p> {{ member.status }} </p>
+		<ul>
+			<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>
+			<li *ngIf="member.category[1]"> {{ member.category[1] }}</li>
+		</ul>
 	</li>
 </ul>

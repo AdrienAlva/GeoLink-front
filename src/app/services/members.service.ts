@@ -30,7 +30,7 @@ export class MembersService {
   			this.members = data.val() ? data.val() : [];
   			this.emitMembers();
   			
-  			console.log(this.members)
+  			/*console.log(this.members.category[0]);*/
   		});
   }//Eo getMembers()
 
