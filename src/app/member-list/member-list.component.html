@@ -1,10 +1,17 @@
 <ul>
-	<li class="li-item" *ngFor="let member of members">
-		<h3> {{ member.name }} </h3>
-		<p> {{ member.status }} </p>
-		<ul>
-			<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>
-			<li *ngIf="member.category[1]"> {{ member.category[1] }}</li>
-		</ul>
-	</li>
+	<div *ngFor="let member of members">
+		<li class="li-item" *ngIf="(member.category[0]  === cartographie 
+								 || member.category[1] === cartographie 
+								 || member.category[0] === dronistique 
+								 || member.category[1] === dronistique
+								 || member.category[0] === javascript
+								 || member.category[1] === javascript)">
+			<h3> {{ member.name }} </h3>
+			<p> {{ member.status }} </p>
+			<ul>
+				<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>
+				<li *ngIf="member.category[1]"> {{ member.category[1] }}</li>
+			</ul>
+		</li>
+	</div>
 </ul>

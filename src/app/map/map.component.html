@@ -2,4 +2,13 @@
 	
 <div id="map"></div> <!-- l'id sert à designer la div où display la carte. -->	
 
+<button (click)="onSetCartographie()">Cartographie</button>
+<button (click)="onSetDronistique()">Dronistique</button>
+<button (click)="onSetJavascript()">JavaScript</button>
+<button (click)="onDisplayAll()">Tout afficher</button>
+
+<app-member-list [cartographie]="cartographie"
+				 [dronistique]="dronistique"
+				 [javascript]="javascript"></app-member-list>
+
 

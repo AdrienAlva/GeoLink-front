@@ -12,13 +12,23 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
 
+	memberSubscription: Subscription;
+
 	map; // variable pour stocker la map.
 	members: string;
 
 	cartographe = L.layerGroup();
 	droneCat = L.layerGroup();
+	programmeurJS = L.layerGroup();
 
-	memberSubscription: Subscription;
+	layersArray = [ this.cartographe, this.droneCat, this.programmeurJS];
+
+	cartoDisplay = true;
+	droneDisplay = true;
+
+	cartographie = 'cartographie';
+	dronistique = 'dronistique';
+	javascript = 'javascript';
 
 	smallIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -82,7 +92,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		});
 
 		const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		  		minZoom: 4,
+		  		minZoom: 3,
 		  		maxZoom: 17,
 		  		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		  	});
@@ -103,48 +113,93 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			const lng: number = member.lng;
 			const cat1 = member.category[0];
 			const cat2 = member.category[1];
-
-			
-
-			console.log(cat1);
 			
 			if(cat1 == 'dronistique' || cat2 == 'dronistique'){
 				const markerDrone = L.marker([lat, lng], {icon: this.smallIcon});
 					
 				markerDrone.addTo(this.map).bindPopup(name).addTo(this.droneCat); // version où le pop up n'est pas ouvert au chargement.		 	
-			}
+			}//Eo if
 
 			if (cat1 == 'cartographie' || cat2 == 'cartographie') {
 				
 				const markerCarto = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerCarto.addTo(this.map).bindPopup(name).addTo(this.cartographe); // version où le pop up n'est pas ouvert au chargement.			
-				
-			}//Eo else if
-		}//Eo for
+				markerCarto.addTo(this.map).bindPopup(name).addTo(this.cartographe); // version où le pop up n'est pas ouvert au chargement.
+			}//Eo if
 
-		
-	
+			if (cat1 == 'javascript' || cat2 == 'javascript') {
+				
+				const markerJS = L.marker([lat, lng], {icon: this.smallIcon});
+					
+				markerJS.addTo(this.map).bindPopup(name).addTo(this.programmeurJS); // version où le pop up n'est pas ouvert au chargement.
+			}//Eo if
+		}//Eo for
 	}//Eo addMarker()
 
 	makeLayerCarto() {
 
 		this.map.addLayer(this.cartographe);// pour que les categories soit "checked" dans le control de filtre des layers.
 		this.map.addLayer(this.droneCat);
+		this.map.addLayer(this.programmeurJS);
 
 		var overlays = {
 			"Cartographes": this.cartographe,
-			"Dronistique": this.droneCat 
+			"Dronistique": this.droneCat,
+			"Javascript" : this.programmeurJS
 		};
 
 		console.log(this.map);
 		L.control.layers(this.map.mainLayer, overlays).addTo(this.map);
-	}
-		
+	}//Eo makeLayerCarto
 
+	/* clickable events */
+
+	onSetCartographie() {
+		this.map.addLayer(this.cartographe);
+		this.map.removeLayer(this.droneCat);
+		this.map.removeLayer(this.programmeurJS);
+
+		this.cartographie = 'cartographie';
+		this.dronistique = '';
+		this.javascript = '';
+	}
+
+	onSetDronistique() {
+		this.map.addLayer(this.droneCat);
+		this.map.removeLayer(this.cartographe);
+		this.map.removeLayer(this.programmeurJS);
+
+		this.cartographie = '';
+		this.dronistique = 'dronistique';
+		this.javascript = '';
+	}
+
+	onSetJavascript() {
+		this.map.addLayer(this.programmeurJS);
+		this.map.removeLayer(this.cartographe);
+		this.map.removeLayer(this.droneCat);
+
+		this.cartographie = '';
+		this.dronistique = '';
+		this.javascript = 'javascript';
+	}
+
+
+
+	onDisplayAll() {
+		this.map.addLayer(this.cartographe);
+		this.map.addLayer( this.droneCat);
+		this.map.addLayer(this.programmeurJS);
+
+		this.cartographie = 'cartographie';
+		this.dronistique = 'dronistique';
+		this.javascript = 'javascript';
+	}//Eo onDisplayAll()
+		
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();
+
   	}//Eo ngOnDestroy()
 
 

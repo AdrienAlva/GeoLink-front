@@ -27,3 +27,9 @@
 	border: solid green 2px;
 	margin-bottom: 2px;
 }
+
+/* categories buttons*/
+
+.green-btn {
+	background-color: green;
+}

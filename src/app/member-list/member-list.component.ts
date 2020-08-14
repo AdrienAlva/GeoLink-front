@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'; 
+import { Component, OnInit, Input, OnDestroy } from '@angular/core'; 
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,6 +9,10 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
+
+  @Input() cartographie: string;
+  @Input() dronistique: string;
+  @Input() javascript: string;
 
   constructor(private membersService: MembersService) { }
 
@@ -24,7 +28,7 @@ export class MemberListComponent implements OnInit {
   	);
 
   	this.membersService.getMembers();
-	this.membersService.emitMembers();
+	  this.membersService.emitMembers();
   }//Eo ngOnInit()
 
 }//Eo class
