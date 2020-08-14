@@ -129,6 +129,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	makeLayerCarto() {
 
+		this.map.addLayer(this.cartographe);// pour que les categories soit "checked" dans le control de filtre des layers.
+		this.map.addLayer(this.droneCat);
+
 		var overlays = {
 			"Cartographes": this.cartographe,
 			"Dronistique": this.droneCat 
