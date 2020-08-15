@@ -15,7 +15,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	memberSubscription: Subscription;
 
 	map; // variable pour stocker la map.
-	members: string;
+	members: Member[] = [];
 
 	cartographe = L.layerGroup();
 	droneCat = L.layerGroup();
@@ -54,18 +54,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	}
 
 	ngOnInit(): void {
-		/*this.memberSubscription = this.membersService.membersSubject.subscribe( 
-	  		(members: any[]) => {
-	  			this.members = members;
-	  		}
-  		);*/
+		this.memberSubscription = this.membersService.membersSubject.subscribe( 
+	  		(members: Member[]) => this.onMembersLoading(members)
+  		);
 
 		this.membersService.getMembers();
-		this.membersService.emitMembers();
 
-		let currentMember = this.membersService.membersSubject.asObservable();
+		/*let currentMember = this.membersService.membersSubject.asObservable();
 
-		this.membersService.membersSubject.subscribe(val => this.addMarker(val));
+		this.membersService.membersSubject.subscribe(val => this.addMarker(val));*/
 	
 	}//Eo ngOnInit()
 
@@ -76,8 +73,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		
 	}//Eo ngAfterViewInit()
 
+	onMembersLoading(members: Member[]){
+		this.members = members;
+		console.log(this.members);
+		this.addMarker(this.members);
+	}//Eo onMembersLoading()
+
 	createMap() {
 		console.log('createMap')
+
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,
 			lng: -1.702823
@@ -101,13 +105,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	}//Eo createMap()
 
-	addMarker(val) { // instance du marker.
+	addMarker(members: Member[]) { // instance du marker.
 
-		const obj = Object.create(val);
-		
-
-		for ( let member of obj) {
-			const open = false;
+		for ( let member of members) {
 			const name: string = member.name; 
 			const lat: number = member.lat;
 			const lng: number = member.lng;

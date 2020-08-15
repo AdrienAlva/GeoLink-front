@@ -9,8 +9,8 @@ import * as L from 'leaflet';
 })
 export class MembersService {
 
-  members: [] =[]; //array local vide.
-  membersSubject = new Subject<any[]>(); // Subject pour diffuser l'array local.
+  members: Member[] =[]; //array local vide.
+  membersSubject = new Subject<Member[]>(); // Subject pour diffuser l'array local.
 
   constructor() { }
 
