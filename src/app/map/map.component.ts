@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import * as L from 'leaflet';
 
 
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -22,9 +23,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	programmeurJS = L.layerGroup();
 
 	layersArray = [ this.cartographe, this.droneCat, this.programmeurJS];
-
-	cartoDisplay = true;
-	droneDisplay = true;
 
 	cartographie = 'cartographie';
 	dronistique = 'dronistique';
@@ -75,7 +73,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
-		console.log(this.members);
+		console.log('onMembersLoading(): ' + this.members);
 		this.addMarker(this.members);
 	}//Eo onMembersLoading()
 
@@ -102,7 +100,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		  	});
 
 		mainLayer.addTo(this.map); // methode pour ajouter les options de configuration de la carte. tileLayer / min-max zoom / attribution.
-
+		
+		
 	}//Eo createMap()
 
 	addMarker(members: Member[]) { // instance du marker.
@@ -148,7 +147,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			"Javascript" : this.programmeurJS
 		};
 
-		console.log(this.map);
 		L.control.layers(this.map.mainLayer, overlays).addTo(this.map);
 	}//Eo makeLayerCarto
 

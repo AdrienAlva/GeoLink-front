@@ -1,0 +1,16 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearchMember()">
+	<div>
+	    <input type="search" class="search-bar" 
+	    placeholder="Rechercher un membre..."
+	    formControlName="keyWord" 
+	    size="30" >
+	    <button type="submit">Rechercher</button>
+  	</div>
+</form>
+
+<div *ngFor="let result of results">
+	<ul>
+		<li *ngIf="result != null" class="result-box"> {{ result.name }}</li>
+	</ul>
+	
+</div>
