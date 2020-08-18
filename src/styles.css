@@ -6,14 +6,6 @@
 
 /* custom CSS map */
 
-.map-wrapper {
-	position: relative;
-	height: 50%;
-	margin: 20px;
-}
-
-
-
 #map {
 	position: relative;
 	height: 50vh;

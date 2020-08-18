@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'; 
+import { Router } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,7 +15,7 @@ export class MemberListComponent implements OnInit {
   @Input() dronistique: string;
   @Input() javascript: string;
 
-  constructor(private membersService: MembersService) { }
+  constructor(private membersService: MembersService,private router: Router) { }
 
   members: Member[]; //Array local vide.
 
@@ -30,5 +31,10 @@ export class MemberListComponent implements OnInit {
   	this.membersService.getMembers();
 	  this.membersService.emitMembers();
   }//Eo ngOnInit()
+
+  onViewMember(id: number) {
+    this.router.navigate(['member', 'profile', id]);
+  }//Eo onViewBook()
+
 
 }//Eo class

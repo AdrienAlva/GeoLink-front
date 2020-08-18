@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
@@ -18,8 +19,11 @@ export class SearchBarComponent implements OnInit {
 
 	results: Member[] = [];	
 
+	noResultDisplay: boolean = false;
+
 	constructor(private formBuilder: FormBuilder,
-				private membersService: MembersService) { }
+				private membersService: MembersService,
+				private router: Router) { }
 
 	ngOnInit(): void {
 		this.initForm();
@@ -45,6 +49,8 @@ export class SearchBarComponent implements OnInit {
 		console.log('On recherche !');
 		console.log(this.searchForm.get('keyWord').value);
 
+		this.noResultDisplay = false;
+
 		this.results = [];
 
 		let userSearch = this.searchForm.get('keyWord').value.trim().toLowerCase().replace(/ /g, '');// replace configuré ainsi supprime tout les inners spaces.
@@ -60,15 +66,21 @@ export class SearchBarComponent implements OnInit {
 
       				this.results[i] = this.members[i];
 
-      				console.log(this.results);
-
     			} else {
     				console.log('Pas de résultats...');
     			}//Eo if / else
-  			}//Eo for
+  			}//Eo for	
 		}//Eo for
-		
+
+		if (this.results.length === 0) { // affichage du message d'absence de résultats pour la recherche.
+    				this.noResultDisplay = true;
+    	}//Eo if
+
 	}//Eo onSearchMember()
+
+	onViewMember(id: number) {
+  	this.router.navigate(['member', 'profile', id]);
+  }//Eo onViewBook()
 
 
 }//Eo class

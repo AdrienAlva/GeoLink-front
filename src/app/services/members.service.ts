@@ -48,5 +48,4 @@ export class MembersService {
   	);
   }//Eo getSingleMembers()
 
-
 }//Eo class

@@ -1,3 +1,5 @@
+<hr>
+
 <form [formGroup]="searchForm" (ngSubmit)="onSearchMember()">
 	<div>
 	    <input type="search" class="search-bar" 
@@ -8,9 +10,13 @@
   	</div>
 </form>
 
-<div *ngFor="let result of results">
+<div *ngFor="let result of results; let i = index">
 	<ul>
-		<li *ngIf="result != null" class="result-box"> {{ result.name }}</li>
+		<li *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }}</span> : 
+		{{ result.status }} - <button (click)="onViewMember(i)">Voir le profil du membre</button></li>
+		
 	</ul>
 	
 </div>
+
+<div *ngIf="noResultDisplay === true"><p>Pas de résultats à afficher...</p></div>

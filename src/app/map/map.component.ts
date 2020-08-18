@@ -73,7 +73,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
-		console.log('onMembersLoading(): ' + this.members);
 		this.addMarker(this.members);
 	}//Eo onMembersLoading()
 

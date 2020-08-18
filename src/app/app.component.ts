@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
 
 @Component({
@@ -7,8 +8,13 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+	mySubscription;
   
-	constructor() {
+	constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+
+		this.router.routeReuseStrategy.shouldReuseRoute = () => false; //permet de recharger la variable de l'user id pour la page profile.
+    
 
 		// Your web app's Firebase configuration
 	    var firebaseConfig = {

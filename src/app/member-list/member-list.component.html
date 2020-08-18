@@ -1,5 +1,5 @@
 <ul>
-	<div *ngFor="let member of members">
+	<div *ngFor="let member of members; let i = index">
 		<li class="li-item" *ngIf="(member.category[0] === cartographie 
 								 || member.category[1] === cartographie 
 								 || member.category[0] === dronistique 
@@ -11,6 +11,8 @@
 			<ul>
 				<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>
 				<li *ngIf="member.category[1]"> {{ member.category[1] }}</li>
+				<br>
+				<button (click)="onViewMember(i)">Voir le profil du membre</button>
 			</ul>
 		</li>
 	</div>
