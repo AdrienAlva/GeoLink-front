@@ -21,10 +21,13 @@ export class MemberListComponent implements OnInit {
 
   memberSubscription: Subscription;
 
+  studentlist: [];
+
   ngOnInit(): void {
   	this.memberSubscription = this.membersService.membersSubject.subscribe( 
   		(members: any[]) => {
   			this.members = members;
+        console.log(this.members);
   		}
   	);
 
@@ -35,6 +38,5 @@ export class MemberListComponent implements OnInit {
   onViewMember(id: number) {
     this.router.navigate(['member', 'profile', id]);
   }//Eo onViewBook()
-
 
 }//Eo class

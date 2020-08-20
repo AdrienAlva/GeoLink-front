@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/Member.model';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase'; 
 import * as L from 'leaflet';
 
@@ -8,15 +10,19 @@ import * as L from 'leaflet';
   providedIn: 'root'
 })
 export class MembersService {
-
   members: Member[] =[]; //array local vide.
   membersSubject = new Subject<Member[]>(); // Subject pour diffuser l'array local.
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  nodeRequest(){
+    return this.httpClient.get('http://localhost:3000/members');
+  }
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.
   	
   	this.membersSubject.next(this.members);
+    console.log('emit: ' + this.members)
   }//Eo emitMembers()
 
   saveMembers() {
@@ -25,13 +31,12 @@ export class MembersService {
 
   getMembers() {
   	
-  	firebase.database().ref('/members')
-  		.on('value', (data) => {		//on() surveille en permanence et renvoie tout changement en BDD (?).
-  			this.members = data.val() ? data.val() : [];
-  			this.emitMembers();
-  			
-  			/*console.log(this.members.category[0]);*/
-  		});
+      this.nodeRequest().subscribe((members: any) => {
+        this.members = members;
+        this.emitMembers();
+      });
+      
+  		
   }//Eo getMembers()
 
   getSingleMembers(id: number) {
