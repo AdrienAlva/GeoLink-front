@@ -1,0 +1,32 @@
+<h2>Demande pour rejoindre l'annuaire GéoLink</h2>
+
+<form [formGroup]="registerProfileForm" (ngSubmit)="onSubmitRegisterProfile()">
+	<fieldset>
+		<label for="surname">Nom : </label><input type="text" name="surname" formControlName="surname">
+		<br/>
+		<label for="name">Prénom : </label><input type="text" name="name" formControlName="name">
+		<br/>
+		<label for="status">Votre statut (étudiant, chercheur,...) : </label><input type="text" name="status" formControlName="status">
+		<br/>
+		<label for="lat">Latitude du marqueur sur la carte : </label><input type="number" name="lat" formControlName="lat">
+		<br/>
+		<label for="lng">Longitude du marqueur sur la carte : </label><input type="number" name="lng" formControlName="lng">
+		<br/>
+		<select name="category1" formControlName="category1">
+		    <option value="">-- Catégories --</option>
+		    <option value="cartographie">cartographie</option>
+		    <option value="dronistique">dronistique</option>
+		    <option value="javascript">javascript</option>
+		</select>
+		<br/>
+		<select name="category2" formControlName="category2">
+		    <option value="">-- Catégories --</option>
+		    <option value="cartographie">cartographie</option>
+		    <option value="dronistique">dronistique</option>
+		    <option value="javascript">javascript</option>
+		</select>
+		<br/>
+		<input type="submit">
+	</fieldset>
+</form>
+

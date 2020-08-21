@@ -1,5 +1,16 @@
 <div id="profile-box">
+	
+	<div id="map"></div>
+
 	<h2>Profil du membre</h2>
-	<h3>{{ members[memberId].name }}</h3>
+	<h3>{{ members[memberId].name }} {{ members[memberId].surname }}</h3>
 	<p> {{ members[memberId].status }}</p>
+	<p>Ce chercheur relève des catégories suivantes :</p>
+	<ul>
+		<li *ngIf="members[memberId].category[0]"> {{ members[memberId].category[0] }}</li>
+		<li *ngIf="members[memberId].category[1]"> {{ members[memberId].category[1] }}</li>
+	</ul>
+	<p><span style="font-weight: bold;">A propos :</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div>
+
+<button (click)="onNavigateHome()">Revenir sur la liste des profils</button>

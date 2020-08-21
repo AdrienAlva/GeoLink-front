@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule, CanActivate } from '@angular/router'; // routing
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +13,16 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SingleProfileComponent } from './single-profile/single-profile.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterProfileComponent } from './register-profile/register-profile.component';
 
 
 const appRoutes: Routes = [
-  { path: 'member/profile/:id', component: SingleProfileComponent}
+  { path: 'member/profile/:id', component: SingleProfileComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'register-profile', component: RegisterProfileComponent},
+  { path: '', component: MapComponent}
 
 ];//routing
 
@@ -26,7 +32,9 @@ const appRoutes: Routes = [
     MapComponent,
     MemberListComponent,
     SearchBarComponent,
-    SingleProfileComponent
+    SingleProfileComponent,
+    LoginComponent,
+    RegisterProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,8 @@ const appRoutes: Routes = [
   providers: [
     MembersService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

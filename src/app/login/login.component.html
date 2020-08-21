@@ -1,0 +1,9 @@
+<h2>Se connecter</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
+	<label for="password"> Mot de passe : </label><input type="password" name="password" formControlName="password">
+	<input type="submit">
+</form>
+
+<button (click)="onGetProtected()">Protected</button>

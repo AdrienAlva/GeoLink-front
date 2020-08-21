@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/Member.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase'; 
 import * as L from 'leaflet';
 
 @Injectable({
@@ -26,7 +25,7 @@ export class MembersService {
   }//Eo emitMembers()
 
   saveMembers() {
-  	firebase.database().ref('/members').set(this.members); // Set() fonctionne comme un 'put' en http.
+  	/*firebase.database().ref('/members').set(this.members);*/ // Set() fonctionne comme un 'put' en http.
   }//Eo saveMembers()
 
   getMembers() {
@@ -40,7 +39,7 @@ export class MembersService {
   }//Eo getMembers()
 
   getSingleMembers(id: number) {
-  	return new Promise(
+  	/*return new Promise(
   		(resolve, reject) => {
   			firebase.database().ref('/members/' + id).once('value').then( //once() n'effectue la requete qu'une seule fois.
   				(data) => {
@@ -50,7 +49,7 @@ export class MembersService {
   				}
   			);
   		}
-  	);
+  	);*/
   }//Eo getSingleMembers()
 
 }//Eo class

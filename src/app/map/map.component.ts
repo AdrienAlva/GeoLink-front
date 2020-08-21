@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'; 
+import { Router, ActivatedRoute } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -47,7 +48,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 
 
-	constructor(private membersService: MembersService) { 
+	constructor(private membersService: MembersService, public router: Router) { 
 		
 	}
 
@@ -61,13 +62,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		/*let currentMember = this.membersService.membersSubject.asObservable();
 
 		this.membersService.membersSubject.subscribe(val => this.addMarker(val));*/
+		this.createMap();// initialisation de la map.
+		this.makeLayerCarto();
 	
 	}//Eo ngOnInit()
 
 
 	ngAfterViewInit(): void {
-		this.createMap();// initialisation de la map.
-		this.makeLayerCarto();
+		
 		
 	}//Eo ngAfterViewInit()
 
@@ -84,7 +86,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			lng: -1.702823
 		};
 
-		const zoomLevel = 5; // niveau de zoom initial.
+		const zoomLevel = 2; // niveau de zoom initial.
 
 		this.map = L.map('map', { //Instance de l'objet map.
 			center: [univRennes2.lat, univRennes2.lng],
@@ -115,21 +117,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			if(cat1 == 'dronistique' || cat2 == 'dronistique'){
 				const markerDrone = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerDrone.addTo(this.map).bindPopup(name).addTo(this.droneCat); // version où le pop up n'est pas ouvert au chargement.		 	
+				markerDrone.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.droneCat); // version où le pop up n'est pas ouvert au chargement.		 	
 			}//Eo if
 
 			if (cat1 == 'cartographie' || cat2 == 'cartographie') {
 				
 				const markerCarto = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerCarto.addTo(this.map).bindPopup(name).addTo(this.cartographe); // version où le pop up n'est pas ouvert au chargement.
+				markerCarto.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.cartographe); // version où le pop up n'est pas ouvert au chargement.
 			}//Eo if
 
 			if (cat1 == 'javascript' || cat2 == 'javascript') {
 				
 				const markerJS = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerJS.addTo(this.map).bindPopup(name).addTo(this.programmeurJS); // version où le pop up n'est pas ouvert au chargement.
+				markerJS.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.programmeurJS); // version où le pop up n'est pas ouvert au chargement.
 			}//Eo if
 		}//Eo for
 	}//Eo addMarker()
@@ -192,11 +194,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.dronistique = 'dronistique';
 		this.javascript = 'javascript';
 	}//Eo onDisplayAll()
+
+
+	onNavigateToLogin() {
+		this.router.navigate(['login']);
+	}//onNavigateToLogin()
 		
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();
-
   	}//Eo ngOnDestroy()
 
 
