@@ -47,16 +47,4 @@ export class LoginComponent implements OnInit {
 		);  
     }//Eo onSubmitLogin()
 
-  onGetProtected() {
-  	this.httpClient.get('http://localhost:3000/protected')    
-      .subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
 }//Eo class

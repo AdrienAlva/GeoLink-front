@@ -16,12 +16,14 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterProfileComponent } from './register-profile/register-profile.component';
+import { RegisterAccountComponent } from './register-account/register-account.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register-profile', component: RegisterProfileComponent},
+  { path: 'register-account', component: RegisterAccountComponent},
   { path: '', component: MapComponent}
 
 ];//routing
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     SearchBarComponent,
     SingleProfileComponent,
     LoginComponent,
-    RegisterProfileComponent
+    RegisterProfileComponent,
+    RegisterAccountComponent
   ],
   imports: [
     BrowserModule,

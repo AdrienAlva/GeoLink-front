@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'; 
+import { Component, OnInit, AfterViewInit, OnDestroy, NgZone, ElementRef } from '@angular/core'; 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as L from 'leaflet';
 
 
@@ -47,8 +48,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	});
 
 
-
-	constructor(private membersService: MembersService, public router: Router) { 
+	constructor(private membersService: MembersService,
+				private router: Router) { 
 		
 	}
 
@@ -72,6 +73,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		
 		
 	}//Eo ngAfterViewInit()
+
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
@@ -113,25 +115,30 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			const lng: number = member.lng;
 			const cat1 = member.category[0];
 			const cat2 = member.category[1];
+
+			let index = members.indexOf(member);
 			
 			if(cat1 == 'dronistique' || cat2 == 'dronistique'){
 				const markerDrone = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerDrone.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.droneCat); // version où le pop up n'est pas ouvert au chargement.		 	
+				markerDrone.addTo(this.map).bindPopup(name + " " + member.surname 
+													  + "<br>" + member.status
+													  + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>"
+													  ).addTo(this.droneCat); 		 	
 			}//Eo if
 
 			if (cat1 == 'cartographie' || cat2 == 'cartographie') {
 				
 				const markerCarto = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerCarto.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.cartographe); // version où le pop up n'est pas ouvert au chargement.
+				markerCarto.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>").addTo(this.cartographe);
 			}//Eo if
 
 			if (cat1 == 'javascript' || cat2 == 'javascript') {
 				
 				const markerJS = L.marker([lat, lng], {icon: this.smallIcon});
 					
-				markerJS.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status).addTo(this.programmeurJS); // version où le pop up n'est pas ouvert au chargement.
+				markerJS.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>").addTo(this.programmeurJS);
 			}//Eo if
 		}//Eo for
 	}//Eo addMarker()
@@ -199,11 +206,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	onNavigateToLogin() {
 		this.router.navigate(['login']);
 	}//onNavigateToLogin()
+
+	onNavigateToRegisterAccount() {
+		this.router.navigate(['register-account']);
+	}//onNavigateToRegisterAccount()
 		
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();
   	}//Eo ngOnDestroy()
-
 
 }//EO class
