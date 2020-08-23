@@ -5,6 +5,7 @@ import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as L from 'leaflet';
+import * as Category from './category.constants';
 
 
 
@@ -26,9 +27,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	layersArray = [ this.cartographe, this.droneCat, this.programmeurJS];
 
-	cartographie = 'cartographie';
-	dronistique = 'dronistique';
-	javascript = 'javascript';
+	selectedCategory: string = null; // Etat courant de la selection de category. Null = all categories.
 
 	smallIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -98,7 +97,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 		const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		  		minZoom: 3,
-		  		maxZoom: 17,
+		  		maxZoom: 18,
 		  		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		  	});
 
@@ -121,6 +120,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 			if(cat1 == 'dronistique' || cat2 == 'dronistique'){
 				const markerDrone = L.marker([lat, lng], {icon: this.smallIcon});
 					
+				let profileLink = "routerLink=''"
+
 				markerDrone.addTo(this.map).bindPopup(name + " " + member.surname 
 													  + "<br>" + member.status
 													  + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>"
@@ -165,9 +166,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.droneCat);
 		this.map.removeLayer(this.programmeurJS);
 
-		this.cartographie = 'cartographie';
-		this.dronistique = '';
-		this.javascript = '';
+		this.selectedCategory = Category.CATEGORY_CARTOGRAPHIE;
 	}
 
 	onSetDronistique() {
@@ -175,9 +174,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.cartographe);
 		this.map.removeLayer(this.programmeurJS);
 
-		this.cartographie = '';
-		this.dronistique = 'dronistique';
-		this.javascript = '';
+		this.selectedCategory = Category.CATEGORY_DRONISTIQUE;
 	}
 
 	onSetJavascript() {
@@ -185,9 +182,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.cartographe);
 		this.map.removeLayer(this.droneCat);
 
-		this.cartographie = '';
-		this.dronistique = '';
-		this.javascript = 'javascript';
+		this.selectedCategory = Category.CATEGORY_JAVASCRIPT;
 	}
 
 
@@ -197,9 +192,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.addLayer( this.droneCat);
 		this.map.addLayer(this.programmeurJS);
 
-		this.cartographie = 'cartographie';
-		this.dronistique = 'dronistique';
-		this.javascript = 'javascript';
+		this.selectedCategory = null;
 	}//Eo onDisplayAll()
 
 
@@ -210,7 +203,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	onNavigateToRegisterAccount() {
 		this.router.navigate(['register-account']);
 	}//onNavigateToRegisterAccount()
-		
+
+	
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();

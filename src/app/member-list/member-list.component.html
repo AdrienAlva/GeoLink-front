@@ -1,11 +1,6 @@
 <ul>
 	<div *ngFor="let member of members; let i = index">
-		<li class="li-item" *ngIf="(member.category[0] === cartographie 
-								 || member.category[1] === cartographie 
-								 || member.category[0] === dronistique 
-								 || member.category[1] === dronistique
-								 || member.category[0] === javascript
-								 || member.category[1] === javascript)">
+		<li class="li-item" *ngIf="filterByCategory(member)">
 			<h3> {{ member.name }} </h3>
 			<p> {{ member.status }} </p>
 			<ul>

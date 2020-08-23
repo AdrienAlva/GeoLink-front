@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
+import * as Category from '../map/category.constants';
 
 @Component({
   selector: 'app-member-list',
@@ -11,9 +12,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MemberListComponent implements OnInit {
 
-  @Input() cartographie: string;
-  @Input() dronistique: string;
-  @Input() javascript: string;
+  @Input() selectedCategory: string;
+  
 
   constructor(private membersService: MembersService,private router: Router) { }
 
@@ -38,5 +38,17 @@ export class MemberListComponent implements OnInit {
   onViewMember(id: number) {
     this.router.navigate(['member', 'profile', id]);
   }//Eo onViewBook()
+
+  filterByCategory(member: Member) {
+    if(this.selectedCategory) {
+      return member.category.indexOf(this.selectedCategory) > - 1
+    }
+
+    // Selectionne toutes les catégories existantes si aucune catégorie n'est selectionné dans selectedCategory.
+    return member.category.indexOf(Category.CATEGORY_CARTOGRAPHIE) > - 1 || 
+           member.category.indexOf(Category.CATEGORY_DRONISTIQUE) > - 1 || 
+           member.category.indexOf(Category.CATEGORY_JAVASCRIPT) > - 1 ;
+  }
+    
 
 }//Eo class
