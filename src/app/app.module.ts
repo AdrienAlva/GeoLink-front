@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule, CanActivate } from '@angular/router'; // routing
 import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { createCustomElement } from '@angular/elements';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterProfileComponent } from './register-profile/register-profile.component';
 import { RegisterAccountComponent } from './register-account/register-account.component';
+import { LeafletPopupComponent } from './leaflet-popup/leaflet-popup.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     SingleProfileComponent,
     LoginComponent,
     RegisterProfileComponent,
-    RegisterAccountComponent
+    RegisterAccountComponent,
+    LeafletPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,13 @@ const appRoutes: Routes = [
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LeafletPopupComponent] 
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private injector: Injector) {
+    const PopupElement = createCustomElement(LeafletPopupComponent, {injector}); // Nécessaire pour bind le popup leaflet.
+    // Register the custom element with the browser.
+    customElements.define('popup-element', PopupElement);
+  }
+}

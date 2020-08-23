@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as L from 'leaflet';
 import * as Category from './category.constants';
-
+import { NgElement, WithProperties } from '@angular/elements';
+import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component';
 
 
 @Component({
@@ -17,14 +18,13 @@ import * as Category from './category.constants';
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
 
 	memberSubscription: Subscription;
-
-	map; // variable pour stocker la map.
 	members: Member[] = [];
 
+	map; // variable pour stocker la map.
+	
 	cartographe = L.layerGroup();
 	droneCat = L.layerGroup();
 	programmeurJS = L.layerGroup();
-
 	layersArray = [ this.cartographe, this.droneCat, this.programmeurJS];
 
 	selectedCategory: string = null; // Etat courant de la selection de category. Null = all categories.
@@ -48,9 +48,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 
 	constructor(private membersService: MembersService,
-				private router: Router) { 
-		
-	}
+				private router: Router) { }
 
 	ngOnInit(): void {
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
@@ -68,11 +66,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	}//Eo ngOnInit()
 
 
-	ngAfterViewInit(): void {
-		
-		
-	}//Eo ngAfterViewInit()
-
+	ngAfterViewInit(): void { }//Eo ngAfterViewInit()
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
@@ -103,46 +97,42 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 		mainLayer.addTo(this.map); // methode pour ajouter les options de configuration de la carte. tileLayer / min-max zoom / attribution.
 		
-		
 	}//Eo createMap()
 
 	addMarker(members: Member[]) { // instance du marker.
 
 		for ( let member of members) {
-			const name: string = member.name; 
-			const lat: number = member.lat;
-			const lng: number = member.lng;
-			const cat1 = member.category[0];
-			const cat2 = member.category[1];
 
 			let index = members.indexOf(member);
 			
-			if(cat1 == 'dronistique' || cat2 == 'dronistique'){
-				const markerDrone = L.marker([lat, lng], {icon: this.smallIcon});
-					
-				let profileLink = "routerLink=''"
-
-				markerDrone.addTo(this.map).bindPopup(name + " " + member.surname 
-													  + "<br>" + member.status
-													  + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>"
-													  ).addTo(this.droneCat); 		 	
+			if(member.category.indexOf(Category.CATEGORY_DRONISTIQUE) > -1){
+				this.addMemberPopupToLayer(member, index, this.droneCat);
 			}//Eo if
 
-			if (cat1 == 'cartographie' || cat2 == 'cartographie') {
-				
-				const markerCarto = L.marker([lat, lng], {icon: this.smallIcon});
-					
-				markerCarto.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>").addTo(this.cartographe);
+			if(member.category.indexOf(Category.CATEGORY_CARTOGRAPHIE) > -1){
+				this.addMemberPopupToLayer(member, index, this.cartographe);
 			}//Eo if
 
-			if (cat1 == 'javascript' || cat2 == 'javascript') {
-				
-				const markerJS = L.marker([lat, lng], {icon: this.smallIcon});
-					
-				markerJS.addTo(this.map).bindPopup(name + ' ' + member.surname + '<br>' + member.status + "<br><a id='test' href='/member/profile/" + index + "'>Voir mon profil...</a>").addTo(this.programmeurJS);
+			if(member.category.indexOf(Category.CATEGORY_JAVASCRIPT) > -1){
+				this.addMemberPopupToLayer(member, index, this.programmeurJS);
 			}//Eo if
+
 		}//Eo for
 	}//Eo addMarker()
+
+	addMemberPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
+		// popup a un type mixé. NgElement on crée un element angular. WithProperties sert à le définir comme LeafletPopupComponent.
+		const popup: NgElement & WithProperties<LeafletPopupComponent> = document.createElement('popup-element') as any;// On créer un élément du DOM avec le selecteur: popup-element.
+		// Listen to the close event
+		popup.addEventListener('closed', () => document.body.removeChild(popup));// Pour remove du DOM l'élément que l'on a crée lorsqu'on ferme le popup.
+		popup.memberId = index;
+		popup.member = member;
+		
+		const marker = L.marker([member.lat, member.lng], {icon: this.smallIcon});// Création du marker
+		marker.bindPopup(fl => document.body.appendChild(popup)); // quand on bindle popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+		marker.addTo(layer);// On ajoute au layer approprié.
+		return popup;
+	}//Eo addMemberPopupToLayer
 
 	makeLayerCarto() {
 
