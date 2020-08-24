@@ -33,6 +33,8 @@ export class SearchBarComponent implements OnInit {
 			);
 
 		this.membersService.getMembers();
+
+		this.firstLetterToUpper('adrien');
 	}//Eo ngOnInit()
 
 	initForm() {
@@ -62,9 +64,12 @@ export class SearchBarComponent implements OnInit {
 		for(let i=0; i<this.members.length; i++) {
   			for(let key in this.members[i]) {
     			if(this.members[i][key].toString().indexOf(userSearch) !=- 1) {
-      				console.log('Trouvé ! ' + this.members[i][key].toString().indexOf(userSearch) + ' + ' + this.members[i].name);
 
       				this.results[i] = this.members[i];
+
+      				this.results[i].name = this.firstLetterToUpper(this.results[i].name);
+
+      				this.results[i].surname = this.firstLetterToUpper(this.results[i].surname);
 
     			} else {
     				console.log('Pas de résultats...');
@@ -78,9 +83,13 @@ export class SearchBarComponent implements OnInit {
 
 	}//Eo onSearchMember()
 
+	firstLetterToUpper(word) {
+		return word.substr(0,1).toUpperCase()+word.substr(1);
+	}//Eo firstLetterToUpper
+
 	onViewMember(id: number) {
-  	this.router.navigate(['member', 'profile', id]);
-  }//Eo onViewBook()
+  		this.router.navigate(['member', 'profile', id]);
+    }//Eo onViewMember()
 
 
 }//Eo class

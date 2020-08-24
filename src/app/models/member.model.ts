@@ -9,6 +9,8 @@ export class Member {
 				public category: string[],
 				public status: string,
 				public email: string,
-				public password: string){}
+				public password: string,
+				public about: string){}
+				
 
 }//Eo class Member

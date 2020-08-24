@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   			  private router: Router) { }
 
   loginForm: FormGroup;
+
+  errorMessage: string;
   
 
   ngOnInit(): void {
@@ -38,8 +40,10 @@ export class LoginComponent implements OnInit {
 		      console.log(res);
 		      if (res['token']) {
 		        localStorage.setItem('token', res['token']);
-		        this.router.navigate(['register-profile'])
-		      }
+		        this.router.navigate(['register-profile']);
+		      } else if (res['message']) {
+            this.errorMessage = res['message'];
+          }
 		    },
 		    (err) => {
 		      console.log('Erreur ! : ' + err);

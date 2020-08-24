@@ -2,7 +2,14 @@
 
 <form [formGroup]="registerAccountForm" (ngSubmit)="onSubmitRegisterAccount()">
 	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
+	<br>
 	<label for="password"> Mot de passe : </label><input type="password" name="password" formControlName="password">
+	<br>
 	<label for="passwordConfirm"> Confirmation du mot de passe : </label><input type="password" name="passwordConfirm" formControlName="passwordConfirm">
+	<br>
 	<input type="submit">
 </form>
+
+<br/>
+
+<a routerLink="/">Retourner à la page d'accueil</a>

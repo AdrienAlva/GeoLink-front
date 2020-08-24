@@ -6,4 +6,10 @@
 	<input type="submit">
 </form>
 
+<div class="errorMessage" *ngIf="this.errorMessage">
+	<p>{{ errorMessage }}</p>
+</div>
 
+<br>
+
+<a routerLink="/">Retourner à la page d'accueil</a>

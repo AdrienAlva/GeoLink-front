@@ -16,6 +16,10 @@ export class LeafletPopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  firstLetterToUpper(word) {
+    	return word.substr(0,1).toUpperCase()+word.substr(1);
+  	}//Eo firstLetterToUpper
+
 }//Eo class
 
 /* Component pour bind le popup leaflet */

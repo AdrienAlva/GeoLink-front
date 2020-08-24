@@ -19,9 +19,7 @@ export class MembersService {
   }
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.
-  	
   	this.membersSubject.next(this.members);
-    console.log('emit: ' + this.members)
   }//Eo emitMembers()
 
   saveMembers() {

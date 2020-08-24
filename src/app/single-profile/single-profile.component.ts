@@ -55,10 +55,6 @@ export class SingleProfileComponent implements OnInit {
 		this.addMarker();
 	}//Eo onMembersLoading()
 
-	onNavigateHome() {
-		this.router.navigate(['']);
-	}//Eo onNavigateHome()
-
 	createMap() {
 		console.log('createMap')
 
@@ -87,5 +83,9 @@ export class SingleProfileComponent implements OnInit {
 				memberMarker.addTo(this.map).bindPopup(this.members[this.memberId].name + ' ' + this.members[this.memberId].surname + '<br>' + this.members[this.memberId].status).openPopup();		 	
 
 	}//Eo addMarker()
+
+	firstLetterToUpper(word) {
+    	return word.substr(0,1).toUpperCase()+word.substr(1);
+  	}//Eo firstLetterToUpper
 
 }//Eo class

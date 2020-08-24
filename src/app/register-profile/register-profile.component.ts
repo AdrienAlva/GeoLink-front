@@ -28,7 +28,8 @@ export class RegisterProfileComponent implements OnInit {
 	  		lat: null,
 	  		lng: null,
 	  		category1: '',
-	  		category2: ''
+	  		category2: '',
+	  		about: ''
 		});
 	}//Eo initForm()
 

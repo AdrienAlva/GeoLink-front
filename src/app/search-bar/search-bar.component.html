@@ -12,7 +12,7 @@
 
 <div *ngFor="let result of results; let i = index">
 	<ul>
-		<li *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }}</span> : 
+		<li *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }} {{ result.surname }}</span> : 
 		{{ result.status }} - <button (click)="onViewMember(i)">Voir le profil du membre</button></li>
 		
 	</ul>
