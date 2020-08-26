@@ -4,15 +4,15 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
 
   constructor(public httpClient: HttpClient,
-  			      private formBuilder: FormBuilder,
-  			      private router: Router) { }
+  			  private formBuilder: FormBuilder,
+  			  private router: Router) { }
 
   loginForm: FormGroup;
 
@@ -33,12 +33,14 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
   	const loginData = this.loginForm.value;
   	
-  	this.httpClient.post('http://localhost:3000/login', loginData)
+  	this.httpClient.post('http://localhost:3000/admin-login', loginData)
   		.subscribe(
   	    (res) => {
+  	      console.log('Enregistrement du token !');
+  	      console.log(res);
     	    if (res['token']) {
     	        localStorage.setItem('token', res['token']);
-    	        this.router.navigate(['register-profile']);
+    	        this.router.navigate(['admin-panel']);
   	      } else if (res['message']) {
               this.errorMessage = res['message'];
             }

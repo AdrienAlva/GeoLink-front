@@ -16,6 +16,8 @@ export class RegisterAccountComponent implements OnInit {
   			  private router: Router) { }
 
   registerAccountForm: FormGroup;
+
+  errorMessage: string;
   
 
   ngOnInit(): void {
@@ -35,14 +37,20 @@ export class RegisterAccountComponent implements OnInit {
 
     this.httpClient.post('http://localhost:3000/register-account', registerAccountData)
       .subscribe(
-          (res) => {
-            console.log('Requete d\'inscription !');
-            console.log(res);
-          },
-          (err) => {
-            console.log('Erreur ! : ' + err);
-          }
-      );  
-    }//Eo onSubmitRegisterAccount()
+        (res) => {
+          console.log('Enregistrement du token !');
+          console.log(res);
+          if (res['token']) {
+              localStorage.setItem('token', res['token']);
+              this.router.navigate(['register-profile']);
+          } else if (res['message']) {
+              this.errorMessage = res['message'];
+            }
+        },
+        (err) => {
+          console.log('Erreur ! : ' + err);
+        }
+    );  
+  }//Eo onSubmitRegisterAccount()
 
 }//Eo class
