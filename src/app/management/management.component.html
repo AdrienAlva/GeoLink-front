@@ -1,1 +1,55 @@
-<p>management works!</p>
+<h2>Liste des membres</h2>
+
+<a routerLink="/admin-panel">Retourner au panneau d'administration</a>
+
+<ul>
+	<div *ngFor="let member of members; let i = index">
+		<h3> {{ member.name}} {{ member.surname}}</h3>
+		<div class="li-item">
+			<form  (ngSubmit)="onSubmitVerifiedMember(f)" #f="ngForm" >
+				<p>Membre validé : {{ member.isVerified }}</p>
+				<p>Membre refusé : {{ member.isRejected }}</p>
+				<label for="surname">Nom : </label><input type="text" name="surname" [ngModel]="member.surname">
+				<br>
+				<label for="name">Prénom : </label><input type="text" name="name" [ngModel]="member.name">
+				<br>
+				<label for="email">Adresse email : </label><input type="email" name="email" [ngModel]="member.email">
+				<br>
+				<label for="status">Statut : </label><input type="text" name="status" [ngModel]="member.status">
+				<br>
+				<label for="category">Thématiques : </label>
+				<select name="category1" [ngModel]="member.category[0]">
+				    <option value="">-- Catégories --</option>
+				    <option value="cartographie">cartographie</option>
+				    <option value="dronistique">dronistique</option>
+				    <option value="javascript">javascript</option>
+				</select>
+				<select name="category2" [ngModel]="member.category[1]">
+				    <option value="">-- Catégories --</option>
+				    <option value="cartographie">cartographie</option>
+				    <option value="dronistique">dronistique</option>
+				    <option value="javascript">javascript</option>
+				</select>
+				<br>
+				<br>
+				<label for="about">description : </label><textarea name="about" [ngModel]="member.about"rows="5" cols="33">	
+				</textarea>
+				<br>
+				<p>Coordonnées géographiques : </p>
+				<label for="lat">Latitude : </label><input type="text" name="lat" [ngModel]="member.lat">
+				<br>
+				<label for="lng">Longitude : </label><input type="text" name="lng" [ngModel]="member.lng">
+				<br>
+				<button type="submit">Modifier</button>
+				<br><br>
+			</form>
+			<button (click)="refuseMember(member.email)">Supprimer</button>
+			</div>
+			<hr>
+	</div>
+</ul>
+
+
+<br>
+
+<a routerLink="/admin-panel">Retourner au panneau d'administration</a>

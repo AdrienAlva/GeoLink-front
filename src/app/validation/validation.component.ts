@@ -16,16 +16,16 @@ export class ValidationComponent implements OnInit {
   			  private formBuilder: FormBuilder,
 		      private router: Router) { }
 
-  membersToVerified: [];
+  membersToVerify: [];
 
   verifiedForm: FormGroup;
 
   ngOnInit(): void {
   	
-  	this.httpClient.get('http://localhost:3000/members').subscribe(
+  	this.httpClient.get('http://localhost:3000/members-validation').subscribe(
   		(data: any) => {
-  			this.membersToVerified = data;
-  			console.log(this.membersToVerified);
+  			this.membersToVerify = data;
+  			console.log(this.membersToVerify);
   		}
   	);
   }//Eo ngOnInit()
@@ -47,7 +47,7 @@ export class ValidationComponent implements OnInit {
   	);
   }//Eo onSubmitVerifiedMember()
 
-  refused(refusedEmail) {
+  refuseMember(refusedEmail) {
 
     let jsonEmail = {email: ''};
     jsonEmail['email'] = refusedEmail;
