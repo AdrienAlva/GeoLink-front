@@ -121,18 +121,25 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 	}//Eo addMarker()
 
 	addMemberPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
-		// popup a un type mixé. NgElement on crée un element angular. WithProperties sert à le définir comme LeafletPopupComponent.
-		const popup: NgElement & WithProperties<LeafletPopupComponent> = document.createElement('popup-element') as any;// On créer un élément du DOM avec le selecteur: popup-element.
-		// Listen to the close event
-		popup.addEventListener('closed', () => document.body.removeChild(popup));// Pour remove du DOM l'élément que l'on a crée lorsqu'on ferme le popup.
-		popup.memberId = index;
-		popup.member = member;
+		
 		
 		const marker = L.marker([member.lat, member.lng], {icon: this.smallIcon});// Création du marker
-		marker.bindPopup(fl => document.body.appendChild(popup)); // quand on bindle popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+		marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
 		marker.addTo(layer);// On ajoute au layer approprié.
-		return popup;
+		
 	}//Eo addMemberPopupToLayer
+
+	makePopup(member: Member, index: number) {
+
+		const popup: NgElement & WithProperties<LeafletPopupComponent> = document.createElement('popup-element') as any;
+		
+		popup.addEventListener('closed', () => document.body.removeChild(popup));
+		popup.memberId = index;
+		popup.member = member;
+
+		return document.body.appendChild(popup);
+
+	}
 
 	makeLayerCarto() {
 

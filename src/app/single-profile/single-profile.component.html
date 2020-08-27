@@ -12,5 +12,6 @@
 	</ul>
 	<p><span style="font-weight: bold;">A propos :</span> {{ members[memberId].about  }}</p>
 </div>
+<p *ngIf="!members[memberId].name">TEST</p>
 
 <a routerLink="/">Retourner à la page d'accueil</a>

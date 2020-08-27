@@ -15,7 +15,7 @@ export class MembersService {
   constructor(private httpClient: HttpClient) { }
 
   nodeRequest(){
-    return this.httpClient.get('http://localhost:3000/members');
+    return this.httpClient.get('http://localhost:3000/verified-members');
   }
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.

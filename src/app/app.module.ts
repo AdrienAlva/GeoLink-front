@@ -23,6 +23,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { ValidationComponent } from './validation/validation.component';
+import { ManagementComponent } from './management/management.component';
 
 
 const appRoutes: Routes = [
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'register-account', component: RegisterAccountComponent},
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'admin-panel', canActivate: [AuthGuardAdminService], component: AdminPanelComponent},
+  { path: 'management', canActivate: [AuthGuardAdminService], component: ManagementComponent},
   { path: 'validation', canActivate: [AuthGuardAdminService], component: ValidationComponent},
   { path: '', component: MapComponent},
   { path: 'not-found', component: FourOhFourComponent },
@@ -53,7 +55,8 @@ const appRoutes: Routes = [
     AdminLoginComponent,
     AdminPanelComponent,
     FourOhFourComponent,
-    ValidationComponent
+    ValidationComponent,
+    ManagementComponent
   ],
   imports: [
     BrowserModule,

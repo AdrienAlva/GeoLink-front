@@ -22,7 +22,7 @@ export class ValidationComponent implements OnInit {
 
   ngOnInit(): void {
   	
-  	this.httpClient.get('http://localhost:3000/verified-members').subscribe(
+  	this.httpClient.get('http://localhost:3000/members').subscribe(
   		(data: any) => {
   			this.membersToVerified = data;
   			console.log(this.membersToVerified);
@@ -46,5 +46,24 @@ export class ValidationComponent implements OnInit {
   	    }
   	);
   }//Eo onSubmitVerifiedMember()
+
+  refused(refusedEmail) {
+
+    let jsonEmail = {email: ''};
+    jsonEmail['email'] = refusedEmail;
+
+    console.log(jsonEmail);
+
+    this.httpClient.post('http://localhost:3000/refused', jsonEmail)
+      .subscribe(
+        (res) => {
+          console.log('Envoi de la requête de validation de profil.');
+          this.ngOnInit();
+      },
+      (err) => {
+          console.log('Erreur ! : ' + err);
+        }
+    );
+  }//Eo refused();
 
 }//Eo class
