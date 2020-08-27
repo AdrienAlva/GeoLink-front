@@ -1,0 +1,63 @@
+<h2>Membres à vérifier</h2>
+
+<ul>
+	<div *ngFor="let member of membersToVerified; let i = index">
+		<form  (ngSubmit)="onSubmitVerifiedMember(f)" #f="ngForm" class="li-item" *ngIf="!member.isVerified" >
+			<label for="surname">Nom : </label><input type="text" name="surname" [ngModel]="member.surname">
+			<br>
+			<label for="name">Prénom : </label><input type="text" name="name" [ngModel]="member.name">
+			<br>
+			<label for="email">Adresse email : </label><input type="email" name="email" [ngModel]="member.email">
+			<br>
+			<label for="status">Statut : </label><input type="text" name="status" [ngModel]="member.status">
+			<br>
+			<label for="category">Thématiques : </label>
+			<select name="category1" [ngModel]="member.category[0]">
+			    <option value="">-- Catégories --</option>
+			    <option value="cartographie">cartographie</option>
+			    <option value="dronistique">dronistique</option>
+			    <option value="javascript">javascript</option>
+			</select>
+			<select name="category2" [ngModel]="member.category[1]">
+			    <option value="">-- Catégories --</option>
+			    <option value="cartographie">cartographie</option>
+			    <option value="dronistique">dronistique</option>
+			    <option value="javascript">javascript</option>
+			</select>
+			<br>
+			<br>
+			<label for="about">description : </label><textarea name="about" [ngModel]="member.about"rows="5" cols="33">	
+			</textarea>
+			<br>
+			<p>Coordonnées géographiques : </p>
+			<label for="lat">Latitude : </label><input type="text" name="lat" [ngModel]="member.lat">
+			<br>
+			<label for="lng">Longitude : </label><input type="text" name="lng" [ngModel]="member.lng">
+			<br>
+			<button type="submit">Accepter</button>
+			<br><br>
+			<button type="submit">Refuser</button>
+		</form>
+	</div>
+</ul>
+
+
+<br>
+
+<a routerLink="/admin-panel">Retourner au panneau d'administration</a>
+
+<!-- <li >
+			<p>Nom : {{ member.surname }}</p>
+			<p>Prénom : {{ member.name }}</p>
+			<p>Adresse email : {{ member.email }}</p>
+			<p>Statut : {{ member.status }} </p>
+			<p>Thématiques : </p>
+			<ul>
+				<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>
+				<li *ngIf="member.category[1]"> {{ member.category[1] }}</li>
+			</ul>
+			<p>Description : {{ member.about }}</p>
+			<p>Coordonnées géographiques : </p>
+			<p>Lattitude : {{ member.lat }}</p>
+			<p>Longitude : {{ member.lng }}</p>
+		</li> -->

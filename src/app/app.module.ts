@@ -22,15 +22,17 @@ import { LeafletPopupComponent } from './leaflet-popup/leaflet-popup.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { ValidationComponent } from './validation/validation.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register-profile', canActivate: [AuthGuardService], component: RegisterProfileComponent},
-  { path: 'register-account', canActivate: [AuthGuardService], component: RegisterAccountComponent},
+  { path: 'register-account', component: RegisterAccountComponent},
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'admin-panel', canActivate: [AuthGuardAdminService], component: AdminPanelComponent},
+  { path: 'validation', canActivate: [AuthGuardAdminService], component: ValidationComponent},
   { path: '', component: MapComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     LeafletPopupComponent,
     AdminLoginComponent,
     AdminPanelComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    ValidationComponent
   ],
   imports: [
     BrowserModule,

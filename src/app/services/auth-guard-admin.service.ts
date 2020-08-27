@@ -18,20 +18,23 @@ export class AuthGuardAdminService {
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)  {  
 		const refToken = localStorage.getItem("token");
-		console.log('local token: ' + refToken);
 		const helper = new JwtHelperService();
 		const isExpired = helper.isTokenExpired(refToken);
+
+		if(isExpired){ // Cas où le JWT est expiré avant la requête.
+			this.router.navigate(['login']);
+  			return false;
+		}
 
 		return this.httpClient.get('http://localhost:3000/admin-login').map((res)=>{
 			if(res['value'] == 'true'){
 				this.isad = true;
 				if (refToken && !isExpired && this.isad) {
-					console.log('On rentre ! ')
 		  			return true;
 				} 
 			}
 
-  			this.router.navigate(['login']);
+  			this.router.navigate(['admin-login']);
   			return false;
 		});//Eo return http call	
 	}//Eo canActivate()
