@@ -28,40 +28,52 @@ export class ManagementComponent implements OnInit {
   	);
   }//Eo ngOnInit()
 
-  onSubmitVerifiedMember(form: NgForm){
+  onUpdateMember(form: NgForm){
   	console.log(form.value);
 
   	const data = form.value;
+
+  	var res = confirm("Êtes-vous sûr de vouloir modifier les données du compte dont l'adresse email associée est : " + data.email + " ?");
+    if(res){
+	        this.httpClient.post('http://localhost:3000/update', data)
+	  		.subscribe(
+	  	    (res) => {
+	    	    console.log('Envoi de la requête de modification de profil.');
+	    	    this.ngOnInit();
+	    	},
+	    	(err) => {
+	  	      console.log('Erreur ! : ' + err);
+	  	    }
+  		);
+    } 
   	
-  	/*this.httpClient.post('http://localhost:3000/validation', data)
-  		.subscribe(
-  	    (res) => {
-    	    console.log('Envoi de la requête de validation de profil.');
-    	    this.ngOnInit();
-    	},
-    	(err) => {
-  	      console.log('Erreur ! : ' + err);
-  	    }
-  	);*/
+  	
   }//Eo onSubmitVerifiedMember()
 
-  refuseMember(refusedEmail) {
+  onDeleteMember(accountEmail) {
 
     let jsonEmail = {email: ''};
-    jsonEmail['email'] = refusedEmail;
+    jsonEmail['email'] = accountEmail;
 
     console.log(jsonEmail);
 
-    /*this.httpClient.post('http://localhost:3000/refused', jsonEmail)
-      .subscribe(
-        (res) => {
-          console.log('Envoi de la requête de validation de profil.');
-          this.ngOnInit();
-      },
-      (err) => {
-          console.log('Erreur ! : ' + err);
-        }
-    );*/
-  }//Eo refused();
+    var res = confirm("Êtes-vous sûr de vouloir supprimer le compte dont l'adresse email associée est : " + accountEmail + " ?");
+    if(res){
+        this.httpClient.post('http://localhost:3000/delete', jsonEmail)
+      	.subscribe(
+	        (res) => {
+	          console.log('Envoi de la requête de suppression du compte.');
+	          this.ngOnInit();
+	      	},
+	      	(err) => {
+	          console.log('Erreur ! : ' + err);
+	        }
+    	);
+    } else {
+    	alert('Vous avez annulé la demande de suppression du compte.')
+    }
+
+    
+  }//Eo onDeleteMember();
 
 }//Eo class

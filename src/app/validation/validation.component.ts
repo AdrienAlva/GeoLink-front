@@ -47,7 +47,7 @@ export class ValidationComponent implements OnInit {
   	);
   }//Eo onSubmitVerifiedMember()
 
-  refuseMember(refusedEmail) {
+  onRefuseMember(refusedEmail) {
 
     let jsonEmail = {email: ''};
     jsonEmail['email'] = refusedEmail;
