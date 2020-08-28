@@ -122,7 +122,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 
 	addMemberPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
 		
-		
 		const marker = L.marker([member.lat, member.lng], {icon: this.smallIcon});// Création du marker
 		marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
 		marker.addTo(layer);// On ajoute au layer approprié.
@@ -138,8 +137,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		popup.member = member;
 
 		return document.body.appendChild(popup);
-
-	}
+	}//Eo makePopup
 
 	makeLayerCarto() {
 
@@ -164,7 +162,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.programmeurJS);
 
 		this.selectedCategory = Category.CATEGORY_CARTOGRAPHIE;
-	}
+	}//Eo onSetCartographie
 
 	onSetDronistique() {
 		this.map.addLayer(this.droneCat);
@@ -172,7 +170,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.programmeurJS);
 
 		this.selectedCategory = Category.CATEGORY_DRONISTIQUE;
-	}
+	}//Eo onSetDronistique
 
 	onSetJavascript() {
 		this.map.addLayer(this.programmeurJS);
@@ -180,9 +178,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.map.removeLayer(this.droneCat);
 
 		this.selectedCategory = Category.CATEGORY_JAVASCRIPT;
-	}
-
-
+	}//Eo onSetJavascript()
 
 	onDisplayAll() {
 		this.map.addLayer(this.cartographe);
@@ -192,7 +188,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.selectedCategory = null;
 	}//Eo onDisplayAll()
 
-
 	onNavigateToLogin() {
 		this.router.navigate(['login']);
 	}//onNavigateToLogin()
@@ -201,7 +196,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // After
 		this.router.navigate(['register-account']);
 	}//onNavigateToRegisterAccount()
 
-	
+	onGoToAccount() {
+		this.router.navigate(['user-account']);
+	}//Eo onGoToAccount()
+
+	onLogout() {
+		localStorage.removeItem('token');
+	}//Eo onLogout()
+
+	/* EO Clickables events functions*/
+
+	isConnected() {
+		let isConnected = localStorage.getItem('token');
+
+		return isConnected;
+	}//eo isConnected
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();

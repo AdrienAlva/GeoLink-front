@@ -10,14 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./management.component.css']
 })
 export class ManagementComponent implements OnInit {
-
-  constructor(private httpClient: HttpClient,
-  			  private formBuilder: FormBuilder,
-		      private router: Router) { }
-
   members: [];
 
   updateMemberForm: FormGroup;
+
+  constructor(private httpClient: HttpClient,
+  			      private formBuilder: FormBuilder,
+		          private router: Router) { }
 
   ngOnInit(): void {
   	
@@ -35,7 +34,7 @@ export class ManagementComponent implements OnInit {
 
   	var res = confirm("Êtes-vous sûr de vouloir modifier les données du compte dont l'adresse email associée est : " + data.email + " ?");
     if(res){
-	        this.httpClient.post('http://localhost:3000/update', data)
+        this.httpClient.post('http://localhost:3000/update', data)
 	  		.subscribe(
 	  	    (res) => {
 	    	    console.log('Envoi de la requête de modification de profil.');

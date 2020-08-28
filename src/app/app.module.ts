@@ -24,12 +24,18 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { ValidationComponent } from './validation/validation.component';
 import { ManagementComponent } from './management/management.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { SentRequestComponent } from './sent-request/sent-request.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
+  { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
   { path: 'register-profile', canActivate: [AuthGuardService], component: RegisterProfileComponent},
+  { path: 'sent-request', canActivate: [AuthGuardService], component: SentRequestComponent},
   { path: 'register-account', component: RegisterAccountComponent},
   { path: 'admin-login', component: AdminLoginComponent},
   { path: 'admin-panel', canActivate: [AuthGuardAdminService], component: AdminPanelComponent},
@@ -56,7 +62,10 @@ const appRoutes: Routes = [
     AdminPanelComponent,
     FourOhFourComponent,
     ValidationComponent,
-    ManagementComponent
+    ManagementComponent,
+    UserAccountComponent,
+    UpdateProfileComponent,
+    SentRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,17 @@
+<div *ngFor="let member of members">
+
+<h2>Bienvenue {{ member.name }} {{ member.surname }} !</h2>
+
+<a routerLink="/update-profile" *ngIf="member.hasSubmitedProfile === true">Modifier mon profil</a>
+
+<br><br>
+
+<app-register-profile *ngIf="member.hasSubmitedProfile === false"></app-register-profile>
+
+<a routerLink="/">Retourner à la page d'accueil</a>
+
+<br><br>
+
+<button (click)="onLogout()">Déconnexion</button>
+
+</div>

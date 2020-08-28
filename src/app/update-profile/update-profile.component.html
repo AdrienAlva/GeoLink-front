@@ -1,14 +1,12 @@
-<h2>Membres à vérifier</h2>
+<h2>Mettre à jour les informations de mon profil</h2>
 
 <ul>
-	<div *ngFor="let member of membersToVerify; let i = index">
-		<div class="li-item" *ngIf="!member.isVerified">
+	<div *ngFor="let member of memberToUpdate">
+		<div>
 			<form  (ngSubmit)="onSubmitVerifiedMember(f)" #f="ngForm" >
 				<label for="surname">Nom : </label><input type="text" name="surname" [ngModel]="member.surname">
 				<br>
 				<label for="name">Prénom : </label><input type="text" name="name" [ngModel]="member.name">
-				<br>
-				<label for="email">Adresse email : </label><input type="email" name="email" [ngModel]="member.email">
 				<br>
 				<label for="status">Statut : </label><input type="text" name="status" [ngModel]="member.status">
 				<br>
@@ -38,12 +36,14 @@
 				<button type="submit">Accepter</button>
 				<br><br>
 			</form>
-			<button (click)="onRefuseMember(member.email)">Refuser</button>
-			</div>
+		</div>
 	</div>
 </ul>
 
+<div class="successMessage" *ngIf="this.successMessage">
+	<p>{{ successMessage }}</p>
+</div>
 
-<br>
+<br><br>
 
-<a routerLink="/admin-panel">Retourner au panneau d'administration</a>
+<a routerLink="/user-account">Retour</a>

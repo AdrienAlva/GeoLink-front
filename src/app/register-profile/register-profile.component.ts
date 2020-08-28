@@ -36,15 +36,19 @@ export class RegisterProfileComponent implements OnInit {
 	onSubmitRegisterProfile() {
   	const registerData = this.registerProfileForm.value;
   	
-	this.httpClient.post('http://localhost:3000/register-profile', registerData)
-		.subscribe(
-		    (res) => {
-		      console.log('Envoi de la demande de création de profil !');
-		    },
-		    (err) => {
-		      console.log('Erreur ! : ' + err);
-		    }
-		);  
+  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
+		if(res){
+			this.httpClient.post('http://localhost:3000/register-profile', registerData)
+			.subscribe(
+			    (res) => {
+			      console.log('Envoi de la demande de création de profil !');
+			    },
+			    (err) => {
+			      console.log('Erreur ! : ' + err);
+			    }    
+			);
+			this.router.navigate(['sent-request']);
+		} 
     }//Eo onSubmitLogin()
 
 }//Eo class
