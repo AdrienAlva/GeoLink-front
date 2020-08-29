@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule, CanActivate } from '@angular/router'; // routing
 import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { createCustomElement } from '@angular/elements';
+import { RecaptchaModule } from 'ng-recaptcha';
 /*---------------------------------------------------------------------------------*/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RecaptchaModule,
     RouterModule.forRoot(appRoutes) //routing
   ],
   providers: [

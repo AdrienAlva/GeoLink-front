@@ -34,7 +34,6 @@ export class SearchBarComponent implements OnInit {
 
 		this.membersService.getMembers();
 
-		this.firstLetterToUpper('adrien');
 	}//Eo ngOnInit()
 
 	initForm() {
@@ -48,8 +47,6 @@ export class SearchBarComponent implements OnInit {
 	}//Eo onMembersLoading()
 
 	onSearchMember() {
-		console.log('On recherche !');
-		console.log(this.searchForm.get('keyWord').value);
 
 		this.noResultDisplay = false;
 
@@ -57,19 +54,15 @@ export class SearchBarComponent implements OnInit {
 
 		let userSearch = this.searchForm.get('keyWord').value.trim().toLowerCase().replace(/ /g, '');// replace configuré ainsi supprime tout les inners spaces.
 
-		console.log(userSearch);
-
-		console.log(this.members);
-
 		for(let i=0; i<this.members.length; i++) {
   			for(let key in this.members[i]) {
-    			if(this.members[i][key].toString().indexOf(userSearch) !=- 1) {
+    			if(this.members[i][key].toString().toLowerCase().indexOf(userSearch) !=- 1) {
 
       				this.results[i] = this.members[i];
 
-      				this.results[i].name = this.firstLetterToUpper(this.results[i].name);
+      				this.results[i].name = this.results[i].name;
 
-      				this.results[i].surname = this.firstLetterToUpper(this.results[i].surname);
+      				this.results[i].surname = this.results[i].surname;
 
     			} else {
     				console.log('Pas de résultats...');
@@ -82,10 +75,6 @@ export class SearchBarComponent implements OnInit {
     	}//Eo if
 
 	}//Eo onSearchMember()
-
-	firstLetterToUpper(word) {
-		return word.substr(0,1).toUpperCase()+word.substr(1);
-	}//Eo firstLetterToUpper
 
 	onViewMember(id: number) {
   		this.router.navigate(['member', 'profile', id]);

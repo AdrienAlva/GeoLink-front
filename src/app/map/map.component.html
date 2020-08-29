@@ -9,10 +9,10 @@
 
 <app-search-bar></app-search-bar>
 
-<button (click)="onNavigateToLogin()" *ngIf="!isConnected()">Se connecter</button>
-<button (click)="onNavigateToRegisterAccount()" *ngIf="!isConnected()">S'inscrire</button>
-<button (click)="onGoToAccount()" *ngIf="isConnected()">Compte utilisateur</button>
-<button (click)="onLogout()" *ngIf="isConnected()">Déconnexion</button>
+<button (click)="onNavigateToLogin()" *ngIf="!isConnected() || isExpired">Se connecter</button>
+<button (click)="onNavigateToRegisterAccount()" *ngIf="!isConnected() || isExpired">S'inscrire</button>
+<button (click)="onGoToAccount()" *ngIf="isConnected() && !isExpired">Compte utilisateur</button>
+<button (click)="onLogout()" *ngIf="isConnected() && !isExpired">Déconnexion</button>
 
 
 

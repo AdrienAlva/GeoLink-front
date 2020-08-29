@@ -1,7 +1,7 @@
 <ul>
 	<div *ngFor="let member of members; let i = index">
 		<li class="li-item" *ngIf="filterByCategory(member)">
-			<h3> {{ firstLetterToUpper(member.name) }} {{ firstLetterToUpper(member.surname) }}</h3>
+			<h3> {{ member.name }} {{ member.surname }}</h3>
 			<p> Je suis : {{ member.status }} </p>
 			<ul>
 				<li *ngIf="member.category[0]"> {{ member.category[0] }}</li>

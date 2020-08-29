@@ -48,11 +48,6 @@ export class MemberListComponent implements OnInit {
     return member.category.indexOf(Category.CATEGORY_CARTOGRAPHIE) > - 1 || 
            member.category.indexOf(Category.CATEGORY_DRONISTIQUE) > - 1 || 
            member.category.indexOf(Category.CATEGORY_JAVASCRIPT) > - 1 ;
-  }//Eo filterByCategory()
-
-  firstLetterToUpper(word) {
-    return word.substr(0,1).toUpperCase()+word.substr(1);
-  }//Eo firstLetterToUpper
-    
+  }//Eo filterByCategory()  
 
 }//Eo class

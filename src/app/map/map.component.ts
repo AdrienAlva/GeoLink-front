@@ -8,6 +8,8 @@ import * as L from 'leaflet';
 import * as Category from './category.constants';
 import { NgElement, WithProperties } from '@angular/elements';
 import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component';
+import { JwtModule } from "@auth0/angular-jwt";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 
 @Component({
@@ -16,6 +18,10 @@ import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component'
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy { // AfterViewInit permet d'atttendre que le DOM soit chargé avant d'agir. 
+
+	refToken = localStorage.getItem("token");
+	helper = new JwtHelperService();
+	isExpired = this.helper.isTokenExpired(this.refToken);
 
 	memberSubscription: Subscription;
 	members: Member[] = [];
