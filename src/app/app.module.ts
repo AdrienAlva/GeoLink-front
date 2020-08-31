@@ -29,6 +29,7 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { SentRequestComponent } from './sent-request/sent-request.component';
 import { RecoveryComponent } from './recovery/recovery.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 const appRoutes: Routes = [
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'recovery', component: RecoveryComponent},
   { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
   { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
+  { path: 'update-password', canActivate: [AuthGuardService], component: UpdatePasswordComponent},
   { path: 'register-profile', canActivate: [AuthGuardService], component: RegisterProfileComponent},
   { path: 'sent-request', canActivate: [AuthGuardService], component: SentRequestComponent},
   { path: 'register-account', component: RegisterAccountComponent},
@@ -69,7 +71,8 @@ const appRoutes: Routes = [
     UserAccountComponent,
     UpdateProfileComponent,
     SentRequestComponent,
-    RecoveryComponent
+    RecoveryComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

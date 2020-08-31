@@ -14,7 +14,6 @@ export class AppComponent {
 
 		this.router.routeReuseStrategy.shouldReuseRoute = () => false; //permet de recharger la variable de l'user id pour la page profile.
     
-
 	}//eo constructor
 
 }//Eo class
