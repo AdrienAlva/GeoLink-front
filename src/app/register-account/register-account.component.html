@@ -7,7 +7,8 @@
 	<br>
 	<label for="passwordConfirm"> Confirmation du mot de passe : </label><input type="password" name="passwordConfirm" formControlName="passwordConfirm">
 	<br>
-	<input type="submit">
+	<re-captcha formControlName="recaptchaReactive"></re-captcha>
+	<input type="submit" [disabled]="registerAccountForm.invalid">
 </form>
 
 <div class="errorMessage" *ngIf="this.errorMessage">

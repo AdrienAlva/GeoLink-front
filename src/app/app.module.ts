@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { Routes, RouterModule, CanActivate } from '@angular/router'; // routing
 import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { createCustomElement } from '@angular/elements';
-import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RECAPTCHA_LANGUAGE, RecaptchaSettings, RecaptchaFormsModule } from 'ng-recaptcha';
 /*---------------------------------------------------------------------------------*/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,11 +28,13 @@ import { ManagementComponent } from './management/management.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { SentRequestComponent } from './sent-request/sent-request.component';
+import { RecoveryComponent } from './recovery/recovery.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'recovery', component: RecoveryComponent},
   { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
   { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
   { path: 'register-profile', canActivate: [AuthGuardService], component: RegisterProfileComponent},
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
     ManagementComponent,
     UserAccountComponent,
     UpdateProfileComponent,
-    SentRequestComponent
+    SentRequestComponent,
+    RecoveryComponent
   ],
   imports: [
     BrowserModule,
@@ -75,13 +78,22 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RecaptchaModule,
+    RecaptchaFormsModule,
     RouterModule.forRoot(appRoutes) //routing
   ],
   providers: [
     MembersService,
     AuthGuardService,
     AuthGuardAdminService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LdQscUZAAAAALAAeFdf-dR3dxlNC-kB3A2qHQYf' } as RecaptchaSettings,
+    },
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: 'fr', // use French language
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [LeafletPopupComponent] 

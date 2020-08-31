@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -11,14 +11,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterAccountComponent implements OnInit {
 
-  constructor(public httpClient: HttpClient,
-  			  private formBuilder: FormBuilder,
-  			  private router: Router) { }
-
   registerAccountForm: FormGroup;
 
   errorMessage: string;
-  
+
+  constructor(private httpClient: HttpClient,
+  			      private formBuilder: FormBuilder,
+  			      private router: Router) { }
 
   ngOnInit(): void {
   	this.initForm();
@@ -28,7 +27,8 @@ export class RegisterAccountComponent implements OnInit {
   	this.registerAccountForm = this.formBuilder.group({
       email: '',
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }//Eo initForm()
 
@@ -52,5 +52,9 @@ export class RegisterAccountComponent implements OnInit {
         }
     );  
   }//Eo onSubmitRegisterAccount()
+
+  resolved(captchaResponse: string) {
+        console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }//Eo resolved()
 
 }//Eo class
