@@ -25,12 +25,14 @@ export class RegisterAccountComponent implements OnInit {
 
   initForm(){
   	this.registerAccountForm = this.formBuilder.group({
-      email: '',
-      password: '',
-      passwordConfirm: '',
+      email: ['', [Validators.required, Validators.email]],
+      password: ['',[ Validators.required, Validators.minLength(8)]], 
+      passwordConfirm: ['',[ Validators.required, Validators.minLength(8)]],
       recaptchaReactive: new FormControl(null, Validators.required)
     });
   }//Eo initForm()
+
+  get f() { return this.registerAccountForm.controls; }
 
   onSubmitRegisterAccount() {
     const registerAccountData = this.registerAccountForm.value;

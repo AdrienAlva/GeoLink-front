@@ -1,9 +1,15 @@
 <h2>Créer un compte</h2>
 
 <form [formGroup]="registerAccountForm" (ngSubmit)="onSubmitRegisterAccount()">
-	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
+	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email" >
+	<div *ngIf="f.email.errors?.email || f.email.errors?.required">
+    	<span>Une adresse email valide est requise.</span>
+  	</div>
 	<br>
 	<label for="password"> Mot de passe : </label><input type="password" name="password" formControlName="password">
+	<div *ngIf="f.password.errors?.minlength">
+    	<span>Le mot de passe doit comprendre au moins 8 caractères.</span>
+  	</div>
 	<br>
 	<label for="passwordConfirm"> Confirmation du mot de passe : </label><input type="password" name="passwordConfirm" formControlName="passwordConfirm">
 	<br>
@@ -11,7 +17,7 @@
 	<input type="submit" [disabled]="registerAccountForm.invalid">
 </form>
 
-<div class="errorMessage" *ngIf="this.errorMessage">
+<div class="errorMessage" *ngIf="errorMessage">
 	<p>{{ errorMessage }}</p>
 </div>
 
