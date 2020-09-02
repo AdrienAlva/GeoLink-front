@@ -35,6 +35,7 @@ export class RecoveryComponent implements OnInit {
       .subscribe(
         (res) => {
           this.errorMessage = res['message'];
+          grecaptcha.reset();
         },
         (err) => {
           console.log('Erreur ! : ' + err);

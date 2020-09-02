@@ -31,8 +31,6 @@ export class MemberListComponent implements OnInit {
   		}
   	);
 
-  	this.membersService.getMembers();
-	  this.membersService.emitMembers();
   }//Eo ngOnInit()
 
   onViewMember(id: number) {
@@ -51,6 +49,8 @@ export class MemberListComponent implements OnInit {
            member.status.indexOf(Category.STATUS_POST_DOCTORANT) > - 1 || 
            member.status.indexOf(Category.STATUS_ENSEIGNANT) > - 1 || 
            member.status.indexOf(Category.STATUS_PROFESSIONNEL) > - 1 ||
+           member.status.indexOf(Category.STATUS_PUBLIC) > - 1 ||
+           member.status.indexOf(Category.STATUS_PRIVE) > - 1 ||
            member.thematics.indexOf(Category.THEME_AGRICULTURE_PRECI) > - 1 ||
            member.thematics.indexOf(Category.THEME_ARCHEOLOGIE) > - 1 ||
            member.thematics.indexOf(Category.THEME_CLIMATOLOGIE) > - 1 ||

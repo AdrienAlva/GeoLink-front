@@ -29,11 +29,7 @@ export class SearchBarComponent implements OnInit {
 		this.initForm();
 
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
-	  		(members: Member[]) => this.onMembersLoading(members)
-			);
-
-		this.membersService.getMembers();
-
+	  		(members: Member[]) => this.onMembersLoading(members));
 	}//Eo ngOnInit()
 
 	initForm() {

@@ -4,6 +4,9 @@ export const 	STATUS_POST_DOCTORANT = 'Post-Doctorant';
 export const 	STATUS_ENSEIGNANT = 'Enseignant-Chercheur';
 export const 	STATUS_PROFESSIONNEL = 'Professionnel';
 
+export const 	STATUS_PUBLIC = 'organisme public';
+export const 	STATUS_PRIVE = 'organisme privé';
+
 export const 	THEME_AGRICULTURE_PRECI = 'Agriculture de Précision';
 export const 	THEME_ARCHEOLOGIE = 'Archéologie';
 export const 	THEME_CLIMATOLOGIE = 'Climatologie';

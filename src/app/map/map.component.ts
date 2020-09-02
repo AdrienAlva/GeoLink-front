@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, ElementRef } from '@angular/core'; 
+import { Component, OnInit, OnDestroy, NgZone, ElementRef, AfterViewInit } from '@angular/core'; 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
@@ -29,12 +29,15 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	map; // variable pour stocker la map.
 
+	allMembers = L.layerGroup();
 	/* status layers */
 	doctorants = L.layerGroup();
 	etudiants = L.layerGroup();
 	postDoctorants = L.layerGroup();
 	enseignantsChercheurs = L.layerGroup();
 	professionnels = L.layerGroup();
+	public = L.layerGroup();
+	prive = L.layerGroup();
 	/* thematics layers */
 	agriculturedePrecision = L.layerGroup();
 	archeologie = L.layerGroup();
@@ -83,27 +86,29 @@ export class MapComponent implements OnInit, OnDestroy {
 					this.statistiques,
 					this.sig,
 					this.traitementSignal,
-					this.urbain];
+					this.urbain,
+					this.public,
+					this.prive];
 
 	selectedCategory: string = null; // Etat courant de la selection de category. Null = all categories.
 
 	/* Map Icons */
-	smallIcon = new L.Icon({  // Instance de l'icon pour le marker.
-		iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
+	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
+		iconUrl: '../assets/icons/member.png',
 		iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
-		iconSize:    [25, 41],
+		iconSize:    [35, 41],
 		iconAnchor:  [12, 41],
 		popupAnchor: [1, -34],
-		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-		shadowSize:  [41, 41]
 	});
 
-	greenIcon = new L.Icon({  // Instance de l'icon pour le marker.
-		iconUrl: '../assets/icons/cramschool.png',
+	organizationIcon = new L.Icon({  // Instance de l'icon pour le marker.
+		iconUrl: '../assets/icons/organization.png',
 		iconSize:    [35, 41],
 		iconAnchor:  [12, 41],
 		popupAnchor: [1, -34]
 	});
+
+	markers = L.markerClusterGroup();
 
 	/* CONSTRUCTOR */
 	constructor(private membersService: MembersService,
@@ -112,12 +117,20 @@ export class MapComponent implements OnInit, OnDestroy {
 	/* ON INIT */
 	ngOnInit(): void {
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
-	  		(members: Member[]) => this.onMembersLoading(members)
-  		);
+	  		(members: Member[]) => {
+
+				this.onMembersLoading(members);
+
+				this.makeLayerCarto();
+
+				this.map.addLayer(this.markers);
+			});
 
 		this.membersService.getMembers();
+
 		this.createMap();
-		this.makeLayerCarto();
+
+		console.log('init accueil')
 
 	}//Eo ngOnInit()
 
@@ -135,12 +148,11 @@ export class MapComponent implements OnInit, OnDestroy {
 			lng: -1.702823
 		};
 
-		const zoomLevel = 2; // niveau de zoom initial.
+		const zoomLevel = 3; // niveau de zoom initial.
 
 		this.map = L.map('map', { //Instance de l'objet map.
 			center: [univRennes2.lat, univRennes2.lng],
 			zoom: zoomLevel,
-			layers: [this.doctorants]
 		});
 
 		const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -157,6 +169,8 @@ export class MapComponent implements OnInit, OnDestroy {
 		for ( let member of members) {
 
 			let index = members.indexOf(member);
+
+			this.addAllMembersPopupToLayer(member, index, this.allMembers);
 	
 			if(member.status.indexOf(Category.STATUS_ETUDIANT) > -1){
 				this.addMemberPopupToLayer(member, index, this.etudiants);
@@ -172,6 +186,12 @@ export class MapComponent implements OnInit, OnDestroy {
 			}//Eo if
 			if(member.status.indexOf(Category.STATUS_PROFESSIONNEL) > -1){
 				this.addMemberPopupToLayer(member, index, this.professionnels);
+			}//Eo if
+			if(member.status.indexOf(Category.STATUS_PUBLIC) > -1){
+				this.addMemberPopupToLayer(member, index, this.public);
+			}//Eo if
+			if(member.status.indexOf(Category.STATUS_PRIVE) > -1){
+				this.addMemberPopupToLayer(member, index, this.prive);
 			}//Eo if
 			if(member.thematics.indexOf(Category.THEME_AGRICULTURE_PRECI) > -1){
 				this.addMemberPopupToLayer(member, index, this.agriculturedePrecision);
@@ -241,10 +261,35 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	addMemberPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
 		
-		const marker = L.marker([member.lat, member.lng], {icon: this.smallIcon});// Création du marker
-		marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
-		marker.addTo(layer);// On ajoute au layer approprié.
-	
+		if (member.isOrganization == true) {
+
+			const marker = L.marker([member.lat, member.lng], {icon: this.organizationIcon});// Création du marker
+
+			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+
+			marker.addTo(layer);// On ajoute au layer approprié.
+
+		} else if(member.isOrganization == false) {
+
+			const marker = L.marker([member.lat, member.lng], {icon: this.memberIcon});// Création du marker
+
+			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+
+			marker.addTo(layer);// On ajoute au layer approprié.
+		} 	
+	}//Eo addMemberPopupToLayer
+
+	addAllMembersPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
+
+		if (member.isOrganization == true) {
+			const marker = L.marker([member.lat, member.lng], {icon: this.organizationIcon});// Création du marker
+			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+			marker.addTo(layer);// On ajoute au layer approprié.
+		} else if(member.isOrganization == false) {
+			const marker = L.marker([member.lat, member.lng], {icon: this.memberIcon});// Création du marker
+			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
+			marker.addTo(layer);// On ajoute au layer approprié.
+		} 	
 	}//Eo addMemberPopupToLayer
 
 	makePopup(member: Member, index: number) {
@@ -259,191 +304,175 @@ export class MapComponent implements OnInit, OnDestroy {
 	}//Eo makePopup
 
 	makeLayerCarto() {
-		/*let markers =  L.markerClusterGroup();*/
-		for(let layer of this.layersArray) {
-			this.map.addLayer(layer);
-		}
 
-		/*this.map.addLayer(markers);*/
+		this.allMembers.addTo(this.markers);
 
 	}//Eo makeLayerCarto
 
 	/* clickable events */
 
 	onSetDoctorants() {
-		for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.map.addLayer(this.doctorants);
+		/*this.map.addLayer(this.doctorants);*/
+		this.markers.clearLayers();
+		this.doctorants.addTo(this.markers);
 		this.selectedCategory = Category.STATUS_DOCTORANT;
 	}//Eo onSetDoctorants()
 
 	onSetEtudiants() {
-		for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.map.addLayer(this.etudiants);
+		this.markers.clearLayers();
+		this.etudiants.addTo(this.markers);
 		this.selectedCategory = Category.STATUS_ETUDIANT;
 	}//Eo onSetEtudiants
 
 	onSetPostDoctorants() {
-		for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.map.addLayer(this.postDoctorants);
+		this.markers.clearLayers();
+		this.postDoctorants.addTo(this.markers);
 		this.selectedCategory = Category.STATUS_POST_DOCTORANT;
 	}//Eo onSetPostDoctorants()
 
 	onSetEnseignants() {
-		for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.map.addLayer(this.enseignantsChercheurs);
+		this.markers.clearLayers();
+		this.enseignantsChercheurs.addTo(this.markers);
 		this.selectedCategory = Category.STATUS_ENSEIGNANT;
 	}//Eo onSetEnseignants()
 
 	onSetProfessionnels() {
-		for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.map.addLayer(this.professionnels);
+		this.markers.clearLayers();
+		this.professionnels.addTo(this.markers);
 		this.selectedCategory = Category.STATUS_PROFESSIONNEL;
+	}//Eo onSetProfessionnels()
+
+	onSetPublic() {
+		this.markers.clearLayers();
+		this.public.addTo(this.markers);
+		this.selectedCategory = Category.STATUS_PUBLIC;
+	}//Eo onSetProfessionnels()
+
+	onSetPrive() {
+		this.markers.clearLayers();
+		this.prive.addTo(this.markers);
+		this.selectedCategory = Category.STATUS_PRIVE;
 	}//Eo onSetProfessionnels()
 
 	onDisplayAll() {
 		for(let layer of this.layersArray) {
-			this.map.addLayer(layer);}
+			this.map.removeLayer(layer);}
+		this.markers.clearLayers();
+		this.allMembers.addTo(this.markers);
 		this.selectedCategory = null;
 	}//Eo onDisplayAll()
 
 	selectThematic(value) {
 		switch(value) {
 		    case "Agriculture de Précision":
-		    	for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.agriculturedePrecision);
+		    	this.markers.clearLayers();
+				this.agriculturedePrecision.addTo(this.markers);
 				this.selectedCategory = Category.THEME_AGRICULTURE_PRECI;
 		       break;
 		    case "Archéologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.archeologie);
+				this.markers.clearLayers();
+				this.archeologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_ARCHEOLOGIE;
 		       break;
 	       case "Climatologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.climatologie);
+		      	this.markers.clearLayers();
+				this.climatologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_CLIMATOLOGIE;
 		       break;
 	       case "Ecologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.ecologie);
+		        this.markers.clearLayers();
+				this.ecologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_ECOLOGIE;
 		       break;
 	       case "Géographie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.geographie);
+		       	this.markers.clearLayers();
+				this.geographie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_GEOGRAPHIE
 		       break;
 	       case "Géologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.geologie);
+		        this.markers.clearLayers();
+				this.geologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_GEOLOGIE;
 		       break;
 	       case "Géosciences":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.geosciences);
+		        this.markers.clearLayers();
+				this.geosciences.addTo(this.markers);
 				this.selectedCategory = Category.THEME_GEOSCIENCES;
 		       break;
 	       case "Hydrologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.hydrologie);
+		        this.markers.clearLayers();
+				this.hydrologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_HYDROLOGIE;
 		       break;
 	       case "Informatique":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.informatique);
+		        this.markers.clearLayers();
+				this.informatique.addTo(this.markers);
 				this.selectedCategory = Category.THEME_INFORMATIQUE;
 		       break;
 	       case "Intelligence Artificielle":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.intelligenceArtificielle);
+		        this.markers.clearLayers();
+				this.intelligenceArtificielle.addTo(this.markers);
 				this.selectedCategory = Category.THEME_IA;
 		       break;	
 				this.selectedCategory = Category.THEME_MATHS;
 	       case "Mathématiques":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.mathematiques);
+		        this.markers.clearLayers();
+				this.mathematiques.addTo(this.markers);
 				this.selectedCategory = Category.THEME_MATHS;
 		       break;	
 	       case "Météorologie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.meteorologie);
+		        this.markers.clearLayers();
+				this.meteorologie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_METEO;
 		       break;	
 	       case "Modélisation":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.modelisation);
+		        this.markers.clearLayers();
+				this.modelisation.addTo(this.markers);
 				this.selectedCategory = Category.THEME_MODELISATION;
 		       break;	
 	       case "Océanographie":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.oceanographie);
+		        this.markers.clearLayers();
+				this.oceanographie.addTo(this.markers);
 				this.selectedCategory = Category.THEME_OCEANOGRAPHIE;
 		       break;	
 	       case "Optique":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.optique);
+		        this.markers.clearLayers();
+				this.optique.addTo(this.markers);
 				this.selectedCategory = Category.THEME_OPTIQUE;
 		       break;	
 	       case "Modélisation":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.modelisation);
+		        this.markers.clearLayers();
+				this.modelisation.addTo(this.markers);
 				this.selectedCategory = Category.THEME_MODELISATION;
 		       break;	
 	       case "Radar":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.radar);
+		        this.markers.clearLayers();
+				this.radar.addTo(this.markers);
 				this.selectedCategory = Category.THEME_RADAR;
 		       break;	
 	       case "Risques Naturels":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.riquesNaturels);
+		        this.markers.clearLayers();
+				this.riquesNaturels.addTo(this.markers);
 				this.selectedCategory = Category.THEME_RISQUESNATURELS;
 		       break;	
 	       case "Statistiques":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.statistiques);
+		        this.markers.clearLayers();
+				this.statistiques.addTo(this.markers);
 				this.selectedCategory = Category.THEME_STATISTIQUES;
 		       break;		
 	       case "Système d’information Géographique (S.I.G.)":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.sig);
+		        this.markers.clearLayers();
+				this.sig.addTo(this.markers);
 				this.selectedCategory = Category.THEME_SIG;
 		       break;	
 	       case "Traitement du signal":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.traitementSignal);
+		        this.markers.clearLayers();
+				this.traitementSignal.addTo(this.markers);
 				this.selectedCategory = Category.THEME_TRAITEMENTSIGNAL;
 		       break;	
 	       case "Urbain":
-		       for(let layer of this.layersArray) {
-					this.map.removeLayer(layer);}
-	      		this.map.addLayer(this.urbain);
+		        this.markers.clearLayers();
+				this.urbain.addTo(this.markers);
 				this.selectedCategory = Category.THEME_URBAIN;
 		       break;			       		       		       	       		       		       		       		       		       		       		       		       		       		       		       		       		       
 		}//Eo switch

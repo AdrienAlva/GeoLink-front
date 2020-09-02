@@ -44,9 +44,10 @@ export class RegisterAccountComponent implements OnInit {
           console.log(res);
           if (res['token']) {
               localStorage.setItem('token', res['token']);
-              this.router.navigate(['register-profile']);
+              this.router.navigate(['profil-type']);
           } else if (res['message']) {
               this.errorMessage = res['message'];
+              grecaptcha.reset();
             }
         },
         (err) => {

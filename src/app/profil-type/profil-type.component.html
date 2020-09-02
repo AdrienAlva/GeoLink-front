@@ -1,0 +1,18 @@
+<h2>Type de candidature</h2>
+
+<form (ngSubmit)="onSubmitRadio(f)" #f="ngForm">
+	<p>S'agit-il d'une candidature individuelle ou bien représentez vous une structure (organisme, institution, entreprise, association,...) ?</p>
+	<div>
+	    <input type="radio" id="personnal"
+	     name="choice" value="personnal" [ngModel]="">
+	    <label for="personnal">J'inscris mon profil personnel</label>
+
+	    <input type="radio" id="organization"
+	     name="choice" value="organization" [ngModel]="">
+	    <label for="organization">Je réprésente une structure</label>	
+
+	    <br><br>
+
+	    <button type="submit">Valider</button>
+    </div>
+</form>

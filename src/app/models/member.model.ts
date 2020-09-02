@@ -10,7 +10,8 @@ export class Member {
 				public status: string,
 				public email: string,
 				public password: string,
-				public about: string){}
+				public about: string,
+				public isOrganization: boolean){}
 				
 
 }//Eo class Member
