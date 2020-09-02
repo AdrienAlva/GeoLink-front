@@ -30,23 +30,142 @@
 				<br>
 				<label for="email">Adresse email : </label><input type="email" name="email" [ngModel]="member.email">
 				<br>
-				<label for="status">Statut : </label><input type="text" name="status" [ngModel]="member.status">
-
-				<br>
-
-				<label for="category">Thématiques : </label>
-				<select name="category1" [ngModel]="member.category[0]">
-				    <option value="">-- Catégories --</option>
-				    <option value="cartographie">cartographie</option>
-				    <option value="dronistique">dronistique</option>
-				    <option value="javascript">javascript</option>
+				<label for="status">Statut: </label>
+				<select name="status" [ngModel]="member.status">
+				    <option value="">-- Statut --</option>
+				    <option value="Etudiant du master TELENVI">Etudiant du master TELENVI</option>
+				    <option value="Doctorant">Doctorant</option>
+				    <option value="Post-Doctorant">Post-Doctorant</option>
+				    <option value="Enseignant-Chercheur">Enseignant-Chercheur</option>
+				    <option value="Professionnel">Professionnel</option>
 				</select>
-				<select name="category2" [ngModel]="member.category[1]">
-				    <option value="">-- Catégories --</option>
-				    <option value="cartographie">cartographie</option>
-				    <option value="dronistique">dronistique</option>
-				    <option value="javascript">javascript</option>
+				<br/>
+				<p >Thématiques de travail :</p>
+				<select name="thematic1" [ngModel]="member.thematics[0]">
+				    <option value="">-- Thématiques --</option>
+				    <option value="Agriculture de Précision">Agriculture de Précision</option>
+				    <option value="Archéologie">Archéologie</option>
+				    <option value="Climatologie">Climatologie</option>
+				    <option value="Ecologie">Ecologie</option>
+				    <option value="Géographie">Géographie</option>
+				    <option value="Géologie">Géologie</option>
+				    <option value="Géosciences">Géosciences</option>
+				    <option value="Hydrologie">Hydrologie</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+				    <option value="Mathématiques">Mathématiques</option>
+				    <option value="Météorologie">Météorologie</option>
+				    <option value="Modélisation">Modélisation</option>
+				    <option value="Océanographie">Océanographie</option>
+				    <option value="Optique">Optique</option>
+				    <option value="Radar">Radar</option>
+				    <option value="Risques Naturels">Risques Naturels</option>
+				    <option value="Statistiques">Statistiques</option>
+				    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+				    <option value="Traitement du signal">Traitement du signal</option>
+				    <option value="Urbain">Urbain</option>  
 				</select>
+				<br/>
+				<select name="thematic2" [ngModel]="member.thematics[1]">
+				    <option value="">-- Thématiques --</option>
+				    <option value="Agriculture de Précision">Agriculture de Précision</option>
+				    <option value="Archéologie">Archéologie</option>
+				    <option value="Climatologie">Climatologie</option>
+				    <option value="Ecologie">Ecologie</option>
+				    <option value="Géographie">Géographie</option>
+				    <option value="Géologie">Géologie</option>
+				    <option value="Géosciences">Géosciences</option>
+				    <option value="Hydrologie">Hydrologie</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+				    <option value="Mathématiques">Mathématiques</option>
+				    <option value="Météorologie">Météorologie</option>
+				    <option value="Modélisation">Modélisation</option>
+				    <option value="Océanographie">Océanographie</option>
+				    <option value="Optique">Optique</option>
+				    <option value="Radar">Radar</option>
+				    <option value="Risques Naturels">Risques Naturels</option>
+				    <option value="Statistiques">Statistiques</option>
+				    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+				    <option value="Traitement du signal">Traitement du signal</option>
+				    <option value="Urbain">Urbain</option>  
+				</select>
+				<br/>
+				<select name="thematic3" [ngModel]="member.thematics[2]">
+				    <option value="">-- Thématiques --</option>
+				    <option value="Agriculture de Précision">Agriculture de Précision</option>
+				    <option value="Archéologie">Archéologie</option>
+				    <option value="Climatologie">Climatologie</option>
+				    <option value="Ecologie">Ecologie</option>
+				    <option value="Géographie">Géographie</option>
+				    <option value="Géologie">Géologie</option>
+				    <option value="Géosciences">Géosciences</option>
+				    <option value="Hydrologie">Hydrologie</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+				    <option value="Mathématiques">Mathématiques</option>
+				    <option value="Météorologie">Météorologie</option>
+				    <option value="Modélisation">Modélisation</option>
+				    <option value="Océanographie">Océanographie</option>
+				    <option value="Optique">Optique</option>
+				    <option value="Radar">Radar</option>
+				    <option value="Risques Naturels">Risques Naturels</option>
+				    <option value="Statistiques">Statistiques</option>
+				    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+				    <option value="Traitement du signal">Traitement du signal</option>
+				    <option value="Urbain">Urbain</option>  
+				</select>
+				<br/>
+				<select name="thematic4" [ngModel]="member.thematics[3]">
+				    <option value="">-- Thématiques --</option>
+				    <option value="Agriculture de Précision">Agriculture de Précision</option>
+				    <option value="Archéologie">Archéologie</option>
+				    <option value="Climatologie">Climatologie</option>
+				    <option value="Ecologie">Ecologie</option>
+				    <option value="Géographie">Géographie</option>
+				    <option value="Géologie">Géologie</option>
+				    <option value="Géosciences">Géosciences</option>
+				    <option value="Hydrologie">Hydrologie</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+				    <option value="Mathématiques">Mathématiques</option>
+				    <option value="Météorologie">Météorologie</option>
+				    <option value="Modélisation">Modélisation</option>
+				    <option value="Océanographie">Océanographie</option>
+				    <option value="Optique">Optique</option>
+				    <option value="Radar">Radar</option>
+				    <option value="Risques Naturels">Risques Naturels</option>
+				    <option value="Statistiques">Statistiques</option>
+				    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+				    <option value="Traitement du signal">Traitement du signal</option>
+				    <option value="Urbain">Urbain</option>  
+				</select>
+				<br/>
+				<select name="thematic5" [ngModel]="member.thematics[4]">
+				    <option value="">-- Thématiques --</option>
+				    <option value="Agriculture de Précision">Agriculture de Précision</option>
+				    <option value="Archéologie">Archéologie</option>
+				    <option value="Climatologie">Climatologie</option>
+				    <option value="Ecologie">Ecologie</option>
+				    <option value="Géographie">Géographie</option>
+				    <option value="Géologie">Géologie</option>
+				    <option value="Géosciences">Géosciences</option>
+				    <option value="Hydrologie">Hydrologie</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+				    <option value="Mathématiques">Mathématiques</option>
+				    <option value="Météorologie">Météorologie</option>
+				    <option value="Modélisation">Modélisation</option>
+				    <option value="Océanographie">Océanographie</option>
+				    <option value="Optique">Optique</option>
+				    <option value="Radar">Radar</option>
+				    <option value="Risques Naturels">Risques Naturels</option>
+				    <option value="Statistiques">Statistiques</option>
+				    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+				    <option value="Traitement du signal">Traitement du signal</option>
+				    <option value="Urbain">Urbain</option>  
+				</select>
+				<br/>
 
 				<br>
 				<br>

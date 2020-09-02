@@ -6,7 +6,7 @@ export class Member {
 				public name: string,
 				public lat: number,
 				public lng: number,
-				public category: string[],
+				public thematics: string[],
 				public status: string,
 				public email: string,
 				public password: string,

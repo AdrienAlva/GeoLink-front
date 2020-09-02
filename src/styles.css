@@ -3,6 +3,7 @@
 
 /*import du CSS leaflet */
 @import "~leaflet/dist/leaflet.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 /* custom CSS map */
 

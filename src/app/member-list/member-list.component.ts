@@ -41,13 +41,37 @@ export class MemberListComponent implements OnInit {
 
   filterByCategory(member: Member) {
     if(this.selectedCategory) {
-      return member.category.indexOf(this.selectedCategory) > - 1
+      return member.status.indexOf(this.selectedCategory) > - 1 ||
+             member.thematics.indexOf(this.selectedCategory) > - 1;
     }
 
     // Selectionne toutes les catégories existantes si aucune catégorie n'est selectionné dans selectedCategory.
-    return member.category.indexOf(Category.CATEGORY_CARTOGRAPHIE) > - 1 || 
-           member.category.indexOf(Category.CATEGORY_DRONISTIQUE) > - 1 || 
-           member.category.indexOf(Category.CATEGORY_JAVASCRIPT) > - 1 ;
+    return member.status.indexOf(Category.STATUS_ETUDIANT) > - 1 || 
+           member.status.indexOf(Category.STATUS_DOCTORANT) > - 1 || 
+           member.status.indexOf(Category.STATUS_POST_DOCTORANT) > - 1 || 
+           member.status.indexOf(Category.STATUS_ENSEIGNANT) > - 1 || 
+           member.status.indexOf(Category.STATUS_PROFESSIONNEL) > - 1 ||
+           member.thematics.indexOf(Category.THEME_AGRICULTURE_PRECI) > - 1 ||
+           member.thematics.indexOf(Category.THEME_ARCHEOLOGIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_CLIMATOLOGIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_ECOLOGIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_GEOGRAPHIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_GEOLOGIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_GEOSCIENCES) > - 1 ||
+           member.thematics.indexOf(Category.THEME_HYDROLOGIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_INFORMATIQUE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_IA) > - 1 ||
+           member.thematics.indexOf(Category.THEME_MATHS) > - 1 ||
+           member.thematics.indexOf(Category.THEME_METEO) > - 1 ||
+           member.thematics.indexOf(Category.THEME_MODELISATION) > - 1 ||
+           member.thematics.indexOf(Category.THEME_OCEANOGRAPHIE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_OPTIQUE) > - 1 ||
+           member.thematics.indexOf(Category.THEME_RADAR) > - 1 ||
+           member.thematics.indexOf(Category.THEME_RISQUESNATURELS) > - 1 ||
+           member.thematics.indexOf(Category.THEME_STATISTIQUES) > - 1 ||
+           member.thematics.indexOf(Category.THEME_SIG) > - 1 ||
+           member.thematics.indexOf(Category.THEME_TRAITEMENTSIGNAL) > - 1 ||
+           member.thematics.indexOf(Category.THEME_URBAIN) > - 1;
   }//Eo filterByCategory()  
 
 }//Eo class

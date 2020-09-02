@@ -16,38 +16,17 @@ export class MembersService {
 
   nodeRequest(){
     return this.httpClient.get('http://localhost:3000/verified-members');
-  }
+  }//Eo nodeRequest()
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.
   	this.membersSubject.next(this.members);
   }//Eo emitMembers()
 
-  saveMembers() {
-  	/*firebase.database().ref('/members').set(this.members);*/ // Set() fonctionne comme un 'put' en http.
-  }//Eo saveMembers()
-
   getMembers() {
-  	
-      this.nodeRequest().subscribe((members: any) => {
-        this.members = members;
-        this.emitMembers();
-      });
-      
-  		
+    this.nodeRequest().subscribe((members: any) => {
+      this.members = members;
+      this.emitMembers();
+    }); 		
   }//Eo getMembers()
-
-  getSingleMembers(id: number) {
-  	/*return new Promise(
-  		(resolve, reject) => {
-  			firebase.database().ref('/members/' + id).once('value').then( //once() n'effectue la requete qu'une seule fois.
-  				(data) => {
-  					resolve(data.val());
-  				}, (error) => {
-  					reject(error);
-  				}
-  			);
-  		}
-  	);*/
-  }//Eo getSingleMembers()
 
 }//Eo class

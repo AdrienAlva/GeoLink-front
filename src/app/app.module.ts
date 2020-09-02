@@ -5,6 +5,7 @@ import { Routes, RouterModule, CanActivate } from '@angular/router'; // routing
 import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { createCustomElement } from '@angular/elements';
 import { RecaptchaModule, RECAPTCHA_SETTINGS, RECAPTCHA_LANGUAGE, RecaptchaSettings, RecaptchaFormsModule } from 'ng-recaptcha';
+
 /*---------------------------------------------------------------------------------*/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

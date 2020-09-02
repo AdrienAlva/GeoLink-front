@@ -7,11 +7,13 @@
 	<p> {{ members[memberId].status }}</p>
 	<p>Ce chercheur relève des catégories suivantes :</p>
 	<ul>
-		<li *ngIf="members[memberId].category[0]"> {{ members[memberId].category[0] }}</li>
-		<li *ngIf="members[memberId].category[1]"> {{ members[memberId].category[1] }}</li>
+		<li *ngIf="members[memberId].thematics[0]"> {{ members[memberId].thematics[0] }}</li>
+		<li *ngIf="members[memberId].thematics[1]"> {{ members[memberId].thematics[1] }}</li>
+		<li *ngIf="members[memberId].thematics[2]"> {{ members[memberId].thematics[2] }}</li>
+		<li *ngIf="members[memberId].thematics[3]"> {{ members[memberId].thematics[3] }}</li>
+		<li *ngIf="members[memberId].thematics[4]"> {{ members[memberId].thematics[4] }}</li>
 	</ul>
 	<p><span style="font-weight: bold;">A propos :</span> {{ members[memberId].about  }}</p>
 </div>
-<p *ngIf="!members[memberId].name">TEST</p>
 
 <a routerLink="/">Retourner à la page d'accueil</a>

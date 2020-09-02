@@ -6,27 +6,149 @@
 		<br/>
 		<label for="name">Prénom : </label><input type="text" name="name" formControlName="name">
 		<br/>
-		<label for="status">Votre statut (étudiant, chercheur,...) : </label><input type="text" name="status" formControlName="status">
+		<label for="status">Statut: </label>
+		<select name="status" formControlName="status">
+		    <option value="">-- Statut --</option>
+		    <option value="Etudiant du master TELENVI">Etudiant du master TELENVI</option>
+		    <option value="Doctorant">Doctorant</option>
+		    <option value="Post-Doctorant">Post-Doctorant</option>
+		    <option value="Enseignant-Chercheur">Enseignant-Chercheur</option>
+		    <option value="Professionnel">Professionnel</option>
+		</select>
+		<br/>
+		<p >Thématiques de travail :</p>
+		<select name="thematic1" formControlName="thematic1">
+		    <option value="">-- Thématiques --</option>
+		    <option value="Agriculture de Précision">Agriculture de Précision</option>
+		    <option value="Archéologie">Archéologie</option>
+		    <option value="Climatologie">Climatologie</option>
+		    <option value="Ecologie">Ecologie</option>
+		    <option value="Géographie">Géographie</option>
+		    <option value="Géologie">Géologie</option>
+		    <option value="Géosciences">Géosciences</option>
+		    <option value="Hydrologie">Hydrologie</option>
+		    <option value="Informatique">Informatique</option>
+		    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+		    <option value="Mathématiques">Mathématiques</option>
+		    <option value="Météorologie">Météorologie</option>
+		    <option value="Modélisation">Modélisation</option>
+		    <option value="Océanographie">Océanographie</option>
+		    <option value="Optique">Optique</option>
+		    <option value="Radar">Radar</option>
+		    <option value="Risques Naturels">Risques Naturels</option>
+		    <option value="Statistiques">Statistiques</option>
+		    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+		    <option value="Traitement du signal">Traitement du signal</option>
+		    <option value="Urbain">Urbain</option>  
+		</select>
+		<br/>
+		<select name="thematic2" formControlName="thematic2">
+		    <option value="">-- Thématiques --</option>
+		    <option value="Agriculture de Précision">Agriculture de Précision</option>
+		    <option value="Archéologie">Archéologie</option>
+		    <option value="Climatologie">Climatologie</option>
+		    <option value="Ecologie">Ecologie</option>
+		    <option value="Géographie">Géographie</option>
+		    <option value="Géologie">Géologie</option>
+		    <option value="Géosciences">Géosciences</option>
+		    <option value="Hydrologie">Hydrologie</option>
+		    <option value="Informatique">Informatique</option>
+		    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+		    <option value="Mathématiques">Mathématiques</option>
+		    <option value="Météorologie">Météorologie</option>
+		    <option value="Modélisation">Modélisation</option>
+		    <option value="Océanographie">Océanographie</option>
+		    <option value="Optique">Optique</option>
+		    <option value="Radar">Radar</option>
+		    <option value="Risques Naturels">Risques Naturels</option>
+		    <option value="Statistiques">Statistiques</option>
+		    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+		    <option value="Traitement du signal">Traitement du signal</option>
+		    <option value="Urbain">Urbain</option>  
+		</select>
+		<br/>
+		<select name="thematic3" formControlName="thematic3">
+		    <option value="">-- Thématiques --</option>
+		    <option value="Agriculture de Précision">Agriculture de Précision</option>
+		    <option value="Archéologie">Archéologie</option>
+		    <option value="Climatologie">Climatologie</option>
+		    <option value="Ecologie">Ecologie</option>
+		    <option value="Géographie">Géographie</option>
+		    <option value="Géologie">Géologie</option>
+		    <option value="Géosciences">Géosciences</option>
+		    <option value="Hydrologie">Hydrologie</option>
+		    <option value="Informatique">Informatique</option>
+		    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+		    <option value="Mathématiques">Mathématiques</option>
+		    <option value="Météorologie">Météorologie</option>
+		    <option value="Modélisation">Modélisation</option>
+		    <option value="Océanographie">Océanographie</option>
+		    <option value="Optique">Optique</option>
+		    <option value="Radar">Radar</option>
+		    <option value="Risques Naturels">Risques Naturels</option>
+		    <option value="Statistiques">Statistiques</option>
+		    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+		    <option value="Traitement du signal">Traitement du signal</option>
+		    <option value="Urbain">Urbain</option>  
+		</select>
+		<br/>
+		<select name="thematic4" formControlName="thematic4">
+		    <option value="">-- Thématiques --</option>
+		    <option value="Agriculture de Précision">Agriculture de Précision</option>
+		    <option value="Archéologie">Archéologie</option>
+		    <option value="Climatologie">Climatologie</option>
+		    <option value="Ecologie">Ecologie</option>
+		    <option value="Géographie">Géographie</option>
+		    <option value="Géologie">Géologie</option>
+		    <option value="Géosciences">Géosciences</option>
+		    <option value="Hydrologie">Hydrologie</option>
+		    <option value="Informatique">Informatique</option>
+		    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+		    <option value="Mathématiques">Mathématiques</option>
+		    <option value="Météorologie">Météorologie</option>
+		    <option value="Modélisation">Modélisation</option>
+		    <option value="Océanographie">Océanographie</option>
+		    <option value="Optique">Optique</option>
+		    <option value="Radar">Radar</option>
+		    <option value="Risques Naturels">Risques Naturels</option>
+		    <option value="Statistiques">Statistiques</option>
+		    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+		    <option value="Traitement du signal">Traitement du signal</option>
+		    <option value="Urbain">Urbain</option>  
+		</select>
+		<br/>
+		<select name="thematic5" formControlName="thematic5">
+		    <option value="">-- Thématiques --</option>
+		    <option value="Agriculture de Précision">Agriculture de Précision</option>
+		    <option value="Archéologie">Archéologie</option>
+		    <option value="Climatologie">Climatologie</option>
+		    <option value="Ecologie">Ecologie</option>
+		    <option value="Géographie">Géographie</option>
+		    <option value="Géologie">Géologie</option>
+		    <option value="Géosciences">Géosciences</option>
+		    <option value="Hydrologie">Hydrologie</option>
+		    <option value="Informatique">Informatique</option>
+		    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+		    <option value="Mathématiques">Mathématiques</option>
+		    <option value="Météorologie">Météorologie</option>
+		    <option value="Modélisation">Modélisation</option>
+		    <option value="Océanographie">Océanographie</option>
+		    <option value="Optique">Optique</option>
+		    <option value="Radar">Radar</option>
+		    <option value="Risques Naturels">Risques Naturels</option>
+		    <option value="Statistiques">Statistiques</option>
+		    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+		    <option value="Traitement du signal">Traitement du signal</option>
+		    <option value="Urbain">Urbain</option>  
+		</select>
+		<br/>
+		<br/>
+		<label for="about">A propos de moi : </label><textarea name="about" formControlName="about" rows="5" cols="33"></textarea>
+		<br/>
 		<br/>
 		<label for="lat">Latitude du marqueur sur la carte : </label><input type="number" name="lat" formControlName="lat">
 		<br/>
 		<label for="lng">Longitude du marqueur sur la carte : </label><input type="number" name="lng" formControlName="lng">
-		<br/>
-		<select name="category1" formControlName="category1">
-		    <option value="">-- Catégories --</option>
-		    <option value="cartographie">cartographie</option>
-		    <option value="dronistique">dronistique</option>
-		    <option value="javascript">javascript</option>
-		</select>
-		<br/>
-		<select name="category2" formControlName="category2">
-		    <option value="">-- Catégories --</option>
-		    <option value="cartographie">cartographie</option>
-		    <option value="dronistique">dronistique</option>
-		    <option value="javascript">javascript</option>
-		</select>
-		<br/>
-		<label for="about">A propos de moi : </label><input type="text" name="about" formControlName="about">
 		<br/>
 		<input type="submit">
 	</fieldset>

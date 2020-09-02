@@ -27,8 +27,11 @@ export class RegisterProfileComponent implements OnInit {
 	  		status: '',
 	  		lat: null,
 	  		lng: null,
-	  		category1: '',
-	  		category2: '',
+	  		thematic1: '',
+	  		thematic2: '',
+	  		thematic3: '',
+	  		thematic4: '',
+	  		thematic5: '',
 	  		about: ''
 		});
 	}//Eo initForm()
