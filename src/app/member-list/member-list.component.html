@@ -1,18 +1,27 @@
-<ul>
-	<div *ngFor="let member of members; let i = index">
-		<li class="li-item" *ngIf="filterByCategory(member)">
-			<h3> {{ member.name }} {{ member.surname }}</h3>
-			<p> Je suis : {{ member.status }} </p>
-			<ul>
-				<li *ngIf="member.thematics[0]"> {{ member.thematics[0] }}</li>
-				<li *ngIf="member.thematics[1]"> {{ member.thematics[1] }}</li>
-				<li *ngIf="member.thematics[1]"> {{ member.thematics[2] }}</li>
-				<li *ngIf="member.thematics[1]"> {{ member.thematics[3] }}</li>
-				<li *ngIf="member.thematics[1]"> {{ member.thematics[4] }}</li>
-				<br>
-				<button (click)="onViewMember(i)">Voir le profil du membre</button>
-			</ul>
-		</li>
+<div id="profile-background">
+	<div class="container" >
+		<div id="profiles-container">
+			<div id="profile" *ngFor="let member of members; let i = index">
+				<div class="li-item" *ngIf="filterByCategory(member)">
+					<div class="card">
+					  <div class="card-header">
+					    {{ member.status }}
+					  </div>
+					  <div class="card-body">
+					    <h5 class="card-title">{{ member.name }} {{ member.surname }}</h5>
+					    <ul>
+							<li *ngIf="member.thematics[0]"> {{ member.thematics[0] }}</li>
+							<li *ngIf="member.thematics[1]"> {{ member.thematics[1] }}</li>
+							<li *ngIf="member.thematics[1]"> {{ member.thematics[2] }}</li>
+							<li *ngIf="member.thematics[1]"> {{ member.thematics[3] }}</li>
+							<li *ngIf="member.thematics[1]"> {{ member.thematics[4] }}</li>
+						</ul>
+					    <button class="btn btn-info" (click)="onViewMember(i)">Voir le profil du membre</button>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</ul>
+</div>
 

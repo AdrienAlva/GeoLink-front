@@ -1,0 +1,19 @@
+ul {
+  list-style-type: none;
+ }
+
+#profile-background{
+	padding-top: 1%;
+	/*background-color: rgba(118, 65, 121, 0.2);*/
+	background-color: rgba(241, 189, 16, 0.25);
+}
+
+#profiles-container {
+ 	height: 70vh;
+ 	overflow: scroll;
+ 	border: rgba(57, 140, 133, 0.6) 2px solid;
+}
+
+#profile {
+ 	margin-bottom: 2px;
+}

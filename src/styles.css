@@ -1,34 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* NOTES
+ - class row + no-gutter pour supprimer le 15px margin de bootstrap.
+
+*/
+
+
 
 
 /*import du CSS leaflet */
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
-/* custom CSS map */
-
-#map {
-	position: relative;
-	height: 50vh;
-	width: 100%;
+@font-face {
+  font-family: 'Caviar-Dreams';
+ 	src: url(assets/fonts/Caviar-Dreams.ttf.eot),
+ 	     url('assets/fonts/Caviar-Dreams.ttf.woff') format('woff');
 }
 
-
-/* list */
-
-.li-item {
-	border: solid green 2px;
-	margin-bottom: 2px;
+html,body {
+	padding: 0;
 }
 
-/* categories buttons*/
-
-.green-btn {
-	background-color: green;
+body {
+	font-family: 'Caviar-Dreams';
 }
 
 /* messages */
-
 .errorMessage {
 	color: red;
 	border: red solid 2px;
@@ -39,4 +35,9 @@
 	color: green;
 	border: green solid 2px;
 	margin-top: 5px;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }

@@ -1,47 +1,60 @@
-<div id="map"></div> <!-- l'id sert à designer la div où display la carte. -->  
 
-<button (click)="onSetEtudiants()">Etudiants</button>
-<button (click)="onSetDoctorants()">Doctorants</button>
-<button (click)="onSetPostDoctorants()">Post-Doctorants</button>
-<button (click)="onSetEnseignants()">Enseignants-Chercheurs</button>
-<button (click)="onSetProfessionnels()">Professionnels</button>
-<button (click)="onSetPublic()">Organismes publics</button>
-<button (click)="onSetPrive()">Organismes privés</button>
-<button (click)="onDisplayAll()">Tout afficher</button>
+<div id="map-with-categories" >
+    <h2 id="subtitle">Réseau pour la promotion des Technologies spatiales</h2>
+    <div class="row no-gutters justify-content-center">
+        <div id="map" class="row no-gutters"></div>
+    </div>
+     
 
-<select (change)="selectThematic($event.target.value)">
-    <option value="">-- Thématiques --</option>
-    <option value="Agriculture de Précision">Agriculture de Précision</option>
-    <option value="Archéologie">Archéologie</option>
-    <option value="Climatologie">Climatologie</option>
-    <option value="Ecologie">Ecologie</option>
-    <option value="Géographie">Géographie</option>
-    <option value="Géologie">Géologie</option>
-    <option value="Géosciences">Géosciences</option>
-    <option value="Hydrologie">Hydrologie</option>
-    <option value="Informatique">Informatique</option>
-    <option value="Intelligence Artificielle">Intelligence Artificielle</option>
-    <option value="Mathématiques">Mathématiques</option>
-    <option value="Météorologie">Météorologie</option>
-    <option value="Modélisation">Modélisation</option>
-    <option value="Océanographie">Océanographie</option>
-    <option value="Optique">Optique</option>
-    <option value="Radar">Radar</option>
-    <option value="Risques Naturels">Risques Naturels</option>
-    <option value="Statistiques">Statistiques</option>
-    <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
-    <option value="Traitement du signal">Traitement du signal</option>
-    <option value="Urbain">Urbain</option>  
-</select>
+    <div class="row no-gutters justify-content-center" id="categories">
+        <button class="btn btn-info"(click)="onDisplayAll()">Tout afficher</button>
+        <button class="btn btn-light" (click)="onSetEtudiants()">Etudiants</button>
+        <button class="btn btn-light" (click)="onSetDoctorants()">Doctorants</button>
+        <button class="btn btn-light" (click)="onSetPostDoctorants()">Post-Doctorants</button>
+        <button class="btn btn-light" (click)="onSetEnseignants()">Enseignants-Chercheurs</button>
+        <button class="btn btn-light" (click)="onSetProfessionnels()">Professionnels</button>
+        <button class="btn btn-secondary" (click)="onSetPublic()">Organismes publics</button>
+        <button class="btn btn-secondary" (click)="onSetPrive()">Organismes privés</button>
+        
+
+        <select class="custom-select" (change)="selectThematic($event.target.value)">
+            <option value="">-- Thématiques --</option>
+            <option value="Agriculture de Précision">Agriculture de Précision</option>
+            <option value="Archéologie">Archéologie</option>
+            <option value="Climatologie">Climatologie</option>
+            <option value="Ecologie">Ecologie</option>
+            <option value="Géographie">Géographie</option>
+            <option value="Géologie">Géologie</option>
+            <option value="Géosciences">Géosciences</option>
+            <option value="Hydrologie">Hydrologie</option>
+            <option value="Informatique">Informatique</option>
+            <option value="Intelligence Artificielle">Intelligence Artificielle</option>
+            <option value="Mathématiques">Mathématiques</option>
+            <option value="Météorologie">Météorologie</option>
+            <option value="Modélisation">Modélisation</option>
+            <option value="Océanographie">Océanographie</option>
+            <option value="Optique">Optique</option>
+            <option value="Radar">Radar</option>
+            <option value="Risques Naturels">Risques Naturels</option>
+            <option value="Statistiques">Statistiques</option>
+            <option value="Système d’information Géographique (S.I.G.)">Système d’information Géographique (S.I.G.)</option>
+            <option value="Traitement du signal">Traitement du signal</option>
+            <option value="Urbain">Urbain</option>  
+        </select>
+    </div>
+</div>
 
 <app-member-list [selectedCategory]="selectedCategory"></app-member-list>
 
 <app-search-bar></app-search-bar>
 
-<button (click)="onNavigateToLogin()" *ngIf="!isConnected() || isExpired">Se connecter</button>
-<button (click)="onNavigateToRegisterAccount()" *ngIf="!isConnected() || isExpired">S'inscrire</button>
-<button (click)="onGoToAccount()" *ngIf="isConnected() && !isExpired">Compte utilisateur</button>
-<button (click)="onLogout()" *ngIf="isConnected() && !isExpired">Déconnexion</button>
+
+
+
+<button class="btn btn-dark" (click)="onNavigateToLogin()" *ngIf="!isConnected() || isExpired">Se connecter</button>
+<button class="btn btn-dark" (click)="onNavigateToRegisterAccount()" *ngIf="!isConnected() || isExpired">S'inscrire</button>
+<button class="btn btn-dark" (click)="onGoToAccount()" *ngIf="isConnected() && !isExpired">Compte utilisateur</button>
+<button class="btn btn-dark"(click)="onLogout()" *ngIf="isConnected() && !isExpired">Déconnexion</button>
 
 
 

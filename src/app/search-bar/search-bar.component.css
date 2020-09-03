@@ -1,7 +1,14 @@
+#search-box {
+	padding-top: 1%;
+	padding-bottom: 1%;
+
+}
+
 .search-bar {
-	margin: 20px;
+	width: 50%;
 }
 
 .result-box {
 	border: orange solid 2px;
+
 }
