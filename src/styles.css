@@ -12,8 +12,7 @@
 
 @font-face {
   font-family: 'Caviar-Dreams';
- 	src: url(assets/fonts/Caviar-Dreams.ttf.eot),
- 	     url('assets/fonts/Caviar-Dreams.ttf.woff') format('woff');
+ 	src: url(assets/fonts/CaviarDreams.ttf);
 }
 
 html,body {
@@ -40,4 +39,30 @@ body {
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+.leaflet-control-container{
+	display: none;
 }

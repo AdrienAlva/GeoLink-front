@@ -1,4 +1,4 @@
-
+<div id="map-container">
 <div id="map-with-categories" >
     <h2 id="subtitle">Réseau pour la promotion des Technologies spatiales</h2>
     <div class="row no-gutters justify-content-center">
@@ -55,6 +55,7 @@
 <button class="btn btn-dark" (click)="onNavigateToRegisterAccount()" *ngIf="!isConnected() || isExpired">S'inscrire</button>
 <button class="btn btn-dark" (click)="onGoToAccount()" *ngIf="isConnected() && !isExpired">Compte utilisateur</button>
 <button class="btn btn-dark"(click)="onLogout()" *ngIf="isConnected() && !isExpired">Déconnexion</button>
+</div>
 
 
 

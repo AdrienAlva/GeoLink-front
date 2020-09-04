@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
@@ -84,9 +84,5 @@ export class SingleProfileComponent implements OnInit {
 				memberMarker.addTo(this.map).bindPopup(this.members[this.memberId].name + ' ' + this.members[this.memberId].surname + '<br>' + this.members[this.memberId].status).openPopup();		 	
 
 	}//Eo addMarker()
-
-	ngOnDestroy () {
-
-	}
 
 }//Eo class
