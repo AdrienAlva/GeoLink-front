@@ -382,7 +382,7 @@ export class MapComponent implements OnInit, OnDestroy {
 	       case "Géographie":
 		       	this.markers.clearLayers();
 				this.geographie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_GEOGRAPHIE
+				this.selectedCategory = Category.THEME_GEOGRAPHIE;
 		       break;
 	       case "Géologie":
 		        this.markers.clearLayers();
@@ -472,6 +472,47 @@ export class MapComponent implements OnInit, OnDestroy {
 		       break;			       		       		       	       		       		       		       		       		       		       		       		       		       		       		       		       		       
 		}//Eo switch
 	}//Eo selectThematic()
+
+	selectCategory(value) {
+		switch(value) {
+		    case "Doctorants":
+				this.markers.clearLayers();
+				this.doctorants.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_DOCTORANT;
+		       break;
+		    case "Post-Doctorants":
+				this.markers.clearLayers();
+				this.postDoctorants.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_POST_DOCTORANT;
+		       break;
+			case "Etudiants":
+			  	this.markers.clearLayers();
+				this.etudiants.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_ETUDIANT;
+			   break;
+			case "Enseignants-Chercheurs":
+			    this.markers.clearLayers();
+				this.enseignantsChercheurs.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_ENSEIGNANT;
+			   break;
+			case "Professionnels":
+			   	this.markers.clearLayers();
+				this.professionnels.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_PROFESSIONNEL;
+			   break;
+			case "Organismes publics":
+			    this.markers.clearLayers();
+				this.public.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_PUBLIC;
+			   break;
+			case "Organismes privés":
+			    this.markers.clearLayers();
+				this.prive.addTo(this.markers);
+				this.selectedCategory = Category.STATUS_PRIVE;
+			   break;			       		       		       	       		       		       		       		       		       		       		       		       		       		       		       		       		       
+		}//Eo switch
+	}//Eo selectThematic()
+
 
 	onNavigateToLogin() {
 		this.router.navigate(['login']);

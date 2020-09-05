@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -38,17 +38,28 @@ export class SingleProfileComponent implements OnInit {
 				private route: ActivatedRoute) {}
 
 	ngOnInit(){
+
 		this.memberId = this.route.snapshot.params['id']; // on récupère l'id du membre en faisant un snapshot de la route.
+
+		this.router.events.subscribe((data) => { //On adapte l'id quand la route change.
+      		if (data instanceof RoutesRecognized) {
+        		this.memberId = data.state.root.firstChild.params["id"];  
+        		console.log(this.memberId)
+      		}	
+    	});
 
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
 	  		(members: Member[]) => {
-	  			this.onMembersLoading(members);}
-			);
+	  			this.onMembersLoading(members);
+	  		}
+
+		);
 
 		this.membersService.getMembers();	
 		console.log('init profile')	
 
 	}//Eo ngOnInit()
+
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
@@ -78,6 +89,9 @@ export class SingleProfileComponent implements OnInit {
 	}//Eo createMap()
 
 	addMarker() { // instance du marker.
+
+				
+				console.log(this.memberId);
 			
 				const memberMarker = L.marker([this.members[this.memberId].lat, this.members[this.memberId].lng], {icon: this.smallIcon});
 					

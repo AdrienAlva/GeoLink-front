@@ -1,10 +1,10 @@
 
 <div class="container-fluid px-0 no-gutters" >
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-	    <a id="logo-link" class="mr-auto row justify-content-center" routerLink="/">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom" style="text-align: center !important;">
+	    <a id="logo-link" class="mr-auto row no-gutters justify-content-center" routerLink="/">
             <img id="logo" src="../assets/logo.png" class="img-fluid" alt="Responsive image">
     	</a>
-    	<app-search-bar></app-search-bar>
+    	<app-search-bar class="searchLarge">></app-search-bar>
 	  	<button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  	</button>
@@ -12,7 +12,7 @@
 		    <ul class="navbar-nav">
 		     
 		      <li class="nav-item" style="margin-right: 2px;">
-		        <a class="btn btn-outline-dark"  routerLinK="/register-account" *ngIf="!authService.isConnected() || authService.isExpired()">S'inscrire</a>
+		        <a class="btn btn-outline-dark"  routerLink="/register-account" *ngIf="!authService.isConnected() || authService.isExpired()">S'inscrire</a>
 		      </li>
 
 		      <li class="nav-item" style="margin-right: 2px;">
@@ -26,54 +26,26 @@
 		      <li class="nav-item">
 		        <a class="btn btn-outline-dark" routerLink="/" (click)="onLogout()" *ngIf="authService.isConnected() && !authService.isExpired()">Déconnexion</a>
 		      </li>
-
-
-
 		    </ul>
 	  </div>
 	</nav>
 
-
-
+	<app-search-bar class="searchMobile">></app-search-bar>
+	
+	<router-outlet></router-outlet>
 	
 
-
-
-
-	    <!-- <nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light flex-row">
-	        <a id="logo-link" class=" mr-auto" routerLink="/">
-	            <img id="logo" src="../assets/logo.png" class="img-fluid" alt="Responsive image">
-	        </a>
-	        
-	        <button class="navbar-toggler ml-lg-0" type="button" data-toggle="collapse" data-target="#navbarNav"  aria-expanded="false" aria-label="Toggle navigation">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
-	          <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Features</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Pricing</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-	      </li>
-	    </ul>
-	  </div>
-	    </nav> -->
-
-	<!-- <div id="header" class="row no-gutters justify-content-center"><a id="logo-link" routerLink="/"><img id="logo" src="../assets/logo.png"></a></div> -->
-
-	<!-- <div id="description" class="row no-gutters justify-content-center"></div> -->
-	
-	
-		<router-outlet></router-outlet>
-
-
+	<div id="footer" >
+		<div id="footer-top" class=" row  no-gutters justify-content-center">
+			
+			<p class="findUs">Retrouvez nous sur les réseaux : </p>
+			<a href=""><img class="network" src="../assets/images/facebook.png"></a>
+			<a href=""><img class="network" src="../assets/images/twitter.png"></a>
+			<p class="findUs">et sur </p>
+			<a id="siteLink" href="https://associationgeolink.wixsite.com/geolink"> le site de l'association.</a>
+		</div>
+		<div id="footer-bottom"></div>
+	</div>	
 </div>
 
 <!-- <p>Le portail géographique de l'association Géolink représente le réseau d'étudiants, enseignants, chercheurs, professionnels et organismes publics ou privés autour du Master TELENVI (Télédétection-Environnement) de l'Université Rennes 2.</p> -->

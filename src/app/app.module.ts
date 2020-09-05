@@ -35,6 +35,8 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ProfilTypeComponent } from './profil-type/profil-type.component';
 import { RegisterProfileOrganizationComponent } from './register-profile-organization/register-profile-organization.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+/*import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';*/
+
 
 
 const appRoutes: Routes = [
@@ -92,7 +94,8 @@ const appRoutes: Routes = [
     RecaptchaModule,
     RecaptchaFormsModule,
     ClickOutsideModule,
-    RouterModule.forRoot(appRoutes) //routing
+    RouterModule.forRoot(appRoutes),
+    /*FontAwesomeModule*/ 
   ],
   providers: [
     MembersService,

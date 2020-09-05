@@ -5,13 +5,15 @@
 	text-align: center;
 	color: white;
 	font-size: 1.5em;
+	font-weight: bold;
 }
 
 #map {
 	/*position: relative;*/
 	height: 50vh;
-	width: 80%;
+	width: 100%;
 	margin-bottom: 1%;
+	border-radius: 3px;
 	/*border-bottom: rgba(57, 140, 133, 1) solid 5px;*/
 
 	/*border: rgb(229, 158, 150) solid 2px;*/
@@ -22,10 +24,17 @@
 }
 
 #map-with-categories{
-	padding-top: 0.5%;
-	background-color: rgba(57, 140, 133, 0.8);
+	
+	/*background-image: url("/../assets/field-opacity.png");*/
+	background-image: url("/../assets/4p.jpg");
+	/*background-repeat: no-repeat;*/
 	border-top: rgba(57, 140, 133, 1) solid 30px;
 	/*border-bottom: rgba(241, 189, 16, 0.5) solid 5px;*/
+}
+
+#map-background {
+	padding-top: 0.5%;
+	background-color: rgba(57, 140, 133, 0.6);
 }
 
 #categories {

@@ -4,15 +4,22 @@
     placeholder="Rechercher un membre..."
     formControlName="keyWord" 
     size="30" >
-    <!-- <button class="btn btn-dark" type="submit">Rechercher</button> -->
+
 </form>
 
-<div id="result" *ngIf="results.length > 0" (clickOutside)="onClickedOutside($event)">
-	<div *ngFor="let result of results; let i = index">
+<div id="result" *ngIf="results.length > 0 || noResultDisplay === true" (clickOutside)="onClickedOutside($event)">
 	
-		<div *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }} {{ result.surname }}</span> : 
-		{{ result.status }} - <button (click)="onViewMember(i)">Voir le profil du membre</button></div>
-		
+	<div *ngFor="let result of results; let i = index">
+		<div class="card" *ngIf="result != null" class="result-box">
+		  <div class="card-header" >
+		    {{ result.status }}
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">{{ result.name }} {{ result.surname }}</h5>
+		    
+		    <a class="btn btn-primary" (click)="onViewMember(i)">Voir le profil du membre</a>
+		  </div>
+		</div>
 	</div>
 
 	<div *ngIf="noResultDisplay === true"><p>Pas de résultats à afficher...</p></div>

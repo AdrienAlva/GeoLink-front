@@ -66,19 +66,24 @@ export class SearchBarComponent implements OnInit {
   			}//Eo for	
 		}//Eo for
 
+		console.log(this.results.length)
+
 		if (this.results.length === 0) { // affichage du message d'absence de résultats pour la recherche.
-    				this.noResultDisplay = true;
+			console.log('no resuts ! ')
+			this.noResultDisplay = true;
     	}//Eo if
 
 	}//Eo onSearchMember()
 
 	onViewMember(id: number) {
   		this.router.navigate(['member', 'profile', id]);
+  		this.results = []; //pour fermer résultats de recherche quand route vers profil.
     }//Eo onViewMember()
 
     onClickedOutside(e: Event) {
     	console.log('click')
 		this.results = [];
+		this.noResultDisplay = false;
   	}
 
 }//Eo class
