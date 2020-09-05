@@ -3,7 +3,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
 	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
 	<label for="password"> Mot de passe : </label><input type="password" name="password" formControlName="password">
-	<input type="submit">
+	<input  type="submit">
 </form>
 
 <div class="errorMessage" *ngIf="this.errorMessage">

@@ -1,22 +1,22 @@
-<div id="result-box">
-	<form [formGroup]="searchForm" (ngSubmit)="onSearchMember()">
-		<div class="row no-gutters justify-content-center">
-		    <input type="search" class="search-bar form-control" 
-		    placeholder="Rechercher un membre..."
-		    formControlName="keyWord" 
-		    size="30" >
-		    <button class="btn btn-dark" type="submit">Rechercher</button>
-	  	</div>
-	</form>
 
+<form id="searchForm" [formGroup]="searchForm" (ngSubmit)="onSearchMember()" class="row no-gutters justify-content-center">
+    <input type="search" class="search-bar form-control" 
+    placeholder="Rechercher un membre..."
+    formControlName="keyWord" 
+    size="30" >
+    <!-- <button class="btn btn-dark" type="submit">Rechercher</button> -->
+</form>
+
+<div id="result" *ngIf="results.length > 0" (clickOutside)="onClickedOutside($event)">
 	<div *ngFor="let result of results; let i = index">
-		<ul>
-			<li *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }} {{ result.surname }}</span> : 
-			{{ result.status }} - <button (click)="onViewMember(i)">Voir le profil du membre</button></li>
-			
-		</ul>
+	
+		<div *ngIf="result != null" class="result-box"> <span style="font-weight: bold;">{{ result.name }} {{ result.surname }}</span> : 
+		{{ result.status }} - <button (click)="onViewMember(i)">Voir le profil du membre</button></div>
 		
 	</div>
 
 	<div *ngIf="noResultDisplay === true"><p>Pas de résultats à afficher...</p></div>
+
 </div>
+
+

@@ -66,3 +66,42 @@ body {
 .leaflet-control-container{
 	display: none;
 }
+
+.navbar-custom {
+    background-color: white !important; 
+    min-height: 7vh;
+
+    padding: 0;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#navbarNav {
+	width: 33%;
+}
+
+app-search-bar {
+	width: 33%;
+}
+
+#description {
+  height: 5vh;
+  background-color: rgba(117, 209, 206, 0.1);
+  border-bottom: rgba(117, 209, 206, 0.3) solid 5px;
+  border-top: rgba(117, 209, 206, 0.3) solid 5px;
+
+}
+
+#logo {
+  height: 100%;
+}
+
+#logo-link{
+  height: 5vh;
+  width: 33%;
+}
+
+
+

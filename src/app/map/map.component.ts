@@ -9,8 +9,7 @@ import 'leaflet.markercluster';
 import * as Category from './category.constants';
 import { NgElement, WithProperties } from '@angular/elements';
 import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component';
-import { JwtModule } from "@auth0/angular-jwt";
-import { JwtHelperService } from "@auth0/angular-jwt";
+
 
 
 @Component({
@@ -19,10 +18,6 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, OnDestroy { 
-
-	refToken = localStorage.getItem("token");
-	helper = new JwtHelperService();
-	isExpired = this.helper.isTokenExpired(this.refToken);
 
 	memberSubscription: Subscription;
 	members: Member[] = [];
@@ -490,16 +485,7 @@ export class MapComponent implements OnInit, OnDestroy {
 		this.router.navigate(['user-account']);
 	}//Eo onGoToAccount()
 
-	onLogout() {
-		localStorage.removeItem('token');
-	}//Eo onLogout()
-
 	/* EO Clickables events functions*/
-
-	isConnected() {
-		let isConnected = localStorage.getItem('token');
-		return isConnected;
-	}//eo isConnected
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();

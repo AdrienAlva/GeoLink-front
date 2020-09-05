@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/Member.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import * as L from 'leaflet';
+
 
 @Injectable({
   providedIn: 'root'

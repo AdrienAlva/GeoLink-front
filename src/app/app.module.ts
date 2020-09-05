@@ -17,6 +17,7 @@ import { SingleProfileComponent } from './single-profile/single-profile.componen
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthService } from './services/auth.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterProfileComponent } from './register-profile/register-profile.component';
 import { RegisterAccountComponent } from './register-account/register-account.component';
@@ -33,6 +34,7 @@ import { RecoveryComponent } from './recovery/recovery.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { ProfilTypeComponent } from './profil-type/profil-type.component';
 import { RegisterProfileOrganizationComponent } from './register-profile-organization/register-profile-organization.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 const appRoutes: Routes = [
@@ -89,10 +91,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    ClickOutsideModule,
     RouterModule.forRoot(appRoutes) //routing
   ],
   providers: [
     MembersService,
+    AuthService,
     AuthGuardService,
     AuthGuardAdminService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

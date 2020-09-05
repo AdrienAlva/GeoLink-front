@@ -76,5 +76,9 @@ export class SearchBarComponent implements OnInit {
   		this.router.navigate(['member', 'profile', id]);
     }//Eo onViewMember()
 
+    onClickedOutside(e: Event) {
+    	console.log('click')
+		this.results = [];
+  	}
 
 }//Eo class
