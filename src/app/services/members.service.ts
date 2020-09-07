@@ -29,4 +29,10 @@ export class MembersService {
     }); 		
   }//Eo getMembers()
 
+  getMembersNoEmit() {
+    this.nodeRequest().subscribe((members: any) => {
+      this.members = members;
+    });     
+  }//Eo getMembers()
+
 }//Eo class

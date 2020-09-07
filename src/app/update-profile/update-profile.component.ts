@@ -23,7 +23,6 @@ export class UpdateProfileComponent implements OnInit {
 		this.httpClient.get('http://localhost:3000/update-profile').subscribe(
 	  		(data: any) => {
 	  			this.memberToUpdate = data;
-	  			console.log(this.memberToUpdate);
 	  		}
   		);
 	}//Eo ngOnInit()

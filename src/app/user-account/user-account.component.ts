@@ -26,10 +26,4 @@ export class UserAccountComponent implements OnInit {
 		);
 	}//Eo ngOnInit()
 
-	onLogout() {
-		localStorage.removeItem('token');
-
-		this.router.navigate(['/']);
-	}//Eo onLogout()
-
 }//Eo class

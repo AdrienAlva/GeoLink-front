@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
 	searchForm: FormGroup;
 
 	members: Member[] = [];
-	memberSubscription: Subscription;
+/*	memberSubscription: Subscription;*/
 
 	results: Member[] = [];	
 
@@ -28,8 +28,13 @@ export class SearchBarComponent implements OnInit {
 	ngOnInit(): void {
 		this.initForm();
 
-		this.memberSubscription = this.membersService.membersSubject.subscribe( 
-	  		(members: Member[]) => this.onMembersLoading(members));
+		this.membersService.getMembersNoEmit();
+
+		this.members = this.membersService.members;
+
+		/*this.memberSubscription = this.membersService.membersSubject.subscribe( 
+	  		(members: Member[]) => this.onMembersLoading(members));*/
+
 	}//Eo ngOnInit()
 
 	initForm() {
@@ -43,6 +48,10 @@ export class SearchBarComponent implements OnInit {
 	}//Eo onMembersLoading()
 
 	onSearchMember() {
+
+		this.membersService.getMembersNoEmit();
+
+		this.members = this.membersService.members;
 
 		this.noResultDisplay = false;
 

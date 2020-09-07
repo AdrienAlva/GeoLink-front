@@ -1,21 +1,26 @@
-<div *ngFor="let member of members">
+<div id="for-top-border">
+	<div class="container">
 
-<h2>Bienvenue {{ member.name }} {{ member.surname }} !</h2>
+		<div *ngFor="let member of members">
 
-<a routerLink="/update-profile" *ngIf="member.hasSubmitedProfile === true">Modifier mon profil</a>
+		<h2 id="welcome">Bienvenue {{ member.name }} {{ member.surname }} !</h2>
 
-<br><br>
+		<a routerLink="/update-profile" *ngIf="member.hasSubmitedProfile === true">Modifier mon profil</a>
 
-<a routerLink="/update-password">Changer mon mot de passe</a>
+		<br><br>
 
-<br><br>
+		<a routerLink="/update-password">Changer mon mot de passe</a>
 
-<app-register-profile *ngIf="member.hasSubmitedProfile === false"></app-register-profile>
+		<br><br>
 
-<a routerLink="/">Retourner à la page d'accueil</a>
+		<app-register-profile *ngIf="member.hasSubmitedProfile === false"></app-register-profile>
 
-<br><br>
+		<div id="home">
+			<a routerLink="/">Retourner à la page d'accueil</a>	
+		</div>	
 
-<button (click)="onLogout()">Déconnexion</button>
+		</div>
+
+	</div>
 
 </div>
