@@ -11,7 +11,7 @@ ul {
 #profiles-container {
  	height: 70vh;
  	overflow: scroll;
- 	/*border: rgba(57, 140, 133, 0.6) 2px solid;*/
+	margin-bottom: 5%;
 }
 
 #profile {

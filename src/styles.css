@@ -21,13 +21,15 @@
  	src: url(assets/fonts/CaviarDreams.ttf);
 }
 
-html,body {
+html, body {
 	padding: 0;
+
 }
 
 body {
 	font-family: 'Caviar-Dreams';
 }
+
 
 /* messages */
 .errorMessage {
@@ -100,21 +102,28 @@ app-search-bar {
   }
 
 #footer {
-  height: 7vh;
-  margin-top: 5%;
+  height: 10vh;
+  
 }
 
 #footer-top {
   height: 4vh; 
   background-color: rgba(57, 140, 133, 0.6);
-  line-height: 4vh; /* hauteur de ligne (identique) */
+  line-height: 4vh; 
   white-space: nowrap;
 
 }
 
 #footer-bottom {
-  height: 3vh;
+  font-size: 0.8em;
+  height: 6vh;
   background-color: rgba(57, 140, 133, 1);  
+  line-height: 6vh; 
+  white-space: nowrap;
+}
+
+#footer-bottom p {
+  margin: 0;
 }
 
 .findUs {
@@ -133,10 +142,23 @@ app-search-bar {
   color: white;
 }
 
+#githubLogo {
+  height: 2vh;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#mentions {
+  text-decoration: underline;
+  color: black;
+  margin-left: 10px;
+}
 
 
 
-@media (max-width: 576px) {
+
+
+@media (max-width: 992px) {
 
   #map {
 
@@ -199,6 +221,18 @@ app-search-bar {
 
   #footer-top {
     font-size: 0.6em !important;
+  }
+
+  #footer-bottom {
+    font-size: 0.7em;
+    height: 6vh;
+    background-color: rgba(57, 140, 133, 1);  
+    line-height: 6vh; 
+    white-space: nowrap;
+  }
+
+  #categories { /* page profil */
+    font-size: 0.7em;
   }
 
 }/* Eo @media (max-width: 576px)*/

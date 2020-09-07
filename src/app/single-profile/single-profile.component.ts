@@ -44,7 +44,6 @@ export class SingleProfileComponent implements OnInit {
 		this.router.events.subscribe((data) => { //On adapte l'id quand la route change.
       		if (data instanceof RoutesRecognized) {
         		this.memberId = data.state.root.firstChild.params["id"];  
-        		console.log(this.memberId)
       		}	
     	});
 
@@ -52,7 +51,6 @@ export class SingleProfileComponent implements OnInit {
 	  		(members: Member[]) => {
 	  			this.onMembersLoading(members);
 	  		}
-
 		);
 
 		this.membersService.getMembers();	
@@ -89,9 +87,6 @@ export class SingleProfileComponent implements OnInit {
 	}//Eo createMap()
 
 	addMarker() { // instance du marker.
-
-				
-				console.log(this.memberId);
 			
 				const memberMarker = L.marker([this.members[this.memberId].lat, this.members[this.memberId].lng], {icon: this.smallIcon});
 					

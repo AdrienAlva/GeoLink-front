@@ -1,19 +1,40 @@
 <div id="profile-box">
-	
-	<div id="map"></div>
+	<div id="profile-background">
 
-	<h2>Profil du membre</h2>
-	<h3>{{ members[memberId].name }} {{ members[memberId].surname }}</h3>
-	<p> {{ members[memberId].status }}</p>
-	<p>Ce chercheur relève des catégories suivantes :</p>
-	<ul>
-		<li *ngIf="members[memberId].thematics[0]"> {{ members[memberId].thematics[0] }}</li>
-		<li *ngIf="members[memberId].thematics[1]"> {{ members[memberId].thematics[1] }}</li>
-		<li *ngIf="members[memberId].thematics[2]"> {{ members[memberId].thematics[2] }}</li>
-		<li *ngIf="members[memberId].thematics[3]"> {{ members[memberId].thematics[3] }}</li>
-		<li *ngIf="members[memberId].thematics[4]"> {{ members[memberId].thematics[4] }}</li>
-	</ul>
-	<p><span style="font-weight: bold;">A propos :</span> {{ members[memberId].about  }}</p>
+		
+	
+		<div class="row no-gutters justify-content-center">
+            <div id="map" class="row no-gutters"></div>
+        </div>
+
+        <div id="info">
+        	<div class="card">
+			  <div class="card-header">
+			    <h3 id="name">{{ members[memberId].name }} {{ members[memberId].surname }}</h3>
+			  </div>
+			  <div class="card-body">
+			    <h5 class="card-title">{{ members[memberId].status }}</h5>
+			    <p class="card-text">{{ members[memberId].about }}</p>
+			    <p *ngIf="members[memberId].site">Site web : <a href="{{ members[memberId].site }}">{{ members[memberId].site }}</a></p>
+			    <div id="categories" class="row no-gutters">
+			    	<p>Thématiques : 
+			    		<span class="category" *ngIf="members[memberId].thematics[0]">{{ members[memberId].thematics[0] }}</span>
+						<span class="category" *ngIf="members[memberId].thematics[1]">{{ members[memberId].thematics[1] }}</span>
+						<span class="category" *ngIf="members[memberId].thematics[2]">{{ members[memberId].thematics[2] }}</span>
+						<span class="category" *ngIf="members[memberId].thematics[3]">{{ members[memberId].thematics[3] }}</span>
+						<span class="category" *ngIf="members[memberId].thematics[4]">{{ members[memberId].thematics[4] }}</span>
+			    	</p>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div id="home">
+			<a routerLink="/" >Retourner à la page d'accueil</a>
+		</div>
+		
+	</div>
 </div>
 
-<a routerLink="/">Retourner à la page d'accueil</a>
+
+
+

@@ -1,13 +1,50 @@
 #profile-box {
-	border: purple solid 2px;
+	background-image: url("/../assets/4p.jpg");
+	border-top: rgba(57, 140, 133, 1) solid 30px;
 }
+
+#profile-background {
+	padding-top: 2%;
+	/*background-color: rgba(255, 202, 24, 0.6);*/
+	padding-bottom: 1%;
+	/*padding-bottom: 1%;*/
+}
+
 
 #map {
-	/*position: relative;*/
 	height: 50vh;
-	width: 100%;
-	margin-bottom: 1%;
-	border-bottom: rgba(57, 140, 133, 1) solid 5px;
-
-	/*border: rgb(229, 158, 150) solid 2px;*/
+	width: 80%;
+	/*margin-bottom: 1%;*/
 }
+
+#name {
+	/*color: white;*/
+	font-weight: bold;
+	text-align: center;
+	font-size: 2em;
+}
+
+#info {
+	margin: auto;
+	width: 80%;
+	background-color: white;
+}
+
+#home {
+	text-decoration: underline;
+	text-align: center;
+}
+
+#home a {
+	color: black;
+}
+
+#categories {
+	overflow: hidden;
+}
+
+.category {
+	background-color: rgba(230, 230, 230, 1); 
+	margin-right: 10px;
+}
+

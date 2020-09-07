@@ -32,7 +32,8 @@ export class RegisterProfileComponent implements OnInit {
 	  		thematic3: '',
 	  		thematic4: '',
 	  		thematic5: '',
-	  		about: ''
+	  		about: '',
+	  		site: ''
 		});
 	}//Eo initForm()
 

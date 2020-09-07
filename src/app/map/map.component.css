@@ -27,14 +27,15 @@
 	
 	/*background-image: url("/../assets/field-opacity.png");*/
 	background-image: url("/../assets/4p.jpg");
-	/*background-repeat: no-repeat;*/
 	border-top: rgba(57, 140, 133, 1) solid 30px;
 	/*border-bottom: rgba(241, 189, 16, 0.5) solid 5px;*/
 }
 
 #map-background {
 	padding-top: 0.5%;
+
 	background-color: rgba(57, 140, 133, 0.6);
+
 }
 
 #categories {
@@ -48,3 +49,5 @@ margin-right: 2px;
 .custom-select {
 	width: 15%;
 }
+
+
