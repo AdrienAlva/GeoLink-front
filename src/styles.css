@@ -246,8 +246,18 @@ app-search-bar {
   /* user-account */
 
   #welcome {
-    font-size: 1.8em;
+    font-size: 1.7em;
     margin-bottom: 5% !important;
+  }
+
+  .account-menu-btn {
+    width: 80% !important;
+  }
+
+  /* admin-panel*/
+
+  .btn-admin {
+    width: 80% !important;
   }
 
 }/* Eo @media (max-width: 576px)*/

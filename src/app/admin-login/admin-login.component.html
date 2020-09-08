@@ -1,16 +1,36 @@
-<h2>Administration</h2>
+<div id="for-top-border">
+	<div class="container">
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
-	<label for="password"> Mot de passe : </label><input type="password" name="password" formControlName="password">
-	<input type="submit">
-</form>
+		<h2>Administration</h2>
 
-<div class="errorMessage" *ngIf="this.errorMessage">
-	<p>{{ errorMessage }}</p>
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+
+			<div class="form-group">
+				<label for="email">Adresse email : </label>
+				<input class="form-control" type="email" name="email" formControlName="email">
+			</div>
+
+			<div class="form-group">
+				<label for="password"> Mot de passe : </label>
+				<input class="form-control" type="password" name="password" formControlName="password">
+			</div>
+
+			<div class="row no-gutters justify-content-center">
+				<input class="btn btn-primary" type="submit">
+			</div>
+			
+
+		</form>
+
+		<div class="errorMessage" *ngIf="this.errorMessage">
+			<p>{{ errorMessage }}</p>
+		</div>
+
+		<br>
+
+		<div id="home">
+			<a routerLink="/">Retourner à la page d'accueil</a>	
+		</div>	
+
+	</div>
 </div>
-
-<br>
-
-<a routerLink="/">Retourner à la page d'accueil</a>
-

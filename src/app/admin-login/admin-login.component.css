@@ -1,5 +1,29 @@
-.errorMessage {
-	color: red;
-	border: red solid 2px;
-	margin-top: 5px;
+
+#for-top-border {
+	border-top: rgba(57, 140, 133, 1) solid 3vh;
+}
+
+.container {
+	border: rgba(230, 230, 230, 1) solid 1px;
+}
+
+#for-top-border h2 {
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
+
+#for-top-border .btn {
+	margin-top: 1.5%;
+	margin-bottom: 1.5%;
+	margin-right: 20px;
+}
+
+#home {
+	text-decoration: underline;
+	text-align: center;
+	margin-top: 3%;
+}
+
+#home a {
+	color: black;
 }

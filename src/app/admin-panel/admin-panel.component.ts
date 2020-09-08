@@ -13,10 +13,4 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
   }//Eo ngOnInit()
 
-  onLogout() {
-		localStorage.removeItem('token');
-
-		this.router.navigate(['/']);
-	}//Eo onLogout()
-
 }//Eo class

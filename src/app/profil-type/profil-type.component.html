@@ -1,18 +1,33 @@
-<h2>Type de candidature</h2>
+<div id="for-top-border">
+	<div class="container">
 
-<form (ngSubmit)="onSubmitRadio(f)" #f="ngForm">
-	<p>S'agit-il d'une candidature individuelle ou bien représentez vous une structure (organisme, institution, entreprise, association,...) ?</p>
-	<div>
-	    <input type="radio" id="personnal"
-	     name="choice" value="personnal" [ngModel]="">
-	    <label for="personnal">J'inscris mon profil personnel</label>
+	<h2>Type de candidature</h2>
 
-	    <input type="radio" id="organization"
-	     name="choice" value="organization" [ngModel]="">
-	    <label for="organization">Je réprésente une structure</label>	
+	<form (ngSubmit)="onSubmitRadio(f)" #f="ngForm">
+		<p>S'agit-il d'une candidature individuelle ou bien représentez vous une structure (organisme, institution, entreprise, association,...) ?</p>
+		<div>
+			<div class="row no-gutters justify-content-center">
+				<div class="custom-control custom-radio custom-control-inline">
+				    <input type="radio" class="custom-control-input" id="personnal"
+				     name="choice" value="personnal" [ngModel]="">
+				    <label class="custom-control-label" for="personnal">J'inscris mon profil personnel</label>
+			    </div>
 
-	    <br><br>
+			    
+			  
+			    <div class="custom-control custom-radio custom-control-inline">
+				    <input type="radio" class="custom-control-input" id="organization"
+				     name="choice" value="organization" [ngModel]="">
+				    <label class="custom-control-label" for="organization">Je réprésente une structure</label>	
+				</div>
+			</div>
+		    
+		    <div class="row no-gutters justify-content-center">
+		    	<button class="btn btn-primary" type="submit">Valider</button>
+		    </div>
+		    
+	    </div>
+	</form>
 
-	    <button type="submit">Valider</button>
-    </div>
-</form>
+	</div>
+</div>

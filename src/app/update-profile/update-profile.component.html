@@ -10,7 +10,7 @@
 					<label for="surname">Nom : </label><input class="form-control" type="text" name="surname" [ngModel]="member.surname">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" *ngIf="member.status != 'organisme public' && member.status != 'organisme privé'">
 					<label for="name">Prénom : </label><input class="form-control" type="text" name="name" [ngModel]="member.name">
 				</div>
 				<div class="form-group">
@@ -22,6 +22,9 @@
 					    <option value="Post-Doctorant">Post-Doctorant</option>
 					    <option value="Enseignant-Chercheur">Enseignant-Chercheur</option>
 					    <option value="Professionnel">Professionnel</option>
+					    <option value="">-------</option>
+					    <option value="organisme public">organisme public</option>
+			    		<option value="organisme privé">organisme privé</option>
 					</select>
 				</div>
 
