@@ -10,7 +10,7 @@
 
                 <button id="displayAll" class="btn btn-info"(click)="onDisplayAll()">Tout afficher</button>
                     
-                <select class="custom-select" (change)="addMarkerBis($event.target.value)" [formControl]="selectOptionsStatus">
+                <select class="custom-select" (change)="addMarkerOnClick($event.target.value)" [formControl]="selectOptionsStatus">
                     <option value="all">-- Tout Statut --</option>
                     <option value="Doctorant">Doctorants</option>
                     <option value="Post-doctorant">Post-doctorants</option>

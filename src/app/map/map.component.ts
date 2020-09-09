@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import * as Category from './category.constants';
 import { NgElement, WithProperties } from '@angular/elements';
 import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component';
 import { FormControl } from '@angular/forms';
@@ -27,65 +26,6 @@ export class MapComponent implements OnInit, OnDestroy {
 	map; // variable pour stocker la map.
 
 	allMembers = L.layerGroup();
-	/* status layers */
-	doctorants = L.layerGroup();
-	etudiants = L.layerGroup();
-	postDoctorants = L.layerGroup();
-	enseignantsChercheurs = L.layerGroup();
-	professionnels = L.layerGroup();
-	public = L.layerGroup();
-	prive = L.layerGroup();
-	/* thematics layers */
-	agriculturedePrecision = L.layerGroup();
-	archeologie = L.layerGroup();
-	climatologie = L.layerGroup();
-	ecologie = L.layerGroup();
-	geographie = L.layerGroup();
-	geologie = L.layerGroup();
-	geosciences = L.layerGroup();
-	hydrologie = L.layerGroup();
-	informatique = L.layerGroup();
-	intelligenceArtificielle = L.layerGroup();
-	mathematiques = L.layerGroup();
-	meteorologie = L.layerGroup();
-	modelisation = L.layerGroup();
-	oceanographie = L.layerGroup();
-	optique = L.layerGroup();
-	radar = L.layerGroup();
-	riquesNaturels = L.layerGroup();
-	statistiques = L.layerGroup();
-	sig = L.layerGroup();
-	traitementSignal = L.layerGroup();
-	urbain = L.layerGroup();
-	/* array of all layers*/
-	layersArray = [ this.doctorants, 
-					this.etudiants,
-					this.postDoctorants,
-					this.enseignantsChercheurs,
-					this.professionnels,
-					this.agriculturedePrecision,
-					this.archeologie,
-					this.climatologie,
-					this.ecologie,
-					this.geographie,
-					this.geologie,
-					this.geosciences,
-					this.hydrologie,
-					this.informatique,
-					this.intelligenceArtificielle,
-					this.mathematiques,
-					this.meteorologie,
-					this.modelisation,
-					this.oceanographie,
-					this.optique,
-					this.radar,
-					this.riquesNaturels,
-					this.statistiques,
-					this.sig,
-					this.traitementSignal,
-					this.urbain,
-					this.public,
-					this.prive];
 
 	/* Map Icons */
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
@@ -130,13 +70,16 @@ export class MapComponent implements OnInit, OnDestroy {
 
 		this.createMap();
 
+		this.memberToDisplay.status = 'all';
+		this.memberToDisplay.thematic = 'all';
+
 		console.log('init accueil')
 
 	}//Eo ngOnInit()
 
 	onMembersLoading(members: Member[]){
 		this.members = members;
-		this.addMarker(this.members);
+		this.addMarkerOnInit(this.members);
 	}//Eo onMembersLoading()
 
 	createMap() {
@@ -165,18 +108,14 @@ export class MapComponent implements OnInit, OnDestroy {
 	}//Eo createMap()
 
 
-	/*statusToDisplay = {Etudiants: this.etudiants};*/
 	thematicToDisplay = "all";
 	statusToDisplay = "all";
 
 	currentLayer = L.layerGroup();
 	
-	addMarkerBis(status) {
-
-		console.log('addMarkerBis()');
+	addMarkerOnClick(status) {
 
 		this.statusToDisplay = status;
-
 
 		if(this.thematicToDisplay == 'all' && this.statusToDisplay == 'all') {
 
@@ -187,8 +126,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 			this.currentLayer.clearLayers();
 
-			console.log('display all');
-
 			for (let member of this.members) {
 
 				let index = this.members.indexOf(member);
@@ -198,7 +135,6 @@ export class MapComponent implements OnInit, OnDestroy {
 			}//Eo for
 
 			this.markers.clearLayers();
-			console.log(this.currentLayer);
 
 			this.currentLayer.addTo(this.markers);
 			
@@ -211,7 +147,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 			this.currentLayer.clearLayers();
 
-			console.log('display only by status');
 
 			for (let member of this.members) {
 
@@ -236,8 +171,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 			this.currentLayer.clearLayers();
 
-			console.log('display only by thematic');
-
 			for (let member of this.members) {
 
 				let index = this.members.indexOf(member);
@@ -249,7 +182,6 @@ export class MapComponent implements OnInit, OnDestroy {
 			}//Eo for
 
 			this.markers.clearLayers();
-			console.log(this.currentLayer);
 
 			this.currentLayer.addTo(this.markers);
 			
@@ -262,14 +194,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
 			this.currentLayer.clearLayers();
 
-			console.log('display thematic/status');
-
 			for (let member of this.members) {
 
 				let index = this.members.indexOf(member);
-
-				console.log(this.statusToDisplay);
-				console.log(this.thematicToDisplay);
 
 				if(member.status.indexOf(this.statusToDisplay) > -1 && member.thematics.indexOf(this.thematicToDisplay) > -1){
 					this.addMemberPopupToLayer(member, index, this.currentLayer);
@@ -286,101 +213,17 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	chooseThematic(thematic) {
 		this.thematicToDisplay = thematic;
-		this.addMarkerBis(this.statusToDisplay);
+		this.addMarkerOnClick(this.statusToDisplay);
 	}
 
-	addMarker(members: Member[]) { // instance du marker.
+	addMarkerOnInit(members: Member[]) { // instance du marker.
 
 		for ( let member of members) {
 
 			let index = members.indexOf(member);
 
 			this.addMemberPopupToLayer(member, index, this.allMembers);
-	
-			if(member.status.indexOf(Category.STATUS_ETUDIANT) > -1){
-				this.addMemberPopupToLayer(member, index, this.etudiants);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_DOCTORANT) > -1){
-				this.addMemberPopupToLayer(member, index, this.doctorants);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_POST_DOCTORANT) > -1){
-				this.addMemberPopupToLayer(member, index, this.postDoctorants);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_ENSEIGNANT) > -1){
-				this.addMemberPopupToLayer(member, index, this.enseignantsChercheurs);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_PROFESSIONNEL) > -1){
-				this.addMemberPopupToLayer(member, index, this.professionnels);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_PUBLIC) > -1){
-				this.addMemberPopupToLayer(member, index, this.public);
-			}//Eo if
-			if(member.status.indexOf(Category.STATUS_PRIVE) > -1){
-				this.addMemberPopupToLayer(member, index, this.prive);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_AGRICULTURE_PRECI) > -1){
-				this.addMemberPopupToLayer(member, index, this.agriculturedePrecision);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_ARCHEOLOGIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.archeologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_CLIMATOLOGIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.climatologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_ECOLOGIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.ecologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_GEOGRAPHIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.geographie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_GEOLOGIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.geologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_GEOSCIENCES) > -1){
-				this.addMemberPopupToLayer(member, index, this.geosciences);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_HYDROLOGIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.hydrologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_INFORMATIQUE) > -1){
-				this.addMemberPopupToLayer(member, index, this.informatique);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_IA) > -1){
-				this.addMemberPopupToLayer(member, index, this.intelligenceArtificielle);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_MATHS) > -1){
-				this.addMemberPopupToLayer(member, index, this.mathematiques);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_METEO) > -1){
-				this.addMemberPopupToLayer(member, index, this.meteorologie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_MODELISATION) > -1){
-				this.addMemberPopupToLayer(member, index, this.modelisation);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_OCEANOGRAPHIE) > -1){
-				this.addMemberPopupToLayer(member, index, this.oceanographie);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_OPTIQUE) > -1){
-				this.addMemberPopupToLayer(member, index, this.optique);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_RADAR) > -1){
-				this.addMemberPopupToLayer(member, index, this.radar);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_RISQUESNATURELS) > -1){
-				this.addMemberPopupToLayer(member, index, this.riquesNaturels);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_STATISTIQUES) > -1){
-				this.addMemberPopupToLayer(member, index, this.statistiques);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_SIG) > -1){
-				this.addMemberPopupToLayer(member, index, this.sig);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_TRAITEMENTSIGNAL) > -1){
-				this.addMemberPopupToLayer(member, index, this.traitementSignal);
-			}//Eo if
-			if(member.thematics.indexOf(Category.THEME_URBAIN) > -1){
-				this.addMemberPopupToLayer(member, index, this.urbain);
-			}//Eo if		
+			
 		}//Eo for
 	}//Eo addMarker()
 
@@ -423,49 +266,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	/* clickable events */
 
-	onSetDoctorants() {
-		/*this.map.addLayer(this.doctorants);*/
-		this.markers.clearLayers();
-		this.doctorants.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_DOCTORANT;
-	}//Eo onSetDoctorants()
-
-	onSetEtudiants() {
-		this.markers.clearLayers();
-		this.etudiants.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_ETUDIANT;
-	}//Eo onSetEtudiants
-
-	onSetPostDoctorants() {
-		this.markers.clearLayers();
-		this.postDoctorants.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_POST_DOCTORANT;
-	}//Eo onSetPostDoctorants()
-
-	onSetEnseignants() {
-		this.markers.clearLayers();
-		this.enseignantsChercheurs.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_ENSEIGNANT;
-	}//Eo onSetEnseignants()
-
-	onSetProfessionnels() {
-		this.markers.clearLayers();
-		this.professionnels.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_PROFESSIONNEL;
-	}//Eo onSetProfessionnels()
-
-	onSetPublic() {
-		this.markers.clearLayers();
-		this.public.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_PUBLIC;
-	}//Eo onSetProfessionnels()
-
-	onSetPrive() {
-		this.markers.clearLayers();
-		this.prive.addTo(this.markers);
-		this.selectedCategory = Category.STATUS_PRIVE;
-	}//Eo onSetProfessionnels()
-
 	onDisplayAll() {
 
 		this.statusToDisplay = 'all';
@@ -473,170 +273,13 @@ export class MapComponent implements OnInit, OnDestroy {
 		this.selectOptionsStatus.reset('all');
 		this.selectOptionsThematic.reset('all');
 
-		this.addMarkerBis(this.statusToDisplay);
+		this.addMarkerOnClick(this.statusToDisplay);
 		/*for(let layer of this.layersArray) {
 			this.map.removeLayer(layer);}
 		this.markers.clearLayers();
 		this.allMembers.addTo(this.markers);
 		this.selectedCategory = null;*/
 	}//Eo onDisplayAll()
-
-	selectThematic(value) {
-		switch(value) {
-		    case "Agriculture de Précision":
-		    	this.markers.clearLayers();
-				this.agriculturedePrecision.addTo(this.markers);
-				this.selectedCategory = Category.THEME_AGRICULTURE_PRECI;
-		       break;
-		    case "Archéologie":
-				this.markers.clearLayers();
-				this.archeologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_ARCHEOLOGIE;
-		       break;
-	       case "Climatologie":
-		      	this.markers.clearLayers();
-				this.climatologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_CLIMATOLOGIE;
-		       break;
-	       case "Ecologie":
-		        this.markers.clearLayers();
-				this.ecologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_ECOLOGIE;
-		       break;
-	       case "Géographie":
-		       	this.markers.clearLayers();
-				this.geographie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_GEOGRAPHIE;
-		       break;
-	       case "Géologie":
-		        this.markers.clearLayers();
-				this.geologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_GEOLOGIE;
-		       break;
-	       case "Géosciences":
-		        this.markers.clearLayers();
-				this.geosciences.addTo(this.markers);
-				this.selectedCategory = Category.THEME_GEOSCIENCES;
-		       break;
-	       case "Hydrologie":
-		        this.markers.clearLayers();
-				this.hydrologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_HYDROLOGIE;
-		       break;
-	       case "Informatique":
-		        this.markers.clearLayers();
-				this.informatique.addTo(this.markers);
-				this.selectedCategory = Category.THEME_INFORMATIQUE;
-		       break;
-	       case "Intelligence Artificielle":
-		        this.markers.clearLayers();
-				this.intelligenceArtificielle.addTo(this.markers);
-				this.selectedCategory = Category.THEME_IA;
-		       break;	
-				this.selectedCategory = Category.THEME_MATHS;
-	       case "Mathématiques":
-		        this.markers.clearLayers();
-				this.mathematiques.addTo(this.markers);
-				this.selectedCategory = Category.THEME_MATHS;
-		       break;	
-	       case "Météorologie":
-		        this.markers.clearLayers();
-				this.meteorologie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_METEO;
-		       break;	
-	       case "Modélisation":
-		        this.markers.clearLayers();
-				this.modelisation.addTo(this.markers);
-				this.selectedCategory = Category.THEME_MODELISATION;
-		       break;	
-	       case "Océanographie":
-		        this.markers.clearLayers();
-				this.oceanographie.addTo(this.markers);
-				this.selectedCategory = Category.THEME_OCEANOGRAPHIE;
-		       break;	
-	       case "Optique":
-		        this.markers.clearLayers();
-				this.optique.addTo(this.markers);
-				this.selectedCategory = Category.THEME_OPTIQUE;
-		       break;	
-	       case "Modélisation":
-		        this.markers.clearLayers();
-				this.modelisation.addTo(this.markers);
-				this.selectedCategory = Category.THEME_MODELISATION;
-		       break;	
-	       case "Radar":
-		        this.markers.clearLayers();
-				this.radar.addTo(this.markers);
-				this.selectedCategory = Category.THEME_RADAR;
-		       break;	
-	       case "Risques Naturels":
-		        this.markers.clearLayers();
-				this.riquesNaturels.addTo(this.markers);
-				this.selectedCategory = Category.THEME_RISQUESNATURELS;
-		       break;	
-	       case "Statistiques":
-		        this.markers.clearLayers();
-				this.statistiques.addTo(this.markers);
-				this.selectedCategory = Category.THEME_STATISTIQUES;
-		       break;		
-	       case "Système d’information Géographique (S.I.G.)":
-		        this.markers.clearLayers();
-				this.sig.addTo(this.markers);
-				this.selectedCategory = Category.THEME_SIG;
-		       break;	
-	       case "Traitement du signal":
-		        this.markers.clearLayers();
-				this.traitementSignal.addTo(this.markers);
-				this.selectedCategory = Category.THEME_TRAITEMENTSIGNAL;
-		       break;	
-	       case "Urbain":
-		        this.markers.clearLayers();
-				this.urbain.addTo(this.markers);
-				this.selectedCategory = Category.THEME_URBAIN;
-		       break;			       		       		       	       		       		       		       		       		       		       		       		       		       		       		       		       		       
-		}//Eo switch
-	}//Eo selectThematic()
-
-	selectCategory(value) {
-		switch(value) {
-		    case "Doctorants":
-				this.markers.clearLayers();
-				this.doctorants.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_DOCTORANT;
-		       break;
-		    case "Post-Doctorants":
-				this.markers.clearLayers();
-				this.postDoctorants.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_POST_DOCTORANT;
-		       break;
-			case "Etudiants":
-			  	this.markers.clearLayers();
-				this.etudiants.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_ETUDIANT;
-			   break;
-			case "Enseignants-Chercheurs":
-			    this.markers.clearLayers();
-				this.enseignantsChercheurs.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_ENSEIGNANT;
-			   break;
-			case "Professionnels":
-			   	this.markers.clearLayers();
-				this.professionnels.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_PROFESSIONNEL;
-			   break;
-			case "Organismes publics":
-			    this.markers.clearLayers();
-				this.public.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_PUBLIC;
-			   break;
-			case "Organismes privés":
-			    this.markers.clearLayers();
-				this.prive.addTo(this.markers);
-				this.selectedCategory = Category.STATUS_PRIVE;
-			   break;			       		       		       	       		       		       		       		       		       		       		       		       		       		       		       		       		       
-		}//Eo switch
-	}//Eo selectThematic()
-
 
 	onNavigateToLogin() {
 		this.router.navigate(['login']);

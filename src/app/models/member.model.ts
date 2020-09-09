@@ -12,6 +12,7 @@ export class Member {
 				public password: string,
 				public about: string,
 				public site: string,
+				public id: number,
 				public isOrganization: boolean){}
 				
 

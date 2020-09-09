@@ -12,11 +12,11 @@
 					    <ul>
 							<li *ngIf="member.thematics[0]"> {{ member.thematics[0] }}</li>
 							<li *ngIf="member.thematics[1]"> {{ member.thematics[1] }}</li>
-							<li *ngIf="member.thematics[1]"> {{ member.thematics[2] }}</li>
-							<li *ngIf="member.thematics[1]"> {{ member.thematics[3] }}</li>
-							<li *ngIf="member.thematics[1]"> {{ member.thematics[4] }}</li>
+							<li *ngIf="member.thematics[2]"> {{ member.thematics[2] }}</li>
+							<li *ngIf="member.thematics[3]"> {{ member.thematics[3] }}</li>
+							<li *ngIf="member.thematics[4]"> {{ member.thematics[4] }}</li>
 						</ul>
-					    <button class="btn btn-info" (click)="onViewMember(i)">Voir le profil du membre</button>
+					    <button class="btn btn-info" (click)="onViewMember(member.id)">Voir le profil du membre</button>
 					  </div>
 					</div>
 				</div>

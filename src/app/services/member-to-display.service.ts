@@ -14,15 +14,24 @@ export class MemberToDisplayService {
 
 	thematic = 'all';
 
+	id: number;
+
   	constructor(private membersService: MembersService) { }
 
   	filterByCategory(members: Member[]) {
 
+
+
 		this.membersToDisplay = [];
 		for(let member of members) {
+
+			this.id = members.indexOf(member);
+			member.id = this.id;
+
 	      	if(this.status == 'all' && this.thematic == 'all'){
 
 	        	this.membersToDisplay.push(member);
+
 	    	
 	      	} else if (this.status != 'all' && this.thematic == 'all') {
 
@@ -45,15 +54,8 @@ export class MemberToDisplayService {
 	          		this.membersToDisplay.push(member);
 
 	          	}
-	      	}
-    	}
-  			/*}*/
-  		/*});*/
-
-  		
-
-
-	    
+	      	}// else if
+    	}//Eo for	    
     }//Eo filterByCategory() 
 
 }//Eo class
