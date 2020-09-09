@@ -28,3 +28,5 @@ export const 	THEME_STATISTIQUES = 'Statistiques';
 export const 	THEME_SIG = 'Système d’information Géographique (S.I.G.)';
 export const 	THEME_TRAITEMENTSIGNAL = 'Traitement du signal';
 export const 	THEME_URBAIN = 'Urbain';
+export let 		memberListStatus = 'Doctorant';
+export let 		memberListThematic = 'all';

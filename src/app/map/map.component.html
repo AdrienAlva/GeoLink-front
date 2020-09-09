@@ -5,31 +5,25 @@
             <div class="row no-gutters justify-content-center">
                 <div id="map" class="row no-gutters"></div>
             </div>
- 
+
             <div class="row no-gutters justify-content-center" id="categories">
+
                 <button id="displayAll" class="btn btn-info"(click)="onDisplayAll()">Tout afficher</button>
-                <!-- <button class="btn btn-light" (click)="onSetEtudiants()">Etudiants</button>
-                <button class="btn btn-light" (click)="onSetDoctorants()">Doctorants</button>
-                <button class="btn btn-light" (click)="onSetPostDoctorants()">Post-Doctorants</button>
-                <button class="btn btn-light" (click)="onSetEnseignants()">Enseignants-Chercheurs</button>
-                <button class="btn btn-light" (click)="onSetProfessionnels()">Professionnels</button>
-                <button class="btn btn-secondary" (click)="onSetPublic()">Organismes publics</button>
-                <button class="btn btn-secondary" (click)="onSetPrive()">Organismes privés</button> -->
                     
-                <select class="custom-select" (change)="selectCategory($event.target.value)">
-                    <option value="">-- Statut --</option>
-                    <option value="Doctorants">Doctorants</option>
-                    <option value="Post-Doctorants">Posts-Doctorants</option>
-                    <option value="Etudiants">Etudiants</option>
-                    <option value="Enseignants-Chercheurs">Ecologie</option>
-                    <option value="Professionnels">Professionnels</option>
-                    <option value="Organismes publics">Organismes publics</option>
-                    <option value="Organismes privés">Organismes privés</option>
+                <select class="custom-select" (change)="addMarkerBis($event.target.value)" [formControl]="selectOptionsStatus">
+                    <option value="all">-- Tout Statut --</option>
+                    <option value="Doctorant">Doctorants</option>
+                    <option value="Post-doctorant">Post-doctorants</option>
+                    <option value="Etudiant du master TELENVI">Etudiants</option>
+                    <option value="Enseignant-Chercheur">Enseignants-Chercheurs</option>
+                    <option value="Professionnel">Professionnels</option>
+                    <option value="organisme public">Organismes publics</option>
+                    <option value="organisme privé">Organismes privés</option>
                   
                 </select>
 
-                <select class="custom-select" (change)="selectThematic($event.target.value)">
-                    <option value="">-- Thématiques --</option>
+                <select class="custom-select" (change)="chooseThematic($event.target.value)" [formControl]="selectOptionsThematic">
+                    <option value="all">-- Toutes Thématiques --</option>
                     <option value="Agriculture de Précision">Agriculture de Précision</option>
                     <option value="Archéologie">Archéologie</option>
                     <option value="Climatologie">Climatologie</option>
@@ -56,7 +50,7 @@
         </div>
     </div>
 
-    <app-member-list [selectedCategory]="selectedCategory"></app-member-list>
+    <app-member-list></app-member-list>
 
 
 </div>

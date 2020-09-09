@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, NgZone, ElementRef, AfterViewInit } from 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
+import { MemberToDisplayService } from '../services/member-to-display.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as L from 'leaflet';
@@ -9,6 +10,7 @@ import 'leaflet.markercluster';
 import * as Category from './category.constants';
 import { NgElement, WithProperties } from '@angular/elements';
 import { LeafletPopupComponent } from '../leaflet-popup/leaflet-popup.component';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -85,8 +87,6 @@ export class MapComponent implements OnInit, OnDestroy {
 					this.public,
 					this.prive];
 
-	selectedCategory: string = null; // Etat courant de la selection de category. Null = all categories.
-
 	/* Map Icons */
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: '../assets/icons/member.png',
@@ -105,8 +105,12 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	markers = L.markerClusterGroup();
 
+	selectOptionsStatus: FormControl = new FormControl('all');
+	selectOptionsThematic: FormControl = new FormControl('all');
+
 	/* CONSTRUCTOR */
 	constructor(private membersService: MembersService,
+				private memberToDisplay: MemberToDisplayService,
 				private router: Router) { }
 
 	/* ON INIT */
@@ -160,13 +164,138 @@ export class MapComponent implements OnInit, OnDestroy {
 		mainLayer.addTo(this.map); // methode pour ajouter les options de configuration de la carte. tileLayer / min-max zoom / attribution.
 	}//Eo createMap()
 
+
+	/*statusToDisplay = {Etudiants: this.etudiants};*/
+	thematicToDisplay = "all";
+	statusToDisplay = "all";
+
+	currentLayer = L.layerGroup();
+	
+	addMarkerBis(status) {
+
+		console.log('addMarkerBis()');
+
+		this.statusToDisplay = status;
+
+
+		if(this.thematicToDisplay == 'all' && this.statusToDisplay == 'all') {
+
+			this.memberToDisplay.status = this.statusToDisplay;
+			this.memberToDisplay.thematic = this.thematicToDisplay;
+
+			this.memberToDisplay.filterByCategory(this.members);
+
+			this.currentLayer.clearLayers();
+
+			console.log('display all');
+
+			for (let member of this.members) {
+
+				let index = this.members.indexOf(member);
+
+				this.addMemberPopupToLayer(member, index, this.currentLayer);
+				
+			}//Eo for
+
+			this.markers.clearLayers();
+			console.log(this.currentLayer);
+
+			this.currentLayer.addTo(this.markers);
+			
+		} else if(this.thematicToDisplay == 'all' && this.statusToDisplay != 'all') {
+
+			this.memberToDisplay.status = this.statusToDisplay;
+			this.memberToDisplay.thematic = this.thematicToDisplay;
+
+			this.memberToDisplay.filterByCategory(this.members);
+
+			this.currentLayer.clearLayers();
+
+			console.log('display only by status');
+
+			for (let member of this.members) {
+
+				let index = this.members.indexOf(member);
+
+				if(member.status.indexOf(status) > -1){
+					this.addMemberPopupToLayer(member, index, this.currentLayer);
+				}//Eo if
+	
+			}//Eo for
+
+			this.markers.clearLayers();
+
+			this.currentLayer.addTo(this.markers);
+			
+		} else if(this.thematicToDisplay != 'all' && this.statusToDisplay == 'all') {
+
+			this.memberToDisplay.status = this.statusToDisplay;
+			this.memberToDisplay.thematic = this.thematicToDisplay;
+
+			this.memberToDisplay.filterByCategory(this.members);
+
+			this.currentLayer.clearLayers();
+
+			console.log('display only by thematic');
+
+			for (let member of this.members) {
+
+				let index = this.members.indexOf(member);
+
+				if(member.thematics.indexOf(this.thematicToDisplay) > -1){
+					this.addMemberPopupToLayer(member, index, this.currentLayer);
+				}//Eo if
+	
+			}//Eo for
+
+			this.markers.clearLayers();
+			console.log(this.currentLayer);
+
+			this.currentLayer.addTo(this.markers);
+			
+		} else if (this.thematicToDisplay != 'all' && this.statusToDisplay != 'all'){
+
+			this.memberToDisplay.status = this.statusToDisplay;
+			this.memberToDisplay.thematic = this.thematicToDisplay;
+
+			this.memberToDisplay.filterByCategory(this.members);
+
+			this.currentLayer.clearLayers();
+
+			console.log('display thematic/status');
+
+			for (let member of this.members) {
+
+				let index = this.members.indexOf(member);
+
+				console.log(this.statusToDisplay);
+				console.log(this.thematicToDisplay);
+
+				if(member.status.indexOf(this.statusToDisplay) > -1 && member.thematics.indexOf(this.thematicToDisplay) > -1){
+					this.addMemberPopupToLayer(member, index, this.currentLayer);
+				}//Eo if
+	
+			}//Eo for
+
+			this.markers.clearLayers();
+
+			this.currentLayer.addTo(this.markers);
+			
+		}//Eo if / else
+	}
+
+	chooseThematic(thematic) {
+		this.thematicToDisplay = thematic;
+		this.addMarkerBis(this.statusToDisplay);
+	}
+
 	addMarker(members: Member[]) { // instance du marker.
 
 		for ( let member of members) {
 
 			let index = members.indexOf(member);
 
-			this.addAllMembersPopupToLayer(member, index, this.allMembers);
+			this.addMemberPopupToLayer(member, index, this.allMembers);
 	
 			if(member.status.indexOf(Category.STATUS_ETUDIANT) > -1){
 				this.addMemberPopupToLayer(member, index, this.etudiants);
@@ -275,19 +404,6 @@ export class MapComponent implements OnInit, OnDestroy {
 		} 	
 	}//Eo addMemberPopupToLayer
 
-	addAllMembersPopupToLayer(member: Member, index: number, layer: L.LayerGroup<any>) {
-
-		if (member.isOrganization == true) {
-			const marker = L.marker([member.lat, member.lng], {icon: this.organizationIcon});// Création du marker
-			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
-			marker.addTo(layer);// On ajoute au layer approprié.
-		} else if(member.isOrganization == false) {
-			const marker = L.marker([member.lat, member.lng], {icon: this.memberIcon});// Création du marker
-			marker.bindPopup(fl => this.makePopup(member, index)); // quand on bind le popup on lui ajoute en tant qu'enfant le contenu html du LeafletPopupComponent.
-			marker.addTo(layer);// On ajoute au layer approprié.
-		} 	
-	}//Eo addMemberPopupToLayer
-
 	makePopup(member: Member, index: number) {
 
 		const popup: NgElement & WithProperties<LeafletPopupComponent> = document.createElement('popup-element') as any;
@@ -351,11 +467,18 @@ export class MapComponent implements OnInit, OnDestroy {
 	}//Eo onSetProfessionnels()
 
 	onDisplayAll() {
-		for(let layer of this.layersArray) {
+
+		this.statusToDisplay = 'all';
+		this.thematicToDisplay = 'all';
+		this.selectOptionsStatus.reset('all');
+		this.selectOptionsThematic.reset('all');
+
+		this.addMarkerBis(this.statusToDisplay);
+		/*for(let layer of this.layersArray) {
 			this.map.removeLayer(layer);}
 		this.markers.clearLayers();
 		this.allMembers.addTo(this.markers);
-		this.selectedCategory = null;
+		this.selectedCategory = null;*/
 	}//Eo onDisplayAll()
 
 	selectThematic(value) {

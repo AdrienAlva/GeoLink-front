@@ -15,6 +15,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SingleProfileComponent } from './single-profile/single-profile.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { MemberToDisplayService } from './services/member-to-display.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthService } from './services/auth.service';
@@ -102,6 +103,7 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuardService,
     AuthGuardAdminService,
+    MemberToDisplayService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     {
       provide: RECAPTCHA_SETTINGS,

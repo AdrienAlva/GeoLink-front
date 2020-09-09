@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Member } from '../models/Member.model';
 import { MembersService } from '../services/members.service';
+import { MemberToDisplayService } from '../services/member-to-display.service';
 import { Subscription } from 'rxjs/Subscription';
 import * as Category from '../map/category.constants';
 
@@ -15,36 +16,38 @@ export class MemberListComponent implements OnInit {
   @Input() selectedCategory: string;
   
 
-  constructor(private membersService: MembersService,private router: Router) { }
+  constructor(private membersService: MembersService,
+              private memberToDisplay: MemberToDisplayService,
+              private router: Router) { }
 
   members: Member[]; //Array local vide.
 
   memberSubscription: Subscription;
 
-  studentlist: [];
+  
 
   ngOnInit(): void {
   	this.memberSubscription = this.membersService.membersSubject.subscribe( 
   		(members: any[]) => {
   			this.members = members;
-        console.log(this.members);
+
+        this.memberToDisplay.filterByCategory(this.members);
   		}
   	);
-
   }//Eo ngOnInit()
 
   onViewMember(id: number) {
     this.router.navigate(['member', 'profile', id]);
   }//Eo onViewBook()
 
-  filterByCategory(member: Member) {
-    if(this.selectedCategory) {
+
+    /*if(this.selectedCategory) {
       return member.status.indexOf(this.selectedCategory) > - 1 ||
              member.thematics.indexOf(this.selectedCategory) > - 1;
-    }
+    }*/
 
     // Selectionne toutes les catégories existantes si aucune catégorie n'est selectionné dans selectedCategory.
-    return member.status.indexOf(Category.STATUS_ETUDIANT) > - 1 || 
+    /*return member.status.indexOf(Category.STATUS_ETUDIANT) > - 1 || 
            member.status.indexOf(Category.STATUS_DOCTORANT) > - 1 || 
            member.status.indexOf(Category.STATUS_POST_DOCTORANT) > - 1 || 
            member.status.indexOf(Category.STATUS_ENSEIGNANT) > - 1 || 
@@ -71,7 +74,7 @@ export class MemberListComponent implements OnInit {
            member.thematics.indexOf(Category.THEME_STATISTIQUES) > - 1 ||
            member.thematics.indexOf(Category.THEME_SIG) > - 1 ||
            member.thematics.indexOf(Category.THEME_TRAITEMENTSIGNAL) > - 1 ||
-           member.thematics.indexOf(Category.THEME_URBAIN) > - 1;
-  }//Eo filterByCategory()  
+           member.thematics.indexOf(Category.THEME_URBAIN) > - 1;*/
+   
 
 }//Eo class

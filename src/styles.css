@@ -107,6 +107,7 @@ app-search-bar {
 
 .custom-select {
     margin-right: 2px;
+    width: 20% !important;
   }
 
 #footer {
