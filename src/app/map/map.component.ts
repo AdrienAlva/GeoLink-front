@@ -98,8 +98,8 @@ export class MapComponent implements OnInit, OnDestroy {
 			zoom: zoomLevel,
 		});
 
-		const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		  		minZoom: 3,
+		const mainLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+		  		minZoom: 2,
 		  		maxZoom: 18,
 		  		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		  	});

@@ -16,7 +16,7 @@ export class MemberListComponent implements OnInit {
   
 
   constructor(private membersService: MembersService,
-              private memberToDisplay: MemberToDisplayService,
+              public memberToDisplay: MemberToDisplayService,
               private router: Router) { }
 
   members: Member[]; //Array local vide.
