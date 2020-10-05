@@ -16,6 +16,7 @@
 			    <h5 class="card-title">{{ members[memberId].status }}</h5>
 			    <p class="card-text">{{ members[memberId].about }}</p>
 			    <p *ngIf="members[memberId].site">Site web : <a href="{{ members[memberId].site }}">{{ members[memberId].site }}</a></p>
+			    <p>adresse courriel : {{ members[memberId].email }} </p>
 			    <div id="categories" class="row no-gutters">
 			    	<p>Thématiques : 
 			    		<span class="category" *ngIf="members[memberId].thematics[0]">{{ members[memberId].thematics[0] }}</span>
