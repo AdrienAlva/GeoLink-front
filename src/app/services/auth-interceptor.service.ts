@@ -14,8 +14,16 @@ export class AuthInterceptorService implements HttpInterceptor {
     console.log("Interception In Progress"); //SECTION 1
     const token: string = localStorage.getItem('token');
     req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
-    req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
-    req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+    if (req.body instanceof FormData) {
+      console.log('FormDATA')
+/*        req = req.clone({ headers: req.headers.set('Content-Type', 'multipart/form-data')});
+        req = req.clone({ headers: req.headers.set('Accept', 'multipart/form-data') });*/
+    } else {
+      console.log('JSON')
+        req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
+        req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+    }
+   
  
     return next.handle(req)
         .pipe(

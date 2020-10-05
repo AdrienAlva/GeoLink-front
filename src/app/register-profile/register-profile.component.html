@@ -173,6 +173,11 @@
 					<input class="form-control" type="url" name="site" formControlName="site">
 				</div>
 
+				<div class="form-group">
+					<label for="name">Photo de profil : </label>
+					<input class="form-control" type="file" name="avatar" (change)="onFileSelect($event)">
+				</div>
+
 				<p>Position du marqueur sur la carte : </p>
 				<div id="map"></div>
 

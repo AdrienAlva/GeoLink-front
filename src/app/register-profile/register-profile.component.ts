@@ -23,9 +23,9 @@ export class RegisterProfileComponent implements OnInit {
 		popupAnchor: [1, -34],
 	});
 
-	constructor(public httpClient: HttpClient,
-				  private formBuilder: FormBuilder,
-				  private router: Router) { }
+	constructor(private httpClient: HttpClient,
+			  	private formBuilder: FormBuilder,
+			  	private router: Router) { }
 
 	ngOnInit(): void {
 		
@@ -61,15 +61,16 @@ export class RegisterProfileComponent implements OnInit {
 	  		thematic4: '',
 	  		thematic5: '',
 	  		about: '',
-	  		site: ''
+	  		site: '',
+	  		avatar: ['']
 		});
 	}//Eo initForm()
 
 	onSubmitRegisterProfile() {
 
-  	const registerData = this.registerProfileForm.value;
-  	
-  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
+	  	const registerData = this.registerProfileForm.value;
+	  	
+	  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
 			this.httpClient.post('http://localhost:3000/register-profile', registerData)
 			.subscribe(
@@ -82,7 +83,25 @@ export class RegisterProfileComponent implements OnInit {
 			);
 			this.router.navigate(['sent-request']);
 		} 
-    }//Eo onSubmitLogin()
+
+    	const formData = new FormData();
+    	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
+
+		console.log(formData);
+
+    	this.httpClient.post('http://localhost:3000/upload-avatar', formData).subscribe(
+      		(res) => console.log(res),
+      		(err) => console.log(err)
+    	);//req for avatar upload
+    }//Eo onSubmitRegisterProfile()
+
+  	onFileSelect(event) { 
+  		console.log("onFileSelect()");
+	    if (event.target.files.length > 0) {
+	      const file = event.target.files[0];
+	      this.registerProfileForm.get('avatar').setValue(file);
+	    }
+  	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
 
 	createMap() {
 
