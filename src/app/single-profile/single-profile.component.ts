@@ -76,7 +76,7 @@ export class SingleProfileComponent implements OnInit {
 			layers: []
 		});
 
-		const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		const mainLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 		  		minZoom: 3,
 		  		maxZoom: 17,
 		  		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -30,7 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
 	/* Map Icons */
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: '../assets/icons/member.png',
-		iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
+		
 		iconSize:    [35, 41],
 		iconAnchor:  [12, 41],
 		popupAnchor: [1, -34],

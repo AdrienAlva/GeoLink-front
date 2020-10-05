@@ -1,16 +1,30 @@
-<h2>Mot de passe oublié</h2>
+<div id="for-top-border">
+	<div class="container">
 
-<form [formGroup]="recoveryForm" (ngSubmit)="onSubmitRecovery()">
-	<label for="email">Adresse email : </label><input type="email" name="email" formControlName="email">
-	<br>
-	<re-captcha formControlName="recaptchaReactive"></re-captcha>
-	<input type="submit" [disabled]="recoveryForm.invalid">
-</form>
+		<h2>Mot de passe oublié</h2>
 
-<div class="errorMessage" *ngIf="errorMessage">
-	<p>{{ errorMessage }}</p>
+		<form [formGroup]="recoveryForm" (ngSubmit)="onSubmitRecovery()">
+			<div class="form-group">
+				<label for="email">Adresse email : </label>
+				<input class="form-control" type="email" name="email" formControlName="email">
+				<br/>
+				<div class="row no-gutters justify-content-center">
+					<re-captcha formControlName="recaptchaReactive"></re-captcha>
+				</div>
+				<div class="row no-gutters justify-content-center">
+					<input class="btn btn-primary" type="submit" [disabled]="recoveryForm.invalid">
+				</div>
+			</div>
+		</form>
+
+		<div class="errorMessage" *ngIf="errorMessage">
+			<p>{{ errorMessage }}</p>
+		</div>
+
+		
+
+		<div id="home">
+			<a routerLink="/">Retourner à la page d'accueil</a>
+		</div>
+	</div>
 </div>
-
-<br/>
-
-<a routerLink="/">Retourner à la page d'accueil</a>
