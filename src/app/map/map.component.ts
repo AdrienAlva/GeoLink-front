@@ -30,7 +30,6 @@ export class MapComponent implements OnInit, OnDestroy {
 	/* Map Icons */
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: '../assets/icons/member.png',
-		
 		iconSize:    [35, 41],
 		iconAnchor:  [12, 41],
 		popupAnchor: [1, -34],
