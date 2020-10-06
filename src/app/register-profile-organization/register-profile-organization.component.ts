@@ -60,7 +60,8 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 	  		thematic4: '',
 	  		thematic5: '',
 	  		about: '',
-	  		site: ''
+	  		site: '',
+	  		avatar: ['']
 		});
 	}//Eo initForm()
 
@@ -80,7 +81,25 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 			);
 			this.router.navigate(['sent-request']);
 		} 
+
+    	const formData = new FormData();
+    	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
+
+		console.log(formData);
+
+    	this.httpClient.post('http://localhost:3000/upload-avatar', formData).subscribe(
+      		(res) => console.log(res),
+      		(err) => console.log(err)
+    	);//req for avatar upload
     }//Eo onSubmitLogin()
+
+  	onFileSelect(event) { 
+  		console.log("onFileSelect()");
+	    if (event.target.files.length > 0) {
+	      const file = event.target.files[0];
+	      this.registerProfileForm.get('avatar').setValue(file);
+	    }
+  	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
 
 	createMap() {
 

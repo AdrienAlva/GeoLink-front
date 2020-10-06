@@ -48,3 +48,26 @@
 	margin-right: 10px;
 }
 
+.avatar {
+	width: 60%;
+	margin: auto;
+  	display: block;
+}
+
+.avatar-block {
+	
+	width: 30%;	
+	margin: auto;
+	display: flex;
+}
+
+.card-body {
+  width: 70%;
+  border-right: rgba(180, 180, 180, 1) 2px solid;
+  margin-bottom: 0 !important;
+ }
+
+ .card-text {
+ 	text-align: justify;
+ }
+

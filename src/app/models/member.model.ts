@@ -11,6 +11,7 @@ export class Member {
 				public email: string,
 				public password: string,
 				public about: string,
+				public avatar: string,
 				public site: string,
 				public id: number,
 				public isOrganization: boolean){}

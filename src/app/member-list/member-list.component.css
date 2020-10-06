@@ -1,19 +1,93 @@
 ul {
   list-style-type: none;
+  width: 70%;
+  height: 100%;
+  padding-right: 5%;
+  border-right: rgba(180, 180, 180, 1) 2px solid;
+  margin-bottom: 0 !important;
  }
 
 #profile-background{
 	padding-top: 1%;
-	/*background-color: rgba(118, 65, 121, 0.2);*/
+	padding-bottom: 2%;
+	background-color: rgba(220, 220, 220, 1);
 	/*background-color: rgba(241, 189, 16, 0.25);*/
 }
 
 #profiles-container {
  	height: 70vh;
- 	overflow: scroll;
-	margin-bottom: 5%;
+ 	overflow: scroll;	
 }
 
 #profile {
  	margin-bottom: 2px;
+}
+
+.avatar {
+	height: 16%;
+	width: 12%;
+	margin: auto;
+}
+
+.row {
+	height: 100%
+}
+
+.name {
+	font-size: 1.5em;
+}
+
+.card-title {
+	text-align: center;
+}
+
+.rounded-list li{
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em 2em;
+        margin-bottom: 0.5em;
+        background: #ddd;
+        color: #444;
+        text-decoration: none;
+        border-radius: .3em;   
+}
+
+.last-li {
+	margin-bottom: 0 !important;
+}
+
+.profile-button {
+	margin-top: 2%;
+}
+
+@media (max-width: 992px) {
+
+	ul {
+	  list-style-type: none;
+	  width: 60%;
+	  height: 100%;
+	  padding-right: 5%;
+	  padding-left: 5%;
+	  border-right: rgba(180, 180, 180, 1) 2px solid;
+	  margin-bottom: 0 !important;
+
+	  font-size: 0.8em;
+	}
+
+	.avatar {
+		height: 50%;
+		width: 30%;
+		margin: auto;
+	}
+
+	.profile-button {
+		margin-top: 4%;
+
+	}
+
+	.card-body {
+		padding-right: 0;
+		padding-left: 0;
+	}
+
 }

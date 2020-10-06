@@ -9,24 +9,30 @@
 
         <div id="info">
         	<div class="card">
-			  <div class="card-header">
-			    <h3 id="name">{{ members[memberId].name }} {{ members[memberId].surname }}</h3>
-			  </div>
-			  <div class="card-body">
-			    <h5 class="card-title">{{ members[memberId].status }}</h5>
-			    <p class="card-text">{{ members[memberId].about }}</p>
-			    <p *ngIf="members[memberId].site">Site web : <a href="{{ members[memberId].site }}">{{ members[memberId].site }}</a></p>
-			    <p>adresse courriel : {{ members[memberId].email }} </p>
-			    <div id="categories" class="row no-gutters">
-			    	<p>Thématiques : 
-			    		<span class="category" *ngIf="members[memberId].thematics[0]">{{ members[memberId].thematics[0] }}</span>
-						<span class="category" *ngIf="members[memberId].thematics[1]">{{ members[memberId].thematics[1] }}</span>
-						<span class="category" *ngIf="members[memberId].thematics[2]">{{ members[memberId].thematics[2] }}</span>
-						<span class="category" *ngIf="members[memberId].thematics[3]">{{ members[memberId].thematics[3] }}</span>
-						<span class="category" *ngIf="members[memberId].thematics[4]">{{ members[memberId].thematics[4] }}</span>
-			    	</p>
-			    </div>
-			  </div>
+	        		
+			  	<div class="card-header">
+				    <h3 id="name">{{ members[memberId].name }} {{ members[memberId].surname }}</h3>
+			  	</div>
+				<div class="row no-gutters">
+					<div class="card-body">
+						<h5 class="card-title">{{ members[memberId].status }}</h5>
+						<p class="card-text">{{ members[memberId].about }}</p>
+						<p *ngIf="members[memberId].site">Site web : <a href="{{ members[memberId].site }}">{{ members[memberId].site }}</a></p>
+						<p>adresse courriel : {{ members[memberId].email }} </p>
+						<div id="categories" class="row no-gutters">
+							<p>Thématiques : 
+								<span class="category" *ngIf="members[memberId].thematics[0]">{{ members[memberId].thematics[0] }}</span>
+								<span class="category" *ngIf="members[memberId].thematics[1]">{{ members[memberId].thematics[1] }}</span>
+								<span class="category" *ngIf="members[memberId].thematics[2]">{{ members[memberId].thematics[2] }}</span>
+								<span class="category" *ngIf="members[memberId].thematics[3]">{{ members[memberId].thematics[3] }}</span>
+								<span class="category" *ngIf="members[memberId].thematics[4]">{{ members[memberId].thematics[4] }}</span>
+							</p>
+						</div>					    
+				  	</div>
+				  	<div class="avatar-block">
+						<img class="avatar" src="http://localhost:3000/uploads/{{members[memberId].avatar}}">
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="home">

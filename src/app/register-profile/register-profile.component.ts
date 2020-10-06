@@ -82,7 +82,7 @@ export class RegisterProfileComponent implements OnInit {
 			    }    
 			);
 			this.router.navigate(['sent-request']);
-		} 
+		}
 
     	const formData = new FormData();
     	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	

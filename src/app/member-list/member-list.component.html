@@ -5,18 +5,25 @@
 				<div class="li-item">
 					<div class="card">
 					  <div class="card-header">
-					    {{ member.status }}
+					     <span class="name">{{ member.name }} {{ member.surname }}</span> - {{ member.status }}
 					  </div>
 					  <div class="card-body">
-					    <h5 class="card-title">{{ member.name }} {{ member.surname }}</h5>
-					    <ul>
-							<li *ngIf="member.thematics[0]"> {{ member.thematics[0] }}</li>
-							<li *ngIf="member.thematics[1]"> {{ member.thematics[1] }}</li>
-							<li *ngIf="member.thematics[2]"> {{ member.thematics[2] }}</li>
-							<li *ngIf="member.thematics[3]"> {{ member.thematics[3] }}</li>
-							<li *ngIf="member.thematics[4]"> {{ member.thematics[4] }}</li>
-						</ul>
-					    <button class="btn btn-info" (click)="onViewMember(member.id)">Voir le profil du membre</button>
+
+					    <h5 class="card-title"></h5>
+					    <div class="row no-gutters">
+						    <ul class="rounded-list">
+								<li *ngIf="member.thematics[0]"> {{ member.thematics[0] }}</li>
+								<li *ngIf="member.thematics[1]"> {{ member.thematics[1] }}</li>
+								<li *ngIf="member.thematics[2]"> {{ member.thematics[2] }}</li>
+								<li *ngIf="member.thematics[3]"> {{ member.thematics[3] }}</li>
+								<li class="last-li" *ngIf="member.thematics[4]"> {{ member.thematics[4] }}</li>
+							</ul>
+							<img class="avatar" src="http://localhost:3000/uploads/{{member.avatar}}">
+						</div>
+
+						<div class="profile-button row no-gutters justify-content-center">
+					    	<button class="btn btn-info" (click)="onViewMember(member.id)">Voir le profil du membre</button>
+				    	</div>
 					  </div>
 					</div>
 				</div>
