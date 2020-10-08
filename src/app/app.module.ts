@@ -36,6 +36,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ProfilTypeComponent } from './profil-type/profil-type.component';
 import { RegisterProfileOrganizationComponent } from './register-profile-organization/register-profile-organization.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { AvatarUpdateComponent } from './avatar-update/avatar-update.component';
 /*import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';*/
 
 
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   { path: 'recovery', component: RecoveryComponent},
   { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
   { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
+  { path: 'avatar-update', canActivate: [AuthGuardService], component: AvatarUpdateComponent},
   { path: 'update-password', canActivate: [AuthGuardService], component: UpdatePasswordComponent},
   { path: 'register-profile', canActivate: [AuthGuardService], component: RegisterProfileComponent},
   { path: 'register-profile-organization', canActivate: [AuthGuardService], component: RegisterProfileOrganizationComponent},
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     RecoveryComponent,
     UpdatePasswordComponent,
     ProfilTypeComponent,
-    RegisterProfileOrganizationComponent
+    RegisterProfileOrganizationComponent,
+    AvatarUpdateComponent
   ],
   imports: [
     BrowserModule,

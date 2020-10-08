@@ -45,6 +45,25 @@ export class ValidationComponent implements OnInit {
   	      console.log('Erreur ! : ' + err);
   	    }
   	);
+
+    if(data.refusedAvatar == "true") {
+      console.log('refused avatar...');
+
+      let jsonEmail = {email: '', avatar: ''};
+      jsonEmail['email'] = data.email;
+      jsonEmail['avatar'] = data.avatarValue;
+
+      this.httpClient.post('http://localhost:3000/delete-avatar', jsonEmail)
+        .subscribe(
+          (res) => {
+            console.log('Envoi de suppression d\'avatar.');
+            this.ngOnInit();
+        },
+        (err) => {
+            console.log('Erreur ! : ' + err);
+          }
+      );
+    }//Eo if
   }//Eo onSubmitVerifiedMember()
 
   onRefuseMember(refusedEmail) {
@@ -52,18 +71,17 @@ export class ValidationComponent implements OnInit {
     let jsonEmail = {email: ''};
     jsonEmail['email'] = refusedEmail;
 
-    console.log(jsonEmail);
-
     this.httpClient.post('http://localhost:3000/refused', jsonEmail)
       .subscribe(
         (res) => {
-          console.log('Envoi de la requête de validation de profil.');
+          console.log('Envoi de la requête de refus de profil.');
           this.ngOnInit();
       },
       (err) => {
           console.log('Erreur ! : ' + err);
         }
     );
+
   }//Eo refused();
 
 }//Eo class

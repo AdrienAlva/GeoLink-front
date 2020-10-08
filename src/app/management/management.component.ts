@@ -45,6 +45,24 @@ export class ManagementComponent implements OnInit {
 	  	    }
   		);
     } 
+
+    if(data.refusedAvatar == "true") {
+
+      let jsonEmail = {email: '', avatar: ''};
+      jsonEmail['email'] = data.email;
+      jsonEmail['avatar'] = data.avatarValue;
+
+      this.httpClient.post('http://localhost:3000/delete-avatar', jsonEmail)
+        .subscribe(
+          (res) => {
+            console.log('Envoi de suppression d\'avatar.');
+            this.ngOnInit();
+        },
+        (err) => {
+            console.log('Erreur ! : ' + err);
+          }
+      );
+    }//Eo if
   	
   	
   }//Eo onSubmitVerifiedMember()

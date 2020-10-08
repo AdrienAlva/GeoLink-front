@@ -6,7 +6,20 @@
 		
 		<div id="member-box" *ngFor="let member of membersToVerify; let i = index">
 			<div *ngIf="!member.isVerified">
+
 				<form  (ngSubmit)="onSubmitVerifiedMember(f)" #f="ngForm" >
+
+					<div class="avatar-block">
+						<img class="avatar" src="http://localhost:3000/uploads/{{member.avatar}}">				
+					</div>
+					<input type="hidden" name="avatarValue" value="{{member.avatar}}" [ngModel]="member.avatar">
+					<div class="form-group">
+						<label for="refusedAvatar">Refuser la photo de profil (Attention cela supprimera l'image de la base de donnée !) : </label>
+					  	<select class="form-control" name="refusedAvatar" [ngModel]="false">		  	
+						  	<option value="false" selected>-</option>
+						    <option value="true">Refuser la photo de profil</option>
+						</select>
+					</div>
 
 					<div class="form-group">
 						<label for="surname">Nom : </label>

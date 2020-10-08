@@ -12,6 +12,13 @@
 		<br>
 
 		<div class="row no-gutters justify-content-center">
+			<a class="btn btn-info account-menu-btn" routerLink="/avatar-update" *ngIf="member.hasSubmitedProfile === true">Modifier ma photo de profil</a>
+		</div>
+
+		<br>
+
+
+		<div class="row no-gutters justify-content-center">
 			<a class="btn btn-info account-menu-btn" routerLink="/update-password">Changer mon mot de passe</a>
 		</div>
 

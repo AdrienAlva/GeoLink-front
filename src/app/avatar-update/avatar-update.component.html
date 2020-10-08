@@ -1,0 +1,26 @@
+<div id="for-top-border">
+	<div class="container">
+
+		<h2>Modifier ma photo de profil</h2>
+
+		<form [formGroup]="formDataForm" (ngSubmit)="onSubmitRegisterProfile()">
+			<div class="form-group">
+				<label for="name">Photo de profil : </label>
+				<input class="form-control" type="file" name="avatar" (change)="onFileSelect($event)">
+			</div>
+
+			<div class="row no-gutters justify-content-center">
+				<input class="btn btn-primary" type="submit">
+			</div>
+		</form>
+
+		<div class="successMessage" *ngIf="this.successMessage">
+			<p>{{ successMessage }}</p>
+		</div>
+
+		<div id="home">
+			<a routerLink="/user-account">Page d'accueil utilisateur</a>	
+		</div>	
+
+	</div>
+</div>

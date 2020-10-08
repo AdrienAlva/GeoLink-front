@@ -34,5 +34,18 @@
 	color: black;
 }
 
+.avatar {
+	width: 60%;
+	margin: auto;
+  	display: block;
+}
+
+.avatar-block {
+	
+	width: 30%;	
+	margin: auto;
+	display: flex;
+}
+
 
 

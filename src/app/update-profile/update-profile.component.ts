@@ -42,7 +42,7 @@ export class UpdateProfileComponent implements OnInit {
 			      console.log('Erreur ! : ' + err);
 			    }    
 			);
-		}
+		}	
 	}//Eo onSubmitVerifiedMember()
 
 }//Eo class
