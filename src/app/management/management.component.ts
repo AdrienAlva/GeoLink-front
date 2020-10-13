@@ -67,10 +67,11 @@ export class ManagementComponent implements OnInit {
   	
   }//Eo onSubmitVerifiedMember()
 
-  onDeleteMember(accountEmail) {
+  onDeleteMember(accountEmail, avatar) {
 
-    let jsonEmail = {email: ''};
+    let jsonEmail = {email: '', avatar: ''};
     jsonEmail['email'] = accountEmail;
+    jsonEmail['avatar'] = avatar;
 
     console.log(jsonEmail);
 

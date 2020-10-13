@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-recovery',
   templateUrl: './recovery.component.html',
@@ -23,8 +24,7 @@ export class RecoveryComponent implements OnInit {
 
   initForm(){
   	this.recoveryForm = this.formBuilder.group({
-      email: '',
-      recaptchaReactive: new FormControl(null, Validators.required)
+      email: ''
     });
   }//Eo initForm()
 
@@ -35,7 +35,6 @@ export class RecoveryComponent implements OnInit {
       .subscribe(
         (res) => {
           this.errorMessage = res['message'];
-          grecaptcha.reset();
         },
         (err) => {
           console.log('Erreur ! : ' + err);
@@ -43,7 +42,4 @@ export class RecoveryComponent implements OnInit {
     );  
   }//Eo onSubmitRegisterAccount()
 
-  resolved(captchaResponse: string) {
-        console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }//Eo resolved();
 }//Eo class

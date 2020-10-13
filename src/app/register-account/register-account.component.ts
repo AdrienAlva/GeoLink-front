@@ -28,7 +28,6 @@ export class RegisterAccountComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['',[ Validators.required, Validators.minLength(8)]], 
       passwordConfirm: ['',[ Validators.required, Validators.minLength(8)]],
-      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }//Eo initForm()
 
@@ -47,7 +46,6 @@ export class RegisterAccountComponent implements OnInit {
               this.router.navigate(['profil-type']);
           } else if (res['message']) {
               this.errorMessage = res['message'];
-              grecaptcha.reset();
             }
         },
         (err) => {
@@ -55,9 +53,5 @@ export class RegisterAccountComponent implements OnInit {
         }
     );  
   }//Eo onSubmitRegisterAccount()
-
-  resolved(captchaResponse: string) {
-        console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }//Eo resolved()
 
 }//Eo class
