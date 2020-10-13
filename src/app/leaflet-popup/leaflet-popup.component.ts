@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Member } from '../models/Member.model';
+import { Member } from '../models/member.model';
 
 @Component({
   selector: 'app-leaflet-popup',

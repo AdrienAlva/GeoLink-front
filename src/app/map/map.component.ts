@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, NgZone, ElementRef, AfterViewInit } from '@angular/core'; 
 import { Router, ActivatedRoute } from '@angular/router';
-import { Member } from '../models/Member.model';
+import { Member } from '../models/member.model';
 import { MembersService } from '../services/members.service';
 import { MemberToDisplayService } from '../services/member-to-display.service';
 import { Subscription } from 'rxjs/Subscription';

@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
-import { Member } from '../models/Member.model';
+import { Member } from '../models/member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
