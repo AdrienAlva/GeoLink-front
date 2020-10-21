@@ -37,14 +37,14 @@ import { ProfilTypeComponent } from './profil-type/profil-type.component';
 import { RegisterProfileOrganizationComponent } from './register-profile-organization/register-profile-organization.component';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { AvatarUpdateComponent } from './avatar-update/avatar-update.component';
-/*import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';*/
-
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recovery', component: RecoveryComponent},
+  { path: 'recovery/:id', component: ResetPasswordComponent},
   { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
   { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
   { path: 'avatar-update', canActivate: [AuthGuardService], component: AvatarUpdateComponent},
@@ -87,7 +87,8 @@ const appRoutes: Routes = [
     UpdatePasswordComponent,
     ProfilTypeComponent,
     RegisterProfileOrganizationComponent,
-    AvatarUpdateComponent
+    AvatarUpdateComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +100,6 @@ const appRoutes: Routes = [
     RecaptchaFormsModule,
     ClickOutsideModule,
     RouterModule.forRoot(appRoutes),
-    /*FontAwesomeModule*/ 
   ],
   providers: [
     MembersService,

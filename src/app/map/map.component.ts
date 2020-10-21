@@ -42,7 +42,10 @@ export class MapComponent implements OnInit, OnDestroy {
 		popupAnchor: [1, -34]
 	});
 
-	markers = L.markerClusterGroup();
+	markers = L.markerClusterGroup({
+		spiderfyOnMaxZoom: false,
+		showCoverageOnHover: false
+	});
 
 	selectOptionsStatus: FormControl = new FormControl('all');
 	selectOptionsThematic: FormControl = new FormControl('all');

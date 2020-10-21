@@ -13,6 +13,7 @@ export class RecoveryComponent implements OnInit {
   recoveryForm: FormGroup;
 
   errorMessage: string;
+  successMessage: string;
 
   constructor(private httpClient: HttpClient,
   			  private formBuilder: FormBuilder,
@@ -34,7 +35,8 @@ export class RecoveryComponent implements OnInit {
     this.httpClient.post('http://localhost:3000/recovery', data)
       .subscribe(
         (res) => {
-          this.errorMessage = res['message'];
+          this.errorMessage = res['errorMessage'];
+          this.successMessage = res['successMessage'];
         },
         (err) => {
           console.log('Erreur ! : ' + err);
