@@ -30,11 +30,13 @@ export class ResetPasswordComponent implements OnInit {
 
 	initForm(){
 		this.updatePasswordForm = this.formBuilder.group({
-	  		password: '',
-	  		passwordConfirm: '',
+	  		password: ['',[ Validators.required, Validators.minLength(8)]],
+	  		passwordConfirm: ['',[ Validators.required, Validators.minLength(8)]],
 	  		token: this.tokenParam
 		});
 	}//Eo initForm()
+
+	get f() { return this.updatePasswordForm.controls; }
 
 	onSubmitUpdatePassword() {
 		const data = this.updatePasswordForm.value;
@@ -42,9 +44,9 @@ export class ResetPasswordComponent implements OnInit {
 		this.httpClient.post('http://localhost:3000/reset-password', data)
 		  .subscribe(
 		    (res) => {
-		     	this.errorMessage = res['errorMessage'];
 		     	this.successMessage = res['successMessage'];
 		     	this.resetting = res['resetting'];
+	     		this.errorMessage = res['errorMessage']; 	
 		    },
 		    (err) => {
 		      console.log('Erreur ! : ' + err);

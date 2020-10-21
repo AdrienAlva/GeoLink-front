@@ -25,7 +25,8 @@ export class RecoveryComponent implements OnInit {
 
   initForm(){
   	this.recoveryForm = this.formBuilder.group({
-      email: ''
+      email: '',
+      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }//Eo initForm()
 
@@ -35,8 +36,10 @@ export class RecoveryComponent implements OnInit {
     this.httpClient.post('http://localhost:3000/recovery', data)
       .subscribe(
         (res) => {
+          console.log(res)
           this.errorMessage = res['errorMessage'];
           this.successMessage = res['successMessage'];
+          grecaptcha.reset();
         },
         (err) => {
           console.log('Erreur ! : ' + err);
