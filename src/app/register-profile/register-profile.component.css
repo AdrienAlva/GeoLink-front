@@ -18,6 +18,17 @@
 	margin-right: 20px;
 }
 
+input[type="radio"] { 
+  margin-right: 5px;
+  /*Pour espacer le boutton et le texte de label*/
+}
+
+#avatar-input {
+	border-bottom: rgba(57, 140, 133, 1) dotted 2px;
+	padding-bottom: 3%;
+}
+
+
 #home {
 	text-decoration: underline;
 	text-align: center;
@@ -30,4 +41,5 @@
 
 #map {
 	height: 30vh;
+	cursor: crosshair; 
 }

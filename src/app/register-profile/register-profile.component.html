@@ -17,7 +17,7 @@
 
 				<div class="form-group">
 					<label for="status">Statut: </label>
-					<select class="form-control" name="status" formControlName="status">
+					<select class="form-control" name="status" formControlName="status" (change)="onClickStatus($event.target.value)">
 					    <option value="">-- Statut --</option>
 					    <option value="Etudiant du master TELENVI">Etudiant du master TELENVI</option>
 					    <option value="Doctorant">Doctorant</option>
@@ -25,6 +25,19 @@
 					    <option value="Enseignant-Chercheur">Enseignant-Chercheur</option>
 					    <option value="Professionnel">Professionnel</option>
 					</select>
+				</div>
+
+				<div class="form-group" *ngIf="formerStudentInput == true">
+					<p>Êtes vous un ancien étudiant du master TELENVI ?</p>
+					<div>
+						<input type="radio" id="former-student" name="former" value="true" formControlName="former">
+						<label for="former-student">Oui</label>
+					</div>
+
+					<div>
+						<input type="radio" id="not-former-student" name="former" value="false" formControlName="former">
+						<label for="not-former-student">Non</label>
+					</div>
 				</div>
 
 				<p >Thématiques de travail :</p>
@@ -173,7 +186,7 @@
 					<input class="form-control" type="url" name="site" formControlName="site">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="avatar-input">
 					<label for="name">Photo de profil : </label>
 					<input class="form-control" type="file" name="avatar" (change)="onFileSelect($event)">
 				</div>

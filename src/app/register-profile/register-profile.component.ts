@@ -15,6 +15,10 @@ export class RegisterProfileComponent implements OnInit {
 
 	map;
 
+	/*Display boolean*/
+	formerStudentInput: boolean = false;
+	/*END*/
+
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
 		iconUrl: '../assets/icons/member.png',
 		iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
@@ -62,6 +66,7 @@ export class RegisterProfileComponent implements OnInit {
 	  		thematic5: '',
 	  		about: '',
 	  		site: '',
+	  		former:'',
 	  		avatar: ['']
 		});
 	}//Eo initForm()
@@ -102,6 +107,18 @@ export class RegisterProfileComponent implements OnInit {
 	      this.registerProfileForm.get('avatar').setValue(file);
 	    }
   	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
+
+  	onClickStatus(status){
+  		if(status == 'Etudiant du master TELENVI') {
+  			console.log('Etudiant TELENVI'); 
+
+  			this.formerStudentInput = false;
+  		} else {
+  			console.log('Others status');
+
+  			this.formerStudentInput = true;
+  		}
+  	}//Eo onClickStatus()
 
 	createMap() {
 
