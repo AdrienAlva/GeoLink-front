@@ -18,6 +18,19 @@
 	margin-right: 20px;
 }
 
+#status-data {
+	border: rgba(57, 140, 133, 1) dotted 2px;
+	padding: 1%;
+	padding-bottom: 0;
+	margin-bottom: 1%;
+}
+
+#status-data-title {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: rgba(57, 140, 133, 1);
+}
+
 input[type="radio"] { 
   margin-right: 5px;
   /*Pour espacer le boutton et le texte de label*/

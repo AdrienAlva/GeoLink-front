@@ -1,5 +1,5 @@
 
-<form id="searchForm" [formGroup]="searchForm" (ngSubmit)="onSearchMember()" class="row no-gutters justify-content-center">
+<form [formGroup]="searchForm" (ngSubmit)="onSearchMember()" class="row no-gutters justify-content-center">
     <input type="search" class="search-bar form-control" 
     placeholder="Rechercher un membre..."
     formControlName="keyWord" 
@@ -10,7 +10,7 @@
 <div id="result" *ngIf="results.length > 0 || noResultDisplay === true" (clickOutside)="onClickedOutside($event)">
 	
 	<div *ngFor="let result of results; let i = index">
-		<div class="card" *ngIf="result != null" class="result-box">
+		<div class="card" *ngIf="result != null">
 		  <div class="card-header" >
 		    {{ result.status }}
 		  </div>

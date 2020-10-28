@@ -39,8 +39,7 @@ export class RegisterProfileComponent implements OnInit {
 
 		let layerGroup = L.layerGroup().addTo(this.map);
 
-		this.map.on("click", e => {
-	      	console.log(e.latlng); 
+		this.map.on("click", e => { 
 	      		
         	layerGroup.clearLayers(); 
     		
@@ -57,6 +56,8 @@ export class RegisterProfileComponent implements OnInit {
 	  		surname: '',
 	  		name: '',
 	  		status: '',
+	  		contract: '',
+	  		environment: '',
 	  		lat: null,
 	  		lng: null,
 	  		thematic1: '',
@@ -74,6 +75,8 @@ export class RegisterProfileComponent implements OnInit {
 	onSubmitRegisterProfile() {
 
 	  	const registerData = this.registerProfileForm.value;
+
+	  	console.log(registerData);
 	  	
 	  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
@@ -92,8 +95,6 @@ export class RegisterProfileComponent implements OnInit {
     	const formData = new FormData();
     	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
 
-		console.log(formData);
-
     	this.httpClient.post('http://localhost:3000/upload-avatar', formData).subscribe(
       		(res) => console.log(res),
       		(err) => console.log(err)
@@ -109,13 +110,9 @@ export class RegisterProfileComponent implements OnInit {
   	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
 
   	onClickStatus(status){
-  		if(status == 'Etudiant du master TELENVI') {
-  			console.log('Etudiant TELENVI'); 
-
+  		if(status == 'Etudiant du master TELENVI' || status == '') {
   			this.formerStudentInput = false;
   		} else {
-  			console.log('Others status');
-
   			this.formerStudentInput = true;
   		}
   	}//Eo onClickStatus()

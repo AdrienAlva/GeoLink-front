@@ -21,7 +21,6 @@ export class UserAccountComponent implements OnInit {
 		this.httpClient.get('http://localhost:3000/user-account').subscribe(
 			(data: any) => {
 				this.members = data;
-				console.log(this.members);
 			}
 		);
 	}//Eo ngOnInit()

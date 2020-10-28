@@ -27,16 +27,50 @@
 					</select>
 				</div>
 
-				<div class="form-group" *ngIf="formerStudentInput == true">
-					<p>Êtes vous un ancien étudiant du master TELENVI ?</p>
-					<div>
-						<input type="radio" id="former-student" name="former" value="true" formControlName="former">
-						<label for="former-student">Oui</label>
+				<div id="status-data" *ngIf="formerStudentInput == true">
+					<h3 id="status-data-title">Quelques informations supplémentaires sur votre statut :</h3>
+					<div class="form-group">
+						<p>Êtes vous un ancien étudiant du master TELENVI ?</p>
+						<div>
+							<input type="radio" id="former-student" name="former" value="true" formControlName="former">
+							<label for="former-student">Oui</label>
+						</div>
+
+						<div>
+							<input type="radio" id="not-former-student" name="former" value="false" formControlName="former">
+							<label for="not-former-student">Non</label>
+						</div>
 					</div>
 
-					<div>
-						<input type="radio" id="not-former-student" name="former" value="false" formControlName="former">
-						<label for="not-former-student">Non</label>
+					<div class="form-group">
+						<p>Type de votre contrat ? (ne sera pas affiché publiquement sur l'annuaire)</p>
+						<div>
+							<input type="radio" id="cdd" name="contract" value="cdd" formControlName="contract">
+							<label for="cdd">CDD</label>
+						</div>
+
+						<div>
+							<input type="radio" id="cdi" name="contract" value="cdi" formControlName="contract">
+							<label for="cdi">CDI</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<p>Type de votre milieu professionnel ? (ne sera pas affiché publiquement sur l'annuaire)</p>
+						<div>
+							<input type="radio" id="public" name="environment" value="public" formControlName="environment">
+							<label for="public">Public</label>
+						</div>
+
+						<div>
+							<input type="radio" id="privé" name="environment" value="privé" formControlName="environment">
+							<label for="privé">Privé</label>
+						</div>
+
+						<div>
+							<input type="radio" id="mixte" name="environment" value="mixte" formControlName="environment">
+							<label for="mixte">Mixte</label>
+						</div>
 					</div>
 				</div>
 
