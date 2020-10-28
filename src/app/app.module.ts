@@ -19,6 +19,7 @@ import { MemberToDisplayService } from './services/member-to-display.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthService } from './services/auth.service';
+import { StatisticsService } from './services/statistics.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterProfileComponent } from './register-profile/register-profile.component';
 import { RegisterAccountComponent } from './register-account/register-account.component';
@@ -38,6 +39,7 @@ import { RegisterProfileOrganizationComponent } from './register-profile-organiz
 import { ClickOutsideModule } from 'ng-click-outside';
 import { AvatarUpdateComponent } from './avatar-update/avatar-update.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { StatsComponent } from './stats/stats.component';
 
 
 const appRoutes: Routes = [
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'admin-panel', canActivate: [AuthGuardAdminService], component: AdminPanelComponent},
   { path: 'management', canActivate: [AuthGuardAdminService], component: ManagementComponent},
   { path: 'validation', canActivate: [AuthGuardAdminService], component: ValidationComponent},
+  { path: 'stats', canActivate: [AuthGuardAdminService], component: StatsComponent},
   { path: '', component: MapComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
@@ -88,7 +91,8 @@ const appRoutes: Routes = [
     ProfilTypeComponent,
     RegisterProfileOrganizationComponent,
     AvatarUpdateComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +110,7 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuardService,
     AuthGuardAdminService,
+    StatisticsService,
     MemberToDisplayService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     {

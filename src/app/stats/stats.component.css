@@ -13,12 +13,6 @@
 	margin-bottom: 3%;
 }
 
-#for-top-border .btn {
-	margin-top: 1.5%;
-	margin-bottom: 1.5%;
-	margin-right: 20px;
-}
-
 #home {
 	text-decoration: underline;
 	text-align: center;
@@ -29,6 +23,15 @@
 	color: black;
 }
 
-.btn-admin {
-	width: 30%;
+.graph-box {
+	width: 300px;
+}
+
+.graph-box h3 {
+	font-size: 1.5em;
+}
+
+#statusLegend {
+	width: 300px;
+	text-align: left;
 }
