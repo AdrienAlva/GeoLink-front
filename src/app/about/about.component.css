@@ -1,0 +1,118 @@
+
+#for-top-border {
+	border-top: rgba(57, 140, 133, 1) solid 3vh;
+	background-image: url("/../assets/4.jpg");
+}
+
+#for-top-border h2 {
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
+
+.container {
+	border: rgba(230, 230, 230, 1) solid 1px;
+	background-color: white;
+
+}
+
+#title {
+	text-align: center;
+	font-weight: bold;
+}
+
+#logo-about {
+	display: block;
+	width: 300px;
+	margin: auto;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+#about-content {
+	font-size: 1.2em;
+	text-align: justify;
+	padding: 2%;
+}
+
+#about-content a {
+	text-decoration: none;
+	color: rgba(57, 140, 133, 1);
+	font-weight: bold;
+}
+
+#title-gaed {
+	font-weight: bold;
+	font-size: 1.3em;
+	text-align: center;
+}
+
+#title-telenvi {
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+#logo-container{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5%;
+	margin-bottom: 3%;
+}
+
+#logo-rennes2 {
+	width: 100px;
+	height: 100px;
+	display: block;
+}
+
+#logo-agro{
+	display: block;
+}
+
+#home {
+	text-decoration: underline;
+	text-align: center;
+	margin-bottom: 1%;
+}
+
+#home a {
+	color: black;
+}
+
+@media (max-width: 992px) {
+
+	#title-gaed {
+		font-weight: bold;
+		font-size: 1.2em;
+		text-align: center;
+	}
+
+	#title-telenvi {
+		font-weight: bold;
+		font-size: 1.em;
+		text-align: center;
+	}
+
+	#logo-container{
+		display: flex;
+		flex-direction: column;
+		margin-top: 5%;
+		margin-bottom: 3%;
+	}
+
+	#logo-rennes2 {
+		display: block;
+		height: 40%;
+		margin: auto; 
+		margin-bottom: 8%;
+		margin-top: 6%;
+	}
+
+	#logo-agro{
+		display: block;
+		width: 100%;
+		margin: auto;
+	}
+
+
+}/* Eo @media (max-width: 992px) */

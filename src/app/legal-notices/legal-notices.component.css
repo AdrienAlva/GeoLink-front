@@ -8,12 +8,6 @@
 	margin-bottom: 3%;
 }
 
-#for-top-border .btn {
-	margin-top: 1.5%;
-	margin-bottom: 1.5%;
-	margin-right: 20px;
-}
-
 .container {
 	border: rgba(230, 230, 230, 1) solid 1px;
 
@@ -29,4 +23,6 @@
 
 }
 
-
+h4 {
+	font-size: 1.3em;
+}

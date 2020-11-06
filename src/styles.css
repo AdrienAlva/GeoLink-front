@@ -105,6 +105,18 @@ app-search-bar {
   width: 33.3%;
 }
 
+.about-button {
+  background-color: rgba(57, 140, 133, 1);
+}
+
+.about-button:hover, .about-button:focus, .about-button:active {
+  background-color: rgba(57, 140, 133, 0.7) !important;
+}
+
+.btn-outline-dark:hover, .btn-outline-dark:focus, .btn-outline-dark:active {
+  background-color: rgba(57, 140, 133, 0.7) !important;
+}
+
 .custom-select {
     margin-right: 2px;
     width: 20% !important;
@@ -203,7 +215,12 @@ app-search-bar {
     margin-top: 2%;
   }
 
-  .btn-outline-dark{
+  .btn-outline-dark {
+    width: 80%;
+    margin-bottom: 2px;
+  }
+
+  .about-button{
     width: 80%;
     margin-bottom: 2px;
   }
@@ -260,7 +277,19 @@ app-search-bar {
     width: 80% !important;
   }
 
-}/* Eo @media (max-width: 576px)*/
+}/* Eo @media (max-width: 992px)*/
+
+@media (min-width: 993px) and (max-width: 1175px) {
+
+  app-search-bar {
+    width: 25%;
+  }
+
+  #logo-link{
+    height: 8vh;
+    width: 33.3%;
+  }
+}/* Eo @media (min-width: 993px) and (max-width: 1175px)*/
 
 /* Scrolling bars */
 /* width */

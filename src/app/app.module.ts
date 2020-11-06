@@ -40,12 +40,16 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { AvatarUpdateComponent } from './avatar-update/avatar-update.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { StatsComponent } from './stats/stats.component';
+import { LegalNoticesComponent } from './legal-notices/legal-notices.component';
+import { AboutComponent } from './about/about.component';
 
 
 const appRoutes: Routes = [
   { path: 'member/profile/:id', component: SingleProfileComponent},
   { path: 'login', component: LoginComponent},
   { path: 'recovery', component: RecoveryComponent},
+  { path: 'mentions-legales', component: LegalNoticesComponent},
+  { path: 'about', component: AboutComponent},
   { path: 'recovery/:id', component: ResetPasswordComponent},
   { path: 'user-account', canActivate: [AuthGuardService], component: UserAccountComponent},
   { path: 'update-profile', canActivate: [AuthGuardService], component: UpdateProfileComponent},
@@ -92,7 +96,9 @@ const appRoutes: Routes = [
     RegisterProfileOrganizationComponent,
     AvatarUpdateComponent,
     ResetPasswordComponent,
-    StatsComponent
+    StatsComponent,
+    LegalNoticesComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
