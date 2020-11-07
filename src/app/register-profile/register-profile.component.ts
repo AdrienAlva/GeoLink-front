@@ -39,9 +39,6 @@ export class RegisterProfileComponent implements OnInit {
 		
 		this.initForm();
 
-
-
-
 	}//Eo ngOnInit()
 
 	initForm(){
@@ -50,8 +47,6 @@ export class RegisterProfileComponent implements OnInit {
 				  		surname: '',
 				  		name: '',
 				  		status: '',
-				  		contract: '',
-				  		environment: '',
 				  		lat: null,
 				  		lng: null,
 				  		thematic1: '',
