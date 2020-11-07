@@ -8,7 +8,7 @@ export class Member {
 				public lng: number,
 				public thematics: string[],
 				public status: string,
-				public email: string,
+				public emailToDisplay: string,
 				public password: string,
 				public about: string,
 				public avatar: string,

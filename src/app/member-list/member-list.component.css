@@ -23,6 +23,18 @@ ul {
  	margin-bottom: 2px;
 }
 
+.card{
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.card-header{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.card-body{
+	text-align: center;
+}
+
 .avatar {
 	height: 16%;
 	width: 12%;
@@ -46,7 +58,7 @@ ul {
         display: block;
         padding: .4em .4em .4em 2em;
         margin-bottom: 0.5em;
-        background: #ddd;
+        background: rgba(57, 140, 133, 0.5);
         color: #444;
         text-decoration: none;
         border-radius: .3em;   

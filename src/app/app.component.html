@@ -12,23 +12,23 @@
 		    <ul class="navbar-nav">
 
 	    	  <li class="nav-item" style="margin-right: 4px;">
-		        <a class="btn btn-dark about-button"  routerLink="/about">Qui sommes-nous ?</a>
+		        <a class="btn btn-dark about-button font-reduce"  routerLink="/about">Qui sommes-nous ?</a>
 		      </li>
 		     
 		      <li class="nav-item" style="margin-right: 2px;">
-		        <a class="btn btn-outline-dark"  routerLink="/register-account" *ngIf="!authService.isConnected() || authService.isExpired()">S'inscrire</a>
+		        <a class="btn btn-outline-dark font-reduce"  routerLink="/register-account" *ngIf="!authService.isConnected() || authService.isExpired()">S'inscrire</a>
 		      </li>
 
 		      <li class="nav-item" style="margin-right: 2px;">
-		        <a class="btn btn-outline-dark" routerLink="/user-account" *ngIf="authService.isConnected() && !authService.isExpired()">Compte utilisateur</a>
+		        <a class="btn btn-outline-dark font-reduce" routerLink="/user-account" *ngIf="authService.isConnected() && !authService.isExpired()">Compte utilisateur</a>
 		      </li>
 
-		      <li class="nav-item">
-		        <a class="btn btn-outline-dark" routerLink="/login" *ngIf="!authService.isConnected() || authService.isExpired()">Se connecter</a>
+		      <li class="nav-item" style="margin-right: 2px;">
+		        <a class="btn btn-outline-dark font-reduce" routerLink="/login" *ngIf="!authService.isConnected() || authService.isExpired()">Se connecter</a>
 		      </li>
 
-		      <li class="nav-item">
-		        <a class="btn btn-outline-dark" routerLink="/" (click)="onLogout()" *ngIf="authService.isConnected() && !authService.isExpired()">Déconnexion</a>
+		      <li class="nav-item" style="margin-right: 2px;">
+		        <a class="btn btn-outline-dark font-reduce" routerLink="/" (click)="onLogout()" *ngIf="authService.isConnected() && !authService.isExpired()">Déconnexion</a>
 		      </li>
 		    </ul>
 	  </div>
@@ -56,6 +56,8 @@
 			<a href="https://github.com/AdrienAlva"><img id="githubLogo" src="../assets/images/github.png"></a>
 			<p>-</p>
 			<a id="mentions" routerLink="/mentions-legales">Mentions légales</a>
+			<p>-</p>
+			<a id="attribution" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
 
 		</div>
 	</div>	

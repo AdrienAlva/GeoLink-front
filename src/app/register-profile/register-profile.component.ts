@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Member } from '../models/member.model';
+import { map } from 'rxjs/Operators';
 import * as L from 'leaflet';
 
 @Component({
@@ -12,6 +14,8 @@ import * as L from 'leaflet';
 export class RegisterProfileComponent implements OnInit {
 
 	registerProfileForm: FormGroup;
+
+	email: any;
 
 	map;
 
@@ -35,41 +39,64 @@ export class RegisterProfileComponent implements OnInit {
 		
 		this.initForm();
 
-		this.createMap();
 
-		let layerGroup = L.layerGroup().addTo(this.map);
 
-		this.map.on("click", e => { 
-	      		
-        	layerGroup.clearLayers(); 
-    		
-    		let myMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.memberIcon}).addTo(layerGroup);
-    		this.map.addLayer(layerGroup);
 
-    		this.registerProfileForm.controls['lat'].setValue(e.latlng.lat);
-    		this.registerProfileForm.controls['lng'].setValue(e.latlng.lng);
-	    });
 	}//Eo ngOnInit()
 
 	initForm(){
-		this.registerProfileForm = this.formBuilder.group({
-	  		surname: '',
-	  		name: '',
-	  		status: '',
-	  		contract: '',
-	  		environment: '',
-	  		lat: null,
-	  		lng: null,
-	  		thematic1: '',
-	  		thematic2: '',
-	  		thematic3: '',
-	  		thematic4: '',
-	  		thematic5: '',
-	  		about: '',
-	  		site: '',
-	  		former:'',
-	  		avatar: ['']
-		});
+
+	    			this.registerProfileForm = this.formBuilder.group({
+				  		surname: '',
+				  		name: '',
+				  		status: '',
+				  		contract: '',
+				  		environment: '',
+				  		lat: null,
+				  		lng: null,
+				  		thematic1: '',
+				  		thematic2: '',
+				  		thematic3: '',
+				  		thematic4: '',
+				  		thematic5: '',
+				  		about: '',
+				  		emailToDisplay: '',
+				  		site: '',
+				  		former:'',
+				  		avatar: ['']
+					});
+
+		this.httpClient.get('http://localhost:3000/user-account')
+			.subscribe(
+			    (res: any) => {
+			    	
+			    	this.email = JSON.stringify(res, ['email']).replace('[{"email":"', '').replace('"}]', '');
+			    	
+			    	console.log(' 1 - email is : ' + this.email); 
+
+			    	this.registerProfileForm.patchValue({emailToDisplay: this.email});// patch value to update registerProfileForm after his init.
+
+					this.createMap();
+
+					let layerGroup = L.layerGroup().addTo(this.map);
+
+					this.map.on("click", e => { 
+			      		
+			        	layerGroup.clearLayers(); 
+			    		
+			    		let myMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.memberIcon}).addTo(layerGroup);
+			    		this.map.addLayer(layerGroup);
+
+			    		this.registerProfileForm.controls['lat'].setValue(e.latlng.lat);
+			    		this.registerProfileForm.controls['lng'].setValue(e.latlng.lng);
+	    			});
+
+			    },
+			    (err) => {
+		      		console.log('Erreur ! : ' + err);
+			    }    
+			);
+
 	}//Eo initForm()
 
 	onSubmitRegisterProfile() {

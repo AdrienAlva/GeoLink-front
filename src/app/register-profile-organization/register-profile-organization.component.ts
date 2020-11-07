@@ -13,6 +13,8 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 
 	registerProfileForm: FormGroup;
 
+	email: any;
+
 	map;
 
 	memberIcon = new L.Icon({  // Instance de l'icon pour le marker.
@@ -28,23 +30,9 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 				  private router: Router) { }
 
 	ngOnInit(): void {
+		
 		this.initForm();
 
-		this.createMap();
-
-		let layerGroup = L.layerGroup().addTo(this.map);
-
-		this.map.on("click", e => {
-	      	console.log(e.latlng); 
-	      		
-        	layerGroup.clearLayers(); 
-    		
-    		let myMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.memberIcon}).addTo(layerGroup);
-    		this.map.addLayer(layerGroup);
-
-    		this.registerProfileForm.controls['lat'].setValue(e.latlng.lat);
-    		this.registerProfileForm.controls['lng'].setValue(e.latlng.lng);
-	    });
 	}//Eo ngOnInit()
 
 	initForm(){
@@ -60,9 +48,42 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 	  		thematic4: '',
 	  		thematic5: '',
 	  		about: '',
+	  		emailToDisplay: '',
 	  		site: '',
 	  		avatar: ['']
 		});
+
+
+		this.httpClient.get('http://localhost:3000/user-account')
+			.subscribe(
+			    (res: any) => {
+			    	
+			    	this.email = JSON.stringify(res, ['email']).replace('[{"email":"', '').replace('"}]', '');
+			    	
+			    	console.log(' 1 - email is : ' + this.email); 
+
+			    	this.registerProfileForm.patchValue({emailToDisplay: this.email});// patch value to update registerProfileForm after his init.
+
+					this.createMap();
+
+					let layerGroup = L.layerGroup().addTo(this.map);
+
+					this.map.on("click", e => { 
+			      		
+			        	layerGroup.clearLayers(); 
+			    		
+			    		let myMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.memberIcon}).addTo(layerGroup);
+			    		this.map.addLayer(layerGroup);
+
+			    		this.registerProfileForm.controls['lat'].setValue(e.latlng.lat);
+			    		this.registerProfileForm.controls['lng'].setValue(e.latlng.lng);
+	    			});
+
+			    },
+			    (err) => {
+		      		console.log('Erreur ! : ' + err);
+			    }    
+			);
 	}//Eo initForm()
 
 	onSubmitRegisterProfile() {

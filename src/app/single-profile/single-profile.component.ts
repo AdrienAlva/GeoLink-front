@@ -68,10 +68,11 @@ export class SingleProfileComponent implements OnInit {
 	createMap() {
 		console.log('createMap')
 
+
 		const zoomLevel = 8; // niveau de zoom initial.
 
 		this.map = L.map('map', { //Instance de l'objet map.
-			center: [this.members[this.memberId].lat, this.members[this.memberId].lng],
+			center: [this.members[this.memberId]?.lat, this.members[this.memberId]?.lng],
 			zoom: zoomLevel,
 			layers: []
 		});

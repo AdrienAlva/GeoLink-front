@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -29,7 +29,7 @@ export class RegisterAccountComponent implements OnInit {
       password: ['',[ Validators.required, Validators.minLength(8)]], 
       passwordConfirm: ['',[ Validators.required, Validators.minLength(8)]],
       recaptchaReactive: new FormControl(null, Validators.required)
-    });
+    },{validator: this.passwordConfirming});
   }//Eo initForm()
 
   get f() { return this.registerAccountForm.controls; }
@@ -55,5 +55,12 @@ export class RegisterAccountComponent implements OnInit {
         }
     );  
   }//Eo onSubmitRegisterAccount()
+
+    passwordConfirming(c: AbstractControl): { invalid: boolean } {
+      if (c.get('password').value !== c.get('passwordConfirm').value) {
+          return {invalid: true};
+      }
+    }
+
 
 }//Eo class

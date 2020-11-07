@@ -173,6 +173,14 @@ app-search-bar {
   text-decoration: underline;
   color: black;
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+#attribution {
+  text-decoration: underline;
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -279,15 +287,20 @@ app-search-bar {
 
 }/* Eo @media (max-width: 992px)*/
 
-@media (min-width: 993px) and (max-width: 1175px) {
+@media (min-width: 993px) and (max-width: 1400px) {
 
   app-search-bar {
-    width: 25%;
+    width: 30%;
+    font-size: 0.9em;
   }
 
   #logo-link{
     height: 8vh;
-    width: 33.3%;
+    width: 25%;
+  }
+
+  .font-reduce {
+    font-size: 0.9em;
   }
 }/* Eo @media (min-width: 993px) and (max-width: 1175px)*/
 
