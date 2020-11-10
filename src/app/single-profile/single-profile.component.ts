@@ -4,6 +4,7 @@ import { Member } from '../models/member.model';
 import { MembersService } from '../services/members.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import {AppSettings } from '../app.settings';
 import * as L from 'leaflet';
 
 @Component({
@@ -17,6 +18,8 @@ export class SingleProfileComponent implements OnInit {
 	memberSubscription: Subscription;
 
 	memberId: number;
+
+	apiRoute: string = AppSettings.API_ENDPOINT;
 
 	/* single profile map var*/
 

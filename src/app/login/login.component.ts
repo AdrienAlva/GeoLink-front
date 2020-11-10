@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtModule } from "@auth0/angular-jwt";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
   	const loginData = this.loginForm.value;
   	
-  	this.httpClient.post('http://localhost:3000/login', loginData)
+  	this.httpClient.post(AppSettings.API_ENDPOINT + '/login', loginData)
   		.subscribe(
   	    (res) => {
     	    if (res['token']) {

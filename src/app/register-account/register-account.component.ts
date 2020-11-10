@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class RegisterAccountComponent implements OnInit {
   onSubmitRegisterAccount() {
     const registerAccountData = this.registerAccountForm.value;
 
-    this.httpClient.post('http://localhost:3000/register-account', registerAccountData)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/register-account', registerAccountData)
       .subscribe(
         (res) => {
           console.log('Enregistrement du token !');

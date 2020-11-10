@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-recovery',
@@ -33,7 +34,7 @@ export class RecoveryComponent implements OnInit {
   onSubmitRecovery() {
     const data = this.recoveryForm.value;
 
-    this.httpClient.post('http://localhost:3000/recovery', data)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/recovery', data)
       .subscribe(
         (res) => {
           console.log(res)

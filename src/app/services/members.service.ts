@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/member.model';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import {AppSettings } from '../app.settings';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class MembersService {
   constructor(private httpClient: HttpClient) { }
 
   nodeRequest(){
-    return this.httpClient.get('http://localhost:3000/verified-members');
+    console.log(AppSettings.API_ENDPOINT);
+    return this.httpClient.get((AppSettings.API_ENDPOINT + '/verified-members'));
   }//Eo nodeRequest()
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.

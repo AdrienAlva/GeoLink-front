@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-admin-login',
@@ -33,7 +34,7 @@ export class AdminLoginComponent implements OnInit {
   onSubmitLogin() {
   	const loginData = this.loginForm.value;
   	
-  	this.httpClient.post('http://localhost:3000/admin-login', loginData)
+  	this.httpClient.post(AppSettings.API_ENDPOINT + '/admin-login', loginData)
   		.subscribe(
   	    (res) => {
   	      console.log('Enregistrement du token !');

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class UpdatePasswordComponent implements OnInit {
   onSubmitUpdatePassword() {
     const data = this.updatePasswordForm.value;
 
-    this.httpClient.post('http://localhost:3000/update-password', data)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/update-password', data)
       .subscribe(
         (res) => {
          	this.errorMessage = res['message'];

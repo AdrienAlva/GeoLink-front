@@ -4,6 +4,7 @@ import { Member } from '../models/member.model';
 import { MembersService } from '../services/members.service';
 import { MemberToDisplayService } from '../services/member-to-display.service';
 import { Subscription } from 'rxjs/Subscription';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-member-list',
@@ -13,6 +14,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class MemberListComponent implements OnInit {
 
   @Input() selectedCategory: string;
+
+  apiRoute: string = AppSettings.API_ENDPOINT;
   
 
   constructor(private membersService: MembersService,

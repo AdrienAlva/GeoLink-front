@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-management',
@@ -14,13 +15,15 @@ export class ManagementComponent implements OnInit {
 
   updateMemberForm: FormGroup;
 
+  apiRoute: string = AppSettings.API_ENDPOINT;
+
   constructor(private httpClient: HttpClient,
   			      private formBuilder: FormBuilder,
 		          private router: Router) { }
 
   ngOnInit(): void {
   	
-  	this.httpClient.get('http://localhost:3000/members-management').subscribe(
+  	this.httpClient.get(AppSettings.API_ENDPOINT + '/members-management').subscribe(
   		(data: any) => {
   			this.members = data;
   		}
@@ -34,7 +37,7 @@ export class ManagementComponent implements OnInit {
 
   	var res = confirm("Êtes-vous sûr de vouloir modifier les données du compte dont l'adresse email associée est : " + data.email + " ?");
     if(res){
-        this.httpClient.post('http://localhost:3000/update', data)
+        this.httpClient.post(AppSettings.API_ENDPOINT + '/update', data)
 	  		.subscribe(
 	  	    (res) => {
 	    	    console.log('Envoi de la requête de modification de profil.');
@@ -52,7 +55,7 @@ export class ManagementComponent implements OnInit {
       jsonEmail['email'] = data.email;
       jsonEmail['avatar'] = data.avatarValue;
 
-      this.httpClient.post('http://localhost:3000/delete-avatar', jsonEmail)
+      this.httpClient.post(AppSettings.API_ENDPOINT + '/delete-avatar', jsonEmail)
         .subscribe(
           (res) => {
             console.log('Envoi de suppression d\'avatar.');
@@ -77,7 +80,7 @@ export class ManagementComponent implements OnInit {
 
     var res = confirm("Êtes-vous sûr de vouloir supprimer le compte dont l'adresse email associée est : " + accountEmail + " ?");
     if(res){
-        this.httpClient.post('http://localhost:3000/delete', jsonEmail)
+        this.httpClient.post(AppSettings.API_ENDPOINT + '/delete', jsonEmail)
       	.subscribe(
 	        (res) => {
 	          console.log('Envoi de la requête de suppression du compte.');

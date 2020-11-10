@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class UpdateProfileComponent implements OnInit {
 			  	private router: Router) { }
 
 	ngOnInit(): void {
-		this.httpClient.get('http://localhost:3000/update-profile').subscribe(
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/update-profile').subscribe(
 	  		(data: any) => {
 	  			this.memberToUpdate = data;
 	  		}
@@ -33,7 +34,7 @@ export class UpdateProfileComponent implements OnInit {
 		
   		var res = confirm("Êtes-vous certains de vouloir procéder à ces modifications ?");
 		if(res){
-			this.httpClient.post('http://localhost:3000/update-profile', data)
+			this.httpClient.post(AppSettings.API_ENDPOINT + '/update-profile', data)
 			.subscribe(
 			    (res) => {
 			     	this.successMessage = res['message'];

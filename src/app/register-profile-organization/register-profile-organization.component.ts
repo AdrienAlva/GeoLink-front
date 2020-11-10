@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 import * as L from 'leaflet';
 
 @Component({
@@ -54,7 +55,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 		});
 
 
-		this.httpClient.get('http://localhost:3000/user-account')
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/user-account')
 			.subscribe(
 			    (res: any) => {
 			    	
@@ -91,7 +92,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
   	
   	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
-			this.httpClient.post('http://localhost:3000/register-profile-organization', registerData)
+			this.httpClient.post(AppSettings.API_ENDPOINT + '/register-profile-organization', registerData)
 			.subscribe(
 			    (res) => {
 			      console.log('Envoi de la demande de création de profil !');
@@ -108,7 +109,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 
 		console.log(formData);
 
-    	this.httpClient.post('http://localhost:3000/upload-avatar', formData).subscribe(
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/upload-avatar', formData).subscribe(
       		(res) => console.log(res),
       		(err) => console.log(err)
     	);//req for avatar upload

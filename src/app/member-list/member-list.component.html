@@ -18,7 +18,7 @@
 								<li *ngIf="member.thematics[3]"> {{ member.thematics[3] }}</li>
 								<li class="last-li" *ngIf="member.thematics[4]"> {{ member.thematics[4] }}</li>
 							</ul>
-							<img class="avatar" src="http://localhost:3000/uploads/{{member.avatar}}">
+							<img class="avatar" src="{{this.apiRoute}}/uploads/{{member.avatar}}">
 						</div>
 
 						<div class="profile-button row no-gutters justify-content-center">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-reset-password',
@@ -41,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
 	onSubmitUpdatePassword() {
 		const data = this.updatePasswordForm.value;
 
-		this.httpClient.post('http://localhost:3000/reset-password', data)
+		this.httpClient.post(AppSettings.API_ENDPOINT + '/reset-password', data)
 		  .subscribe(
 		    (res) => {
 		     	this.successMessage = res['successMessage'];

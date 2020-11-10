@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-avatar-update',
@@ -35,7 +36,7 @@ export class AvatarUpdateComponent implements OnInit {
 
 		console.log(formData);
 
-    	this.httpClient.post('http://localhost:3000/upload-avatar', formData).subscribe(
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/upload-avatar', formData).subscribe(
       		(res) => this.successMessage = res['message'],
       		(err) => console.log(err)
     	);//req for avatar upload

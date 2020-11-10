@@ -10,12 +10,12 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   constructor() { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
     console.log("Interception In Progress"); //SECTION 1
     const token: string = localStorage.getItem('token');
     req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     if (req.body instanceof FormData) {
-/*        req = req.clone({ headers: req.headers.set('Content-Type', 'multipart/form-data')});
+/*      req = req.clone({ headers: req.headers.set('Content-Type', 'multipart/form-data')});
         req = req.clone({ headers: req.headers.set('Accept', 'multipart/form-data') });*/
     } else {
         req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});

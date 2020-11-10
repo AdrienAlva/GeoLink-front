@@ -5,6 +5,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {AppSettings } from '../app.settings';
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -26,7 +27,7 @@ export class AuthGuardAdminService {
   			return false;
 		}
 
-		return this.httpClient.get('http://localhost:3000/admin-login').map((res)=>{
+		return this.httpClient.get(AppSettings.API_ENDPOINT + '/admin-login').map((res)=>{
 			if(res['value'] == 'true'){
 				this.isad = true;
 				if (refToken && !isExpired && this.isad) {
