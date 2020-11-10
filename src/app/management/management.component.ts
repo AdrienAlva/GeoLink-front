@@ -23,7 +23,7 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit(): void {
   	
-  	this.httpClient.get(AppSettings.API_ENDPOINT + '/members-management').subscribe(
+  	this.httpClient.get(AppSettings.API_ENDPOINT + '/api/members-management').subscribe(
   		(data: any) => {
   			this.members = data;
   		}
@@ -37,7 +37,7 @@ export class ManagementComponent implements OnInit {
 
   	var res = confirm("Êtes-vous sûr de vouloir modifier les données du compte dont l'adresse email associée est : " + data.email + " ?");
     if(res){
-        this.httpClient.post(AppSettings.API_ENDPOINT + '/update', data)
+        this.httpClient.post(AppSettings.API_ENDPOINT + '/api/update', data)
 	  		.subscribe(
 	  	    (res) => {
 	    	    console.log('Envoi de la requête de modification de profil.');
@@ -55,7 +55,7 @@ export class ManagementComponent implements OnInit {
       jsonEmail['email'] = data.email;
       jsonEmail['avatar'] = data.avatarValue;
 
-      this.httpClient.post(AppSettings.API_ENDPOINT + '/delete-avatar', jsonEmail)
+      this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete-avatar', jsonEmail)
         .subscribe(
           (res) => {
             console.log('Envoi de suppression d\'avatar.');
@@ -80,7 +80,7 @@ export class ManagementComponent implements OnInit {
 
     var res = confirm("Êtes-vous sûr de vouloir supprimer le compte dont l'adresse email associée est : " + accountEmail + " ?");
     if(res){
-        this.httpClient.post(AppSettings.API_ENDPOINT + '/delete', jsonEmail)
+        this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete', jsonEmail)
       	.subscribe(
 	        (res) => {
 	          console.log('Envoi de la requête de suppression du compte.');

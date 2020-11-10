@@ -21,7 +21,7 @@ export class UpdateProfileComponent implements OnInit {
 			  	private router: Router) { }
 
 	ngOnInit(): void {
-		this.httpClient.get(AppSettings.API_ENDPOINT + '/update-profile').subscribe(
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/api/update-profile').subscribe(
 	  		(data: any) => {
 	  			this.memberToUpdate = data;
 	  		}
@@ -34,7 +34,7 @@ export class UpdateProfileComponent implements OnInit {
 		
   		var res = confirm("Êtes-vous certains de vouloir procéder à ces modifications ?");
 		if(res){
-			this.httpClient.post(AppSettings.API_ENDPOINT + '/update-profile', data)
+			this.httpClient.post(AppSettings.API_ENDPOINT + '/api/update-profile', data)
 			.subscribe(
 			    (res) => {
 			     	this.successMessage = res['message'];

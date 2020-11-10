@@ -38,7 +38,7 @@ export class RegisterAccountComponent implements OnInit {
   onSubmitRegisterAccount() {
     const registerAccountData = this.registerAccountForm.value;
 
-    this.httpClient.post(AppSettings.API_ENDPOINT + '/register-account', registerAccountData)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-account', registerAccountData)
       .subscribe(
         (res) => {
           console.log('Enregistrement du token !');

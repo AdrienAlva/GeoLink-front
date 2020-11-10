@@ -24,7 +24,7 @@ export class UserAccountComponent implements OnInit {
 
 		this.authInterceptorService.intercept;
 
-		this.httpClient.get(AppSettings.API_ENDPOINT + '/user-account-node').subscribe(
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/api/user-account').subscribe(
 			(data: any) => {
 				this.members = data;
 			}

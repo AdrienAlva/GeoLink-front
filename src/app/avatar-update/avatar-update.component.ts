@@ -36,7 +36,7 @@ export class AvatarUpdateComponent implements OnInit {
 
 		console.log(formData);
 
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/upload-avatar', formData).subscribe(
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
       		(res) => this.successMessage = res['message'],
       		(err) => console.log(err)
     	);//req for avatar upload

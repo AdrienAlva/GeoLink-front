@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
 	onSubmitUpdatePassword() {
 		const data = this.updatePasswordForm.value;
 
-		this.httpClient.post(AppSettings.API_ENDPOINT + '/reset-password', data)
+		this.httpClient.post(AppSettings.API_ENDPOINT + '/api/reset-password', data)
 		  .subscribe(
 		    (res) => {
 		     	this.successMessage = res['successMessage'];

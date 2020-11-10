@@ -34,7 +34,7 @@ export class AdminLoginComponent implements OnInit {
   onSubmitLogin() {
   	const loginData = this.loginForm.value;
   	
-  	this.httpClient.post(AppSettings.API_ENDPOINT + '/admin-login', loginData)
+  	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/admin-login', loginData)
   		.subscribe(
   	    (res) => {
   	      console.log('Enregistrement du token !');

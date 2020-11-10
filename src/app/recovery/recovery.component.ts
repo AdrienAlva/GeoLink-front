@@ -34,7 +34,7 @@ export class RecoveryComponent implements OnInit {
   onSubmitRecovery() {
     const data = this.recoveryForm.value;
 
-    this.httpClient.post(AppSettings.API_ENDPOINT + '/recovery', data)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/api/recovery', data)
       .subscribe(
         (res) => {
           console.log(res)

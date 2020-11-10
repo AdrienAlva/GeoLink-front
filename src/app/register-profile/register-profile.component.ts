@@ -44,25 +44,25 @@ export class RegisterProfileComponent implements OnInit {
 
 	initForm(){
 
-	    			this.registerProfileForm = this.formBuilder.group({
-				  		surname: '',
-				  		name: '',
-				  		status: '',
-				  		lat: null,
-				  		lng: null,
-				  		thematic1: '',
-				  		thematic2: '',
-				  		thematic3: '',
-				  		thematic4: '',
-				  		thematic5: '',
-				  		about: '',
-				  		emailToDisplay: '',
-				  		site: '',
-				  		former:'',
-				  		avatar: ['']
-					});
+		this.registerProfileForm = this.formBuilder.group({
+	  		surname: '',
+	  		name: '',
+	  		status: '',
+	  		lat: null,
+	  		lng: null,
+	  		thematic1: '',
+	  		thematic2: '',
+	  		thematic3: '',
+	  		thematic4: '',
+	  		thematic5: '',
+	  		about: '',
+	  		emailToDisplay: '',
+	  		site: '',
+	  		former:'',
+	  		avatar: ['']
+		});
 
-		this.httpClient.get(AppSettings.API_ENDPOINT + '/user-account')
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/api/user-account')
 			.subscribe(
 			    (res: any) => {
 			    	
@@ -103,7 +103,7 @@ export class RegisterProfileComponent implements OnInit {
 	  	
 	  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
-			this.httpClient.post(AppSettings.API_ENDPOINT + '/register-profile', registerData)
+			this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-profile', registerData)
 			.subscribe(
 			    (res) => {
 			      console.log('Envoi de la demande de création de profil !');
@@ -118,7 +118,7 @@ export class RegisterProfileComponent implements OnInit {
     	const formData = new FormData();
     	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
 
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/upload-avatar', formData).subscribe(
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
       		(res) => console.log(res),
       		(err) => console.log(err)
     	);//req for avatar upload

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,9 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ProfilTypeComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient,
-      		  private formBuilder: FormBuilder,
-		      private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+		          private router: Router) { }
 
   ngOnInit(): void {
   }//Eo ngOnInit()

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
   	const loginData = this.loginForm.value;
   	
-  	this.httpClient.post(AppSettings.API_ENDPOINT + '/login', loginData)
+  	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/login', loginData)
   		.subscribe(
   	    (res) => {
     	    if (res['token']) {

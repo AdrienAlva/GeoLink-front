@@ -27,7 +27,7 @@ export class AuthGuardAdminService {
   			return false;
 		}
 
-		return this.httpClient.get(AppSettings.API_ENDPOINT + '/admin-login').map((res)=>{
+		return this.httpClient.get(AppSettings.API_ENDPOINT + '/api/admin-login').map((res)=>{
 			if(res['value'] == 'true'){
 				this.isad = true;
 				if (refToken && !isExpired && this.isad) {

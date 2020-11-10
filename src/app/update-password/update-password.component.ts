@@ -36,7 +36,7 @@ export class UpdatePasswordComponent implements OnInit {
   onSubmitUpdatePassword() {
     const data = this.updatePasswordForm.value;
 
-    this.httpClient.post(AppSettings.API_ENDPOINT + '/update-password', data)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/api/update-password', data)
       .subscribe(
         (res) => {
          	this.errorMessage = res['message'];

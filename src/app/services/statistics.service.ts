@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import {AppSettings } from '../app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class StatisticsService {
 
 	nodeRequest(){
 		console.log("emit stats")
-		return this.httpClient.get('http://localhost:3000/stats');
+		return this.httpClient.get(AppSettings.API_ENDPOINT + '/api/stats');
 	}//Eo nodeRequest()
 
 	emitStatusStats() { // pour emettre notre subject members au sein de l'appli.

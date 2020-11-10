@@ -92,7 +92,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
   	
   	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
-			this.httpClient.post(AppSettings.API_ENDPOINT + '/register-profile-organization', registerData)
+			this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-profile-organization', registerData)
 			.subscribe(
 			    (res) => {
 			      console.log('Envoi de la demande de création de profil !');
@@ -109,7 +109,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 
 		console.log(formData);
 
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/upload-avatar', formData).subscribe(
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
       		(res) => console.log(res),
       		(err) => console.log(err)
     	);//req for avatar upload

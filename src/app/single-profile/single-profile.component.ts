@@ -92,9 +92,9 @@ export class SingleProfileComponent implements OnInit {
 
 	addMarker() { // instance du marker.
 			
-				const memberMarker = L.marker([this.members[this.memberId].lat, this.members[this.memberId].lng], {icon: this.smallIcon});
+		const memberMarker = L.marker([this.members[this.memberId].lat, this.members[this.memberId].lng], {icon: this.smallIcon});
 					
-				memberMarker.addTo(this.map).bindPopup(this.members[this.memberId].name + ' ' + this.members[this.memberId].surname + '<br>' + this.members[this.memberId].status).openPopup();		 	
+		memberMarker.addTo(this.map).bindPopup(this.members[this.memberId].name + ' ' + this.members[this.memberId].surname + '<br>' + this.members[this.memberId].status).openPopup();		 	
 
 	}//Eo addMarker()
 

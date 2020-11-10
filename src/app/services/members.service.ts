@@ -16,8 +16,7 @@ export class MembersService {
   constructor(private httpClient: HttpClient) { }
 
   nodeRequest(){
-    console.log(AppSettings.API_ENDPOINT);
-    return this.httpClient.get((AppSettings.API_ENDPOINT + '/verified-members'));
+    return this.httpClient.get((AppSettings.API_ENDPOINT + '/api/verified-members'));
   }//Eo nodeRequest()
 
   emitMembers() { // pour emettre notre subject members au sein de l'appli.
