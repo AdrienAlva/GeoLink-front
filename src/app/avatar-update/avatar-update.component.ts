@@ -15,6 +15,8 @@ export class AvatarUpdateComponent implements OnInit {
 
 	successMessage: string;
 
+	errorMessage: string;
+
 	constructor(private httpClient: HttpClient,
 	  		  private formBuilder: FormBuilder,
 		  	  private router: Router) { }
@@ -43,11 +45,22 @@ export class AvatarUpdateComponent implements OnInit {
     }//Eo onSubmitRegisterProfile()
 
   	onFileSelect(event) { 
-  		console.log("onFileSelect()");
-	    if (event.target.files.length > 0) {
-	      const file = event.target.files[0];
-	      this.formDataForm.get('avatar').setValue(file);
+
+	    if (event.target.files.length > 0) {	
+
+	    	this.successMessage = "";
+
+      		const file = event.target.files[0];
+
+      		if (file.size > 1572864) {
+      			this.errorMessage = "La taille du fichier est trop importante !"
+      			return;
+      		}
+
+      		this.errorMessage = "";
+      		this.formDataForm.get('avatar').setValue(file);
 	    }
   	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
+
 
 }//Eo class

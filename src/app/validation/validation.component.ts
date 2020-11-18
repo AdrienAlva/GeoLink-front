@@ -23,7 +23,7 @@ export class ValidationComponent implements OnInit {
 
   ngOnInit(): void {
   	
-  	this.httpClient.get(AppSettings.API_ENDPOINT + '/members-validation').subscribe(
+  	this.httpClient.get(AppSettings.API_ENDPOINT + '/api/members-validation').subscribe(
   		(data: any) => {
   			this.membersToVerify = data;
   			console.log(this.membersToVerify);
@@ -36,7 +36,7 @@ export class ValidationComponent implements OnInit {
 
   	const data = form.value;
   	
-  	this.httpClient.post(AppSettings.API_ENDPOINT + '/validation', data)
+  	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/validation', data)
   		.subscribe(
   	    (res) => {
     	    console.log('Envoi de la requête de validation de profil.');
@@ -54,7 +54,7 @@ export class ValidationComponent implements OnInit {
       jsonEmail['email'] = data.email;
       jsonEmail['avatar'] = data.avatarValue;
 
-      this.httpClient.post(AppSettings.API_ENDPOINT + '/delete-avatar', jsonEmail)
+      this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete-avatar', jsonEmail)
         .subscribe(
           (res) => {
             console.log('Envoi de suppression d\'avatar.');
@@ -72,7 +72,7 @@ export class ValidationComponent implements OnInit {
     let jsonEmail = {email: ''};
     jsonEmail['email'] = refusedEmail;
 
-    this.httpClient.post(AppSettings.API_ENDPOINT + '/refused', jsonEmail)
+    this.httpClient.post(AppSettings.API_ENDPOINT + '/api/refused', jsonEmail)
       .subscribe(
         (res) => {
           console.log('Envoi de la requête de refus de profil.');

@@ -5,8 +5,8 @@
 
 		<form [formGroup]="formDataForm" (ngSubmit)="onSubmitRegisterProfile()">
 			<div class="form-group">
-				<label for="name">Photo de profil : </label>
-				<input class="form-control" type="file" name="avatar" (change)="onFileSelect($event)">
+				<label for="name">Photo de profil (taille maximale: 1,5 mo) : </label>
+				<input id="file" class="form-control" type="file" name="avatar" (change)="onFileSelect($event)">
 			</div>
 
 			<div class="row no-gutters justify-content-center">
@@ -16,6 +16,10 @@
 
 		<div class="successMessage" *ngIf="this.successMessage">
 			<p>{{ successMessage }}</p>
+		</div>
+
+				<div class="errorMessage" *ngIf="this.errorMessage">
+			<p>{{ errorMessage }}</p>
 		</div>
 
 		<div id="home">
