@@ -57,6 +57,10 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	/* ON INIT */
 	ngOnInit(): void {
+		console.log(L.DomUtil.get('map'))
+		/*if(L.DomUtil.get('map')){
+			L.DomUtil.get('map').remove();
+		}*/
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
 	  		(members: Member[]) => {
 	  			this.markers.clearLayers();
@@ -83,7 +87,6 @@ export class MapComponent implements OnInit, OnDestroy {
 	}//Eo onMembersLoading()
 
 	createMap() {
-
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,
 			lng: -1.702823

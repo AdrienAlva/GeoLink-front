@@ -40,8 +40,8 @@ export class SingleProfileComponent implements OnInit {
 				private router: Router,
 				private route: ActivatedRoute) {}
 
-	ngOnInit(){
 
+	ngOnInit(){
 		this.memberId = this.route.snapshot.params['id']; // on récupère l'id du membre en faisant un snapshot de la route.
 
 		this.router.events.subscribe((data) => { //On adapte l'id quand la route change.
@@ -57,7 +57,6 @@ export class SingleProfileComponent implements OnInit {
 		);
 
 		this.membersService.getMembers();	
-		console.log('init profile')	
 
 	}//Eo ngOnInit()
 
@@ -69,8 +68,6 @@ export class SingleProfileComponent implements OnInit {
 	}//Eo onMembersLoading()
 
 	createMap() {
-		console.log('createMap')
-
 
 		const zoomLevel = 8; // niveau de zoom initial.
 
