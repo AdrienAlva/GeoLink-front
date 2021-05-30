@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
             }
     	  },
     	  (err) => {
-  	      console.log('Erreur ! : ' + err);
   	    }
   	);  
   }//Eo onSubmitLogin()

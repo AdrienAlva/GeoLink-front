@@ -31,7 +31,6 @@ export class ManagementComponent implements OnInit {
   }//Eo ngOnInit()
 
   onUpdateMember(form: NgForm){
-  	console.log(form.value);
 
   	const data = form.value;
 
@@ -44,7 +43,6 @@ export class ManagementComponent implements OnInit {
 	    	    this.ngOnInit();
 	    	},
 	    	(err) => {
-	  	      console.log('Erreur ! : ' + err);
 	  	    }
   		);
     } 
@@ -58,7 +56,6 @@ export class ManagementComponent implements OnInit {
       this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete-avatar', jsonEmail)
         .subscribe(
           (res) => {
-            console.log('Envoi de suppression d\'avatar.');
             this.ngOnInit();
         },
         (err) => {

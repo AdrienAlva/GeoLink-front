@@ -37,8 +37,6 @@ export class AdminLoginComponent implements OnInit {
   	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/admin-login', loginData)
   		.subscribe(
   	    (res) => {
-  	      console.log('Enregistrement du token !');
-  	      console.log(res);
     	    if (res['token']) {
     	        localStorage.setItem('token', res['token']);
     	        this.router.navigate(['admin-panel']);
@@ -47,7 +45,6 @@ export class AdminLoginComponent implements OnInit {
             }
     	  },
     	  (err) => {
-  	      console.log('Erreur ! : ' + err);
   	    }
   	);  
   }//Eo onSubmitLogin()

@@ -36,11 +36,8 @@ export class AvatarUpdateComponent implements OnInit {
     	const formData = new FormData();
     	formData.append('avatar', this.formDataForm.get('avatar').value); 	
 
-		console.log(formData);
-
     	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
       		(res) => this.successMessage = res['message'],
-      		(err) => console.log(err)
     	);//req for avatar upload
     }//Eo onSubmitRegisterProfile()
 
