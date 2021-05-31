@@ -15,7 +15,6 @@ export class StatisticsService {
 	constructor(private httpClient: HttpClient) { }
 
 	nodeRequest(){
-		console.log("emit stats")
 		return this.httpClient.get(AppSettings.API_ENDPOINT + '/api/stats');
 	}//Eo nodeRequest()
 

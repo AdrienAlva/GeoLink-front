@@ -61,8 +61,6 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 			    	
 			    	this.email = JSON.stringify(res, ['email']).replace('[{"email":"', '').replace('"}]', '');
 			    	
-			    	console.log(' 1 - email is : ' + this.email); 
-
 			    	this.registerProfileForm.patchValue({emailToDisplay: this.email});// patch value to update registerProfileForm after his init.
 
 					this.createMap();
@@ -81,9 +79,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 	    			});
 
 			    },
-			    (err) => {
-		      		console.log('Erreur ! : ' + err);
-			    }    
+			    (err) => {}    
 			);
 	}//Eo initForm()
 
@@ -94,12 +90,8 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 		if(res){
 			this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-profile-organization', registerData)
 			.subscribe(
-			    (res) => {
-			      console.log('Envoi de la demande de création de profil !');
-			    },
-			    (err) => {
-			      console.log('Erreur ! : ' + err);
-			    }    
+			    (res) => {},
+			    (err) => {}    
 			);
 			this.router.navigate(['sent-request']);
 		} 
@@ -107,16 +99,10 @@ export class RegisterProfileOrganizationComponent implements OnInit {
     	const formData = new FormData();
     	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
 
-		console.log(formData);
-
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
-      		(res) => console.log(res),
-      		(err) => console.log(err)
-    	);//req for avatar upload
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe();//req for avatar upload
     }//Eo onSubmitLogin()
 
   	onFileSelect(event) { 
-  		console.log("onFileSelect()");
 	    if (event.target.files.length > 0) {
 	      const file = event.target.files[0];
 	      this.registerProfileForm.get('avatar').setValue(file);
@@ -124,8 +110,6 @@ export class RegisterProfileOrganizationComponent implements OnInit {
   	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
 
 	createMap() {
-
-		console.log('createMap on register-profile')
 
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,

@@ -37,13 +37,11 @@ export class RecoveryComponent implements OnInit {
     this.httpClient.post(AppSettings.API_ENDPOINT + '/api/recovery', data)
       .subscribe(
         (res) => {
-          console.log(res)
           this.errorMessage = res['errorMessage'];
           this.successMessage = res['successMessage'];
           grecaptcha.reset();
         },
         (err) => {
-          console.log('Erreur ! : ' + err);
         }
     );  
   }//Eo onSubmitRegisterAccount()

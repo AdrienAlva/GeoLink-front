@@ -36,15 +36,14 @@ export class ManagementComponent implements OnInit {
 
   	var res = confirm("Êtes-vous sûr de vouloir modifier les données du compte dont l'adresse email associée est : " + data.email + " ?");
     if(res){
-        this.httpClient.post(AppSettings.API_ENDPOINT + '/api/update', data)
-	  		.subscribe(
-	  	    (res) => {
-	    	    console.log('Envoi de la requête de modification de profil.');
-	    	    this.ngOnInit();
-	    	},
-	    	(err) => {
-	  	    }
-  		);
+      this.httpClient.post(AppSettings.API_ENDPOINT + '/api/update', data)
+  		.subscribe(
+  	    (res) => {
+    	    this.ngOnInit();
+    	  },
+    	  (err) => {
+  	    }
+		  );
     } 
 
     if(data.refusedAvatar == "true") {
@@ -59,7 +58,6 @@ export class ManagementComponent implements OnInit {
             this.ngOnInit();
         },
         (err) => {
-            console.log('Erreur ! : ' + err);
           }
       );
     }//Eo if
@@ -73,18 +71,14 @@ export class ManagementComponent implements OnInit {
     jsonEmail['email'] = accountEmail;
     jsonEmail['avatar'] = avatar;
 
-    console.log(jsonEmail);
-
     var res = confirm("Êtes-vous sûr de vouloir supprimer le compte dont l'adresse email associée est : " + accountEmail + " ?");
     if(res){
         this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete', jsonEmail)
       	.subscribe(
 	        (res) => {
-	          console.log('Envoi de la requête de suppression du compte.');
 	          this.ngOnInit();
 	      	},
 	      	(err) => {
-	          console.log('Erreur ! : ' + err);
 	        }
     	);
     } else {

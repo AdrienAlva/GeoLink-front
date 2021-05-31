@@ -39,9 +39,7 @@ export class UpdateProfileComponent implements OnInit {
 			    (res) => {
 			     	this.successMessage = res['message'];
 			    },
-			    (err) => {
-			      console.log('Erreur ! : ' + err);
-			    }    
+			    (err) => {}    
 			);
 		}	
 	}//Eo onSubmitVerifiedMember()

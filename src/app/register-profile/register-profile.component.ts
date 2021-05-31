@@ -68,8 +68,6 @@ export class RegisterProfileComponent implements OnInit {
 			    	
 			    	this.email = JSON.stringify(res, ['email']).replace('[{"email":"', '').replace('"}]', '');
 			    	
-			    	console.log(' 1 - email is : ' + this.email); 
-
 			    	this.registerProfileForm.patchValue({emailToDisplay: this.email});// patch value to update registerProfileForm after his init.
 
 					this.createMap();
@@ -89,7 +87,6 @@ export class RegisterProfileComponent implements OnInit {
 
 			    },
 			    (err) => {
-		      		console.log('Erreur ! : ' + err);
 			    }    
 			);
 
@@ -99,17 +96,14 @@ export class RegisterProfileComponent implements OnInit {
 
 	  	const registerData = this.registerProfileForm.value;
 
-	  	console.log(registerData);
 	  	
 	  	var res = confirm("Êtes-vous sûr des informations renseignées ?");
 		if(res){
 			this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-profile', registerData)
 			.subscribe(
 			    (res) => {
-			      console.log('Envoi de la demande de création de profil !');
 			    },
 			    (err) => {
-			      console.log('Erreur ! : ' + err);
 			    }    
 			);
 			this.router.navigate(['sent-request']);
@@ -118,14 +112,10 @@ export class RegisterProfileComponent implements OnInit {
     	const formData = new FormData();
     	formData.append('avatar', this.registerProfileForm.get('avatar').value); 	
 
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
-      		(res) => console.log(res),
-      		(err) => console.log(err)
-    	);//req for avatar upload
+    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe();//req for avatar upload
     }//Eo onSubmitRegisterProfile()
 
   	onFileSelect(event) { 
-  		console.log("onFileSelect()");
 	    if (event.target.files.length > 0) {
 	      const file = event.target.files[0];
 	      this.registerProfileForm.get('avatar').setValue(file);
@@ -141,8 +131,6 @@ export class RegisterProfileComponent implements OnInit {
   	}//Eo onClickStatus()
 
 	createMap() {
-
-		console.log('createMap on register-profile')
 
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,

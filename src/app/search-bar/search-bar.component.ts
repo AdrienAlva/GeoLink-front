@@ -32,9 +32,6 @@ export class SearchBarComponent implements OnInit {
 
 		this.members = this.membersService.members;
 
-		/*this.memberSubscription = this.membersService.membersSubject.subscribe( 
-	  		(members: Member[]) => this.onMembersLoading(members));*/
-
 	}//Eo ngOnInit()
 
 	initForm() {
@@ -70,15 +67,12 @@ export class SearchBarComponent implements OnInit {
       				this.results[i].surname = this.results[i].surname;
 
     			} else {
-    				console.log('Pas de résultats...');
+
     			}//Eo if / else
   			}//Eo for	
 		}//Eo for
 
-		console.log(this.results.length)
-
 		if (this.results.length === 0) { // affichage du message d'absence de résultats pour la recherche.
-			console.log('no resuts ! ')
 			this.noResultDisplay = true;
     	}//Eo if
 
@@ -90,7 +84,6 @@ export class SearchBarComponent implements OnInit {
     }//Eo onViewMember()
 
     onClickedOutside(e: Event) {
-    	console.log('click')
 		this.results = [];
 		this.noResultDisplay = false;
   	}

@@ -26,43 +26,34 @@ export class ValidationComponent implements OnInit {
   	this.httpClient.get(AppSettings.API_ENDPOINT + '/api/members-validation').subscribe(
   		(data: any) => {
   			this.membersToVerify = data;
-  			console.log(this.membersToVerify);
   		}
   	);
   }//Eo ngOnInit()
 
   onSubmitVerifiedMember(form: NgForm){
-  	console.log(form.value);
 
   	const data = form.value;
   	
   	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/validation', data)
   		.subscribe(
   	    (res) => {
-    	    console.log('Envoi de la requête de validation de profil.');
     	    this.ngOnInit();
     	},
-    	(err) => {
-  	      console.log('Erreur ! : ' + err);
-  	    }
+    	(err) => {}
   	);
 
     if(data.refusedAvatar == "true") {
-      console.log('refused avatar...');
 
       let jsonEmail = {email: '', avatar: ''};
       jsonEmail['email'] = data.email;
       jsonEmail['avatar'] = data.avatarValue;
 
       this.httpClient.post(AppSettings.API_ENDPOINT + '/api/delete-avatar', jsonEmail)
-        .subscribe(
-          (res) => {
-            console.log('Envoi de suppression d\'avatar.');
-            this.ngOnInit();
+      .subscribe(
+        (res) => {
+          this.ngOnInit();
         },
-        (err) => {
-            console.log('Erreur ! : ' + err);
-          }
+        (err) => {}
       );
     }//Eo if
   }//Eo onSubmitVerifiedMember()
@@ -75,12 +66,9 @@ export class ValidationComponent implements OnInit {
     this.httpClient.post(AppSettings.API_ENDPOINT + '/api/refused', jsonEmail)
       .subscribe(
         (res) => {
-          console.log('Envoi de la requête de refus de profil.');
           this.ngOnInit();
       },
-      (err) => {
-          console.log('Erreur ! : ' + err);
-        }
+      (err) => {}
     );
 
   }//Eo refused();

@@ -57,10 +57,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	/* ON INIT */
 	ngOnInit(): void {
-		console.log(L.DomUtil.get('map'))
-		/*if(L.DomUtil.get('map')){
-			L.DomUtil.get('map').remove();
-		}*/
 		this.memberSubscription = this.membersService.membersSubject.subscribe( 
 	  		(members: Member[]) => {
 	  			this.markers.clearLayers();
@@ -275,11 +271,6 @@ export class MapComponent implements OnInit, OnDestroy {
 		this.selectOptionsThematic.reset('all');
 
 		this.addMarkerOnClick(this.statusToDisplay);
-		/*for(let layer of this.layersArray) {
-			this.map.removeLayer(layer);}
-		this.markers.clearLayers();
-		this.allMembers.addTo(this.markers);
-		this.selectedCategory = null;*/
 	}//Eo onDisplayAll()
 
 	onNavigateToLogin() {

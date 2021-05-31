@@ -42,9 +42,7 @@ export class UpdatePasswordComponent implements OnInit {
          	this.errorMessage = res['message'];
          	this.successMessage = res['successMessage'];
         },
-        (err) => {
-          console.log('Erreur ! : ' + err);
-        }
+        (err) => {}
     );  
   }//Eo onSubmitUpdatePassword()
 

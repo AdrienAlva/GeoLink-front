@@ -1,5 +1,4 @@
 export class Member {
-
 	
 	constructor(public _id: string, 
 				public surname: string,
@@ -15,6 +14,4 @@ export class Member {
 				public site: string,
 				public id: number,
 				public isOrganization: boolean){}
-				
-
 }//Eo class Member

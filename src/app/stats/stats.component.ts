@@ -24,8 +24,6 @@ export class StatsComponent implements OnInit {
 	  			
 			this.statusFromReq = stats;
 
-			console.log(this.statusFromReq);
-
 			let graph = <HTMLCanvasElement>document.getElementById("status");
 
 			graph.width = 300;
@@ -113,7 +111,6 @@ export class StatsComponent implements OnInit {
 			);
 			myPiechart.draw();
 
-
 		});//Eo SUBCRIPTION
 
 		this.statisticsService.getStatusStats();
@@ -132,20 +129,5 @@ export class StatsComponent implements OnInit {
 	    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
 	    ctx.stroke();
 	}	//Eo drawArc()
-
-/*	onGetStats() {
-
-	    this.httpClient.get('http://localhost:3000/stats')
-	      .subscribe(
-	        (res) => {
-	         console.log(res);
-	         this.statusFromReq = res;
-	        },
-	        (err) => {
-	          console.log('Erreur ! : ' + err);
-	        }
-	    );  
-	}//Eo onSubmitRegisterAccount()*/
-
 
 }//Eo class

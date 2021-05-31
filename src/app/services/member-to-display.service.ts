@@ -20,8 +20,6 @@ export class MemberToDisplayService {
 
   	filterByCategory(members: Member[]) {
 
-
-
 		this.membersToDisplay = [];
 		for(let member of members) {
 

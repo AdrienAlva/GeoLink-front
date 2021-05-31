@@ -49,11 +49,7 @@ export class ResetPasswordComponent implements OnInit {
 		     	this.resetting = res['resetting'];
 	     		this.errorMessage = res['errorMessage']; 	
 		    },
-		    (err) => {
-		      console.log('Erreur ! : ' + err);
-		    }
+		    (err) => {}
 		);    
-
 	}//Eo onSubmitUpdatePassword()
-
 }//Eo class

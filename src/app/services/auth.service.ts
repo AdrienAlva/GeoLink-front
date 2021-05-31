@@ -20,6 +20,4 @@ export class AuthService {
 		let isExpired = helper.isTokenExpired(refToken);
 		return isExpired;
 	}
-
-
 }//Eo class

@@ -41,8 +41,6 @@ export class RegisterAccountComponent implements OnInit {
     this.httpClient.post(AppSettings.API_ENDPOINT + '/api/register-account', registerAccountData)
       .subscribe(
         (res) => {
-          console.log('Enregistrement du token !');
-          console.log(res);
           if (res['token']) {
               localStorage.setItem('token', res['token']);
               this.router.navigate(['profil-type']);
@@ -52,7 +50,6 @@ export class RegisterAccountComponent implements OnInit {
             }
         },
         (err) => {
-          console.log('Erreur ! : ' + err);
         }
     );  
   }//Eo onSubmitRegisterAccount()
@@ -62,6 +59,4 @@ export class RegisterAccountComponent implements OnInit {
           return {invalid: true};
       }
     }
-
-
 }//Eo class
