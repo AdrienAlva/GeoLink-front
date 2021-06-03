@@ -76,17 +76,20 @@ export class StatsComponent implements OnInit {
 
 			        for (categ in this.options.data){
 					    val = this.options.data[categ];
-					    slice_angle = 2 * Math.PI * val / total_value;
-					    var pieRadius = Math.min(this.canvas.width/2,this.canvas.height/2);
-					    var labelX = this.canvas.width/2 + (pieRadius / 2) * Math.cos(start_angle + slice_angle/2);
-					    var labelY = this.canvas.height/2 + (pieRadius / 2) * Math.sin(start_angle + slice_angle/2);
-					 
-					    var labelText = Math.round(100 * val / total_value *100) / 100;
-					    this.ctx.fillStyle = "black";
-					    this.ctx.font = "bold 12px Arial";
-					    this.ctx.fillText(labelText+"% (" + this.options.data[categ] +")", labelX,labelY);
-					    start_angle += slice_angle;
-					}
+
+					    if (val > 0) {
+					    	slice_angle = 2 * Math.PI * val / total_value;
+						    var pieRadius = Math.min(this.canvas.width/2,this.canvas.height/2);
+						    var labelX = this.canvas.width/2 + (pieRadius / 2) * Math.cos(start_angle + slice_angle/2);
+						    var labelY = this.canvas.height/2 + (pieRadius / 2) * Math.sin(start_angle + slice_angle/2);
+						 
+						    var labelText = Math.round(100 * val / total_value *100) / 100;
+						    this.ctx.fillStyle = "black";
+						    this.ctx.font = "bold 12px Arial";
+						    this.ctx.fillText(labelText+"% (" + this.options.data[categ] +")", labelX,labelY);
+						    start_angle += slice_angle;
+					    }//Eo if				    
+					}//Eo for
 
 			 		if (this.options.legend){
 			            color_index = 0;
@@ -105,12 +108,11 @@ export class StatsComponent implements OnInit {
 		    	{
 		        	canvas:graph,
 		        	data:this.statusFromReq,
-		        	colors:["#e01a4f","#f15946", "#f9c22e","#53b3cb","#e0771b","#f2d846","#545ccc"],
+		        	colors:["#e01a4f","#f15946", "#f9c22e","#53b3cb","#e0771b","#f2d846","#545ccc","pink","purple","grey","green"],
 		        	legend:myLegend
 		    	}
 			);
 			myPiechart.draw();
-
 		});//Eo SUBCRIPTION
 
 		this.statisticsService.getStatusStats();
