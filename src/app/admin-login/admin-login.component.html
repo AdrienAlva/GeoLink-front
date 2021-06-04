@@ -16,7 +16,11 @@
 			</div>
 
 			<div class="row no-gutters justify-content-center">
-				<input class="btn btn-primary" type="submit">
+				<re-captcha formControlName="recaptchaReactive"></re-captcha>
+			</div>
+				
+			<div class="row no-gutters justify-content-center">
+				<input class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">
 			</div>
 			
 

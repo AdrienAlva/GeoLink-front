@@ -176,7 +176,7 @@ app-search-bar {
   margin-right: 10px;
 }
 
-#attribution {
+.attribution {
   text-decoration: underline;
   color: black;
   margin-left: 10px;

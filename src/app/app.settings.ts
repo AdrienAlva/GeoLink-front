@@ -1,3 +1,3 @@
 export class AppSettings {
-	public static API_ENDPOINT ='http://localhost:2500';
+	public static API_ENDPOINT ='https://portail-geolink.fr';
 }

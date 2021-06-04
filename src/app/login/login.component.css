@@ -16,17 +16,43 @@
 
 .container {
 	border: rgba(230, 230, 230, 1) solid 1px;
-
 }
 
 #home {
 	text-decoration: underline;
 	text-align: center;
+	margin-top: 3%;	
+}
+
+.login-password {
+	margin-bottom: 1.5rem; 
 }
 
 #home a {
 	color: black;
-
 }
+
+.btn-info {
+	width: 100%;
+}
+
+.errorsFront {
+	font-size: 0.8em;
+	color: orange;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+#submit-div {
+	margin-top: 5px;
+}
+
+.forgotten-pass { /*to center horizontaly and vertcally link's text*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+
 
 

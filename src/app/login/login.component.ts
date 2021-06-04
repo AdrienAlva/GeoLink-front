@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtModule } from "@auth0/angular-jwt";
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -29,8 +29,9 @@ export class LoginComponent implements OnInit {
 
   initForm(){
   	this.loginForm = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: ['', [Validators.required, Validators.email]],
+      password: ['',[ Validators.required]],
+      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }//Eo initForm()
 
