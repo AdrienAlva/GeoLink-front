@@ -55,7 +55,7 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 		});
 
 
-		this.httpClient.get(AppSettings.API_ENDPOINT + '/user-account')
+		this.httpClient.get(AppSettings.API_ENDPOINT + '/api/user-account')
 			.subscribe(
 			    (res: any) => {
 			    	
@@ -63,13 +63,13 @@ export class RegisterProfileOrganizationComponent implements OnInit {
 			    	
 			    	this.registerProfileForm.patchValue({emailToDisplay: this.email});// patch value to update registerProfileForm after his init.
 
-					this.createMap();
+						this.createMap();
 
-					let layerGroup = L.layerGroup().addTo(this.map);
+						let layerGroup = L.layerGroup().addTo(this.map);
 
-					this.map.on("click", e => { 
+						this.map.on("click", e => { 
 			      		
-			        	layerGroup.clearLayers(); 
+		        	layerGroup.clearLayers(); 
 			    		
 			    		let myMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: this.memberIcon}).addTo(layerGroup);
 			    		this.map.addLayer(layerGroup);
@@ -110,7 +110,6 @@ export class RegisterProfileOrganizationComponent implements OnInit {
   	}//Eo onFileSelect() - on adding avatar file. Bind it to the FormGroup.
 
 	createMap() {
-
 		const univRennes2 = { // variable contenant les coordonnées utilisées pour définir le centre de la carte au chargement.
 			lat: 48.118048,
 			lng: -1.702823
