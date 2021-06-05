@@ -60,6 +60,9 @@ export class SingleProfileComponent implements OnInit {
 
 	}//Eo ngOnInit()
 
+	ngOnDestroy() {
+		this.memberSubscription.unsubscribe();
+	}
 
 	onMembersLoading(members: Member[]){
 		this.members = members;

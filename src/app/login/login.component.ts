@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   errorMessage: string;
   
-
   ngOnInit(): void {
   	this.initForm();
   }//Eo ngOnInit()

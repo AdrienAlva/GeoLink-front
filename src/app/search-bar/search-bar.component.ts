@@ -15,7 +15,6 @@ export class SearchBarComponent implements OnInit {
 	searchForm: FormGroup;
 
 	members: Member[] = [];
-/*	memberSubscription: Subscription;*/
 
 	results: Member[] = [];	
 
@@ -79,13 +78,13 @@ export class SearchBarComponent implements OnInit {
 	}//Eo onSearchMember()
 
 	onViewMember(id: number) {
-  		this.router.navigate(['member', 'profile', id]);
-  		this.results = []; //pour fermer résultats de recherche quand route vers profil.
-    }//Eo onViewMember()
+		this.router.navigate(['member', 'profile', id]);
+		this.results = []; //pour fermer résultats de recherche quand route vers profil.
+  }//Eo onViewMember()
 
-    onClickedOutside(e: Event) {
+  onClickedOutside(e: Event) {
 		this.results = [];
 		this.noResultDisplay = false;
-  	}
+	}
 
 }//Eo class

@@ -41,5 +41,9 @@ export class MemberListComponent implements OnInit {
   onViewMember(id: number) {
     this.router.navigate(['member', 'profile', id]);
   }//Eo onViewBook()
+
+  ngOnDestroy() {
+    this.memberSubscription.unsubscribe();
+  }//Eo ngOnDestroy()
    
 }//Eo class

@@ -127,9 +127,13 @@ export class StatsComponent implements OnInit {
 	}//Eo drawLine()
 
 	drawArc(ctx, centerX, centerY, radius, startAngle, endAngle){
-	    ctx.beginPath();
-	    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-	    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+    ctx.stroke();
 	}	//Eo drawArc()
+
+  ngOnDestroy() {
+    this.statusStatsSubscription.unsubscribe();
+  }//Eo ngOnDestroy()
 
 }//Eo class

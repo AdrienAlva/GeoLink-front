@@ -57,7 +57,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	/* ON INIT */
 	ngOnInit(): void {
-		this.memberSubscription = this.membersService.membersSubject.subscribe( 
+		this.memberSubscription = this.membersService.membersSubject.subscribe(
 	  		(members: Member[]) => {
 	  			this.markers.clearLayers();
 
@@ -289,6 +289,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
   		this.memberSubscription.unsubscribe();
-  	}//Eo ngOnDestroy()
+	}//Eo ngOnDestroy()
 
 }//EO class
