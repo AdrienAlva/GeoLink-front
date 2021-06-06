@@ -10,7 +10,7 @@
 				<form  (ngSubmit)="onSubmitVerifiedMember(f)" #f="ngForm" >
 
 					<div class="avatar-block">
-						<img class="avatar" src="http://localhost:3000/uploads/{{member.avatar}}">				
+						<img class="avatar" src="{{this.apiRoute}}/uploads/{{member.avatar}}">				
 					</div>
 					<input type="hidden" name="avatarValue" value="{{member.avatar}}" [ngModel]="member.avatar">
 					<div class="form-group">
