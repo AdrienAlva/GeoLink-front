@@ -21,6 +21,8 @@ export class ValidationComponent implements OnInit {
 
   verifiedForm: FormGroup;
 
+  apiRoute: string = AppSettings.API_ENDPOINT;
+
   ngOnInit(): void {
   	
   	this.httpClient.get(AppSettings.API_ENDPOINT + '/api/members-validation').subscribe(
