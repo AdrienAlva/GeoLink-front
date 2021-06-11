@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://portail-geolink.fr/sitemap.xml
