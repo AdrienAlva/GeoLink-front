@@ -43,7 +43,7 @@ export class MapComponent implements OnInit, OnDestroy {
 	});
 
 	markers = L.markerClusterGroup({
-		spiderfyOnMaxZoom: false,
+		spiderfyOnMaxZoom: true,
 		showCoverageOnHover: false
 	});
 

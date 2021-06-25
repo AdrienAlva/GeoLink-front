@@ -34,11 +34,23 @@ export class AvatarUpdateComponent implements OnInit {
 	onSubmitRegisterProfile() {
 
     	const formData = new FormData();
-    	formData.append('avatar', this.formDataForm.get('avatar').value); 	
 
-    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
-      		(res) => this.successMessage = res['message'],
-    	);//req for avatar upload
+    	formData.append('avatar', this.formDataForm.get('avatar').value); 
+
+    	if(this.formDataForm.get('avatar').value.size < 1572864) {
+	    	this.httpClient.post(AppSettings.API_ENDPOINT + '/api/upload-avatar', formData).subscribe(
+	      		(res) => {
+	      			if(res['message']){
+	      				this.successMessage = res['message']
+	      			} else if(res['errorMessage']) {
+	      				this.errorMessage = res['errorMessage']
+	      			}
+	      		}
+	    	);//req for avatar upload    		
+    	} else {
+    		return;
+    	}
+
     }//Eo onSubmitRegisterProfile()
 
   	onFileSelect(event) { 
